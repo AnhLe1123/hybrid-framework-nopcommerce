@@ -9,18 +9,4 @@
     </classes>
   </test>
   
-    <test name="Run on CHROME">
-  <parameter name="browser" value="chrome"/>
-    <classes>
-      <class name="com.nopcommerce.user.User_01_Register_Login"/>
-    </classes>
-  </test>
-  
-    <test name="Run on EDGE_CHRONIUM">
-  <parameter name="browser" value="edge_chronium"/>
-    <classes>
-      <class name="com.nopcommerce.user.User_01_Register_Login"/>
-    </classes>
-  </test>
-  
 </suite>

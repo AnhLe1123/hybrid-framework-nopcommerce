@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import commons.BaseTest;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
+import pageObjects.PageGeneratorManager;
 import pageObjects.RegisterPageObject;
 
 import org.testng.annotations.BeforeClass;
@@ -34,11 +35,10 @@ public class User_01_Register_Login extends BaseTest {
 
 	@Test
 	public void User_01_Register_To_System() {
-		homePage = new HomePageObject(driver);
+		homePage = PageGeneratorManager.getHomePage(driver);
 		Assert.assertTrue(homePage.isHomePageSliderDisplayed());
 		
-		homePage.clickToRegisterLink();
-		registerPage = new RegisterPageObject(driver);
+		registerPage = homePage.clickToRegisterLink();
 		
 		registerPage.clickToMaleGenderCheckbox();
 		registerPage.inputToFirstNameTextbox("John");
@@ -53,21 +53,18 @@ public class User_01_Register_Login extends BaseTest {
 		registerPage.clickToRegisterButton();
 		Assert.assertTrue(registerPage.isSuccessMessageDisplayed());
 		
-		registerPage.clickToLogoutLink();
-		homePage = new HomePageObject(driver);
+		homePage = registerPage.clickToLogoutLink();
 		Assert.assertTrue(homePage.isHomePageSliderDisplayed());
 	} 
 	
 	@Test
 	public void User_02_Login_To_System() {
-		homePage.clickToLoginLink();
-		loginPage = new LoginPageObject(driver);
+		loginPage = homePage.clickToLoginLink();
 		
 		loginPage.inputToEmailTextbox(emailAddress);
 		loginPage.inputToPasswordTextbox(password);
-		loginPage.clickToLoginButton();
+		homePage = loginPage.clickToLoginButton();
 		
-		homePage = new HomePageObject(driver);
 		Assert.assertTrue(homePage.isHomePageSliderDisplayed());
 	}
 
