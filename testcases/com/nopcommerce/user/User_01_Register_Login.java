@@ -2,11 +2,13 @@ package com.nopcommerce.user;
 
 import org.testng.annotations.Test;
 
+import commons.BaseTest;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
 import pageObjects.RegisterPageObject;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -16,22 +18,18 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class User_01_Register_Login {
+public class User_01_Register_Login extends BaseTest {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String emailAddress, password;
 	
+	@Parameters({"browser", "url"})
 	@BeforeClass
-	public void initBrowser() {
-		System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver");
-		driver = new FirefoxDriver();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
+	public void initBrowser(String browserName, String appUrl) {
+		driver = getBrowserDriver(browserName, appUrl);
 		
 		emailAddress = generateEmail();
 		password = "123456";
-		
-		driver.get("https://demo.nopcommerce.com/");
 	}
 
 	@Test
@@ -76,11 +74,6 @@ public class User_01_Register_Login {
 	@AfterClass
 	public void cleanBrowser() {
 		driver.quit();
-	}
-	
-	public String generateEmail() {
-		Random rand = new Random();
-		return rand.nextInt(9999) + "@gmail.com";
 	}
 	
 	HomePageObject homePage;
