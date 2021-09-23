@@ -5,8 +5,13 @@ import org.testng.annotations.Test;
 import commons.BaseTest;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
+import pageObjects.MyAccountPageObject;
 import pageObjects.PageGeneratorManager;
 import pageObjects.RegisterPageObject;
+import pageObjects.SearchPageObject;
+import pageObjects.ShippingAndReturnPageObject;
+import pageObjects.SiteMapPageObject;
+import pageObjects.WishlistPageObject;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -67,6 +72,16 @@ public class User_01_Register_Login extends BaseTest {
 		
 		Assert.assertTrue(homePage.isHomePageSliderDisplayed());
 	}
+	
+	@Test
+	public void User_03_Switch_Page() {
+		searchPage = homePage.clickToSearchLinkFooter(driver);
+		shippingAndReturnPage = searchPage.clickToShippingAndReturnLinkFooter(driver);
+		siteMapPage = shippingAndReturnPage.clickToSiteMapLinkFooter(driver);
+		myAccountPage = siteMapPage.clickToMyAccountLinkFooter(driver);
+		homePage = myAccountPage.clickToHomePageLogo(driver);
+		wishlistPage = homePage.clickToWishListLinkFooter(driver);
+	}
 
 	@AfterClass
 	public void cleanBrowser() {
@@ -75,5 +90,10 @@ public class User_01_Register_Login extends BaseTest {
 	
 	HomePageObject homePage;
 	LoginPageObject loginPage;
+	SearchPageObject searchPage;
+	SiteMapPageObject siteMapPage;
+	WishlistPageObject wishlistPage;
 	RegisterPageObject registerPage;
+	MyAccountPageObject myAccountPage;
+	ShippingAndReturnPageObject shippingAndReturnPage;
 }
