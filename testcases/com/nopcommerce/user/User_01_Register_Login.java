@@ -28,12 +28,12 @@ public class User_01_Register_Login extends BaseTest {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String emailAddress, password;
-	
-	@Parameters({"browser", "url"})
+
+	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
 		driver = getBrowserDriver(browserName, appUrl);
-		
+
 		emailAddress = generateEmail();
 		password = "123456";
 	}
@@ -42,9 +42,9 @@ public class User_01_Register_Login extends BaseTest {
 	public void User_01_Register_To_System() {
 		homePage = PageGeneratorManager.getHomePage(driver);
 		Assert.assertTrue(homePage.isHomePageSliderDisplayed());
-		
+
 		registerPage = homePage.clickToRegisterLink();
-		
+
 		registerPage.clickToMaleGenderCheckbox();
 		registerPage.inputToFirstNameTextbox("John");
 		registerPage.inputToLastNameTextbox("Terry");
@@ -57,37 +57,45 @@ public class User_01_Register_Login extends BaseTest {
 		registerPage.inputToConfirmPasswordTextbox(password);
 		registerPage.clickToRegisterButton();
 		Assert.assertTrue(registerPage.isSuccessMessageDisplayed());
-		
+
 		homePage = registerPage.clickToLogoutLink();
 		Assert.assertTrue(homePage.isHomePageSliderDisplayed());
-	} 
-	
+	}
+
 	@Test
 	public void User_02_Login_To_System() {
 		loginPage = homePage.clickToLoginLink();
-		
+
 		loginPage.inputToEmailTextbox(emailAddress);
 		loginPage.inputToPasswordTextbox(password);
 		homePage = loginPage.clickToLoginButton();
-		
+
 		Assert.assertTrue(homePage.isHomePageSliderDisplayed());
 	}
-	
+
 	@Test
 	public void User_03_Switch_Page() {
-		searchPage = homePage.clickToSearchLinkFooter(driver);
-		shippingAndReturnPage = searchPage.clickToShippingAndReturnLinkFooter(driver);
-		siteMapPage = shippingAndReturnPage.clickToSiteMapLinkFooter(driver);
-		myAccountPage = siteMapPage.clickToMyAccountLinkFooter(driver);
+		homePage.openFooterPageByName(driver, "Search");
+		searchPage = PageGeneratorManager.getSearchPage(driver);
+
+		searchPage.openFooterPageByName(driver, "Shipping & returns");
+		shippingAndReturnPage = PageGeneratorManager.getShippingAndReturnPage(driver);
+
+		shippingAndReturnPage.openFooterPageByName(driver, "Sitemap");
+		siteMapPage = PageGeneratorManager.getSiteMapPage(driver);
+
+		siteMapPage.openFooterPageByName(driver, "My account");
+		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
+
 		homePage = myAccountPage.clickToHomePageLogo(driver);
-		wishlistPage = homePage.clickToWishListLinkFooter(driver);
+		wishlistPage = homePage.openWishListPageFromHeader(driver);
 	}
 
 	@AfterClass
 	public void cleanBrowser() {
 		driver.quit();
 	}
-	
+
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	SearchPageObject searchPage;
