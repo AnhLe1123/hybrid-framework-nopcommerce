@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="Admin - NopCommerce">
+<parameter name="url" value="https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F" />
+
+  <test name="Run on FIREFOX">
+  <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="com.nopcommerce.admin.Admin_01_Upload_Product_Picture"/>
+    </classes>
+  </test>
+  
+</suite>

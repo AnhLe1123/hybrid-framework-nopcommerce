@@ -3,15 +3,15 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import pageObjects.HomePageObject;
-import pageObjects.LoginPageObject;
-import pageObjects.MyAccountPageObject;
-import pageObjects.PageGeneratorManager;
-import pageObjects.RegisterPageObject;
-import pageObjects.SearchPageObject;
-import pageObjects.ShippingAndReturnPageObject;
-import pageObjects.SiteMapPageObject;
-import pageObjects.WishlistPageObject;
+import pageObjects.user.HomePageObject;
+import pageObjects.user.LoginPageObject;
+import pageObjects.user.MyAccountPageObject;
+import pageObjects.user.PageGeneratorManager;
+import pageObjects.user.RegisterPageObject;
+import pageObjects.user.SearchPageObject;
+import pageObjects.user.ShippingAndReturnPageObject;
+import pageObjects.user.SiteMapPageObject;
+import pageObjects.user.WishlistPageObject;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
