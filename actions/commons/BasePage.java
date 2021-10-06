@@ -130,23 +130,23 @@ public class BasePage {
 		}
 	}
 
-	public By getByXpath(String locator) {
+	private By getByXpath(String locator) {
 		return By.xpath(locator);
 	}
 
-	public WebElement getElement(WebDriver driver, String locator) {
+	private WebElement getElement(WebDriver driver, String locator) {
 		return driver.findElement(getByXpath(locator));
 	}
 
-	public WebElement getElement(WebDriver driver, String locator, String... params) {
+	private WebElement getElement(WebDriver driver, String locator, String... params) {
 		return driver.findElement(getByXpath(getDynamicLocator(locator, params)));
 	}
 
-	public List<WebElement> getElements(WebDriver driver, String locator) {
+	private List<WebElement> getElements(WebDriver driver, String locator) {
 		return driver.findElements(getByXpath(locator));
 	}
 
-	public String getDynamicLocator(String locator, String... params) {
+	private String getDynamicLocator(String locator, String... params) {
 		return String.format(locator, (Object[]) params);
 	}
 

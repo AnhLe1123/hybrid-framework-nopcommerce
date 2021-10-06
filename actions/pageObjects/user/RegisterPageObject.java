@@ -7,7 +7,7 @@ import pageUIs.user.RegisterPageUI;
 
 public class RegisterPageObject extends BasePage {
 	private WebDriver driver;
-	
+
 	public RegisterPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -26,7 +26,7 @@ public class RegisterPageObject extends BasePage {
 		waitForElementVisible(driver, RegisterPageUI.LAST_NAME_TEXTBOX);
 		sendkeyToElement(driver, RegisterPageUI.LAST_NAME_TEXTBOX, value);
 	}
-	
+
 	public void inputToEmailTextbox(String value) {
 		waitForElementVisible(driver, RegisterPageUI.EMAIL_TEXTBOX);
 		sendkeyToElement(driver, RegisterPageUI.EMAIL_TEXTBOX, value);
@@ -76,5 +76,15 @@ public class RegisterPageObject extends BasePage {
 		waitForElementClickable(driver, RegisterPageUI.LOGOUT_LINK);
 		clickToElement(driver, RegisterPageUI.LOGOUT_LINK);
 		return PageGeneratorManager.getHomePage(driver);
+	}
+
+	public boolean isErrorMessageForExistingEmailDisplayed() {
+		waitForElementVisible(driver, RegisterPageUI.ERROR_MESSAGE_EXISTING_EMAIL);
+		return isElementDisplayed(driver, RegisterPageUI.ERROR_MESSAGE_EXISTING_EMAIL);
+	}
+
+	public Object getErrorMessageByFieldName(String fieldName) {
+		waitForElementVisible(driver, RegisterPageUI.ERROR_MESSAGE_BY_FIELD_NAME, fieldName);
+		return getElementText(driver, RegisterPageUI.ERROR_MESSAGE_BY_FIELD_NAME, fieldName);
 	}
 }
