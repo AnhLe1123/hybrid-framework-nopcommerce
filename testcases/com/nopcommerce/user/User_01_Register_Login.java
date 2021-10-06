@@ -59,7 +59,7 @@ public class User_01_Register_Login extends BaseTest {
 		Assert.assertTrue(registerPage.isSuccessMessageDisplayed());
 
 		homePage = registerPage.clickToLogoutLink();
-		Assert.assertTrue(homePage.isHomePageSliderDisplayed());
+		verifyTrue(homePage.isHomePageSliderDisplayed());
 	}
 
 	@Test
@@ -70,7 +70,7 @@ public class User_01_Register_Login extends BaseTest {
 		loginPage.inputToPasswordTextbox(password);
 		homePage = loginPage.clickToLoginButton();
 
-		Assert.assertTrue(homePage.isHomePageSliderDisplayed());
+		verifyTrue(homePage.isHomePageSliderDisplayed());
 	}
 
 	@Test

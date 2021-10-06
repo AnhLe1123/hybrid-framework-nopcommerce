@@ -45,31 +45,31 @@ public class Admin_01_Upload_Product_Picture extends BaseTest {
 		productDetailPage.clickToExpandPanelByName("Pictures");
 		productDetailPage.sleepInSecond(2);
 		productDetailPage.uploadFileAtCardName(driver, "pictures", productAvatarImg);
-		Assert.assertTrue(productDetailPage.isPictureUploadedSuccessByFileName(productAvatarImg));
+		verifyTrue(productDetailPage.isPictureUploadedSuccessByFileName(productAvatarImg));
 
 		productDetailPage.enterToAltTextbox(productAvatarAlt);
 		productDetailPage.enterToAltTitlebox(productAvatarTitle);
 		productDetailPage.clickToUpDownInDisplayedOrderTextbox("Increase");
 		productDetailPage.clickToAddPictureButton();
-		Assert.assertTrue(productDetailPage.isPictureImageDisplayed(productName, productAvatarOrder, productAvatarAlt, productAvatarTitle));
+		verifyTrue(productDetailPage.isPictureImageDisplayed(productName, productAvatarOrder, productAvatarAlt, productAvatarTitle));
 
 		productSearchPage = productDetailPage.clickToSaveButton();
-		Assert.assertTrue(productSearchPage.isSuccessMessageDisplayed("The product has been updated successfully."));
+		verifyTrue(productSearchPage.isSuccessMessageDisplayed("The product has been updated successfully."));
 
 		productSearchPage.enterToProductNameTextbox(productName);
 		productSearchPage.clickToSearchButton();
-		Assert.assertTrue(productSearchPage.isPictureImageUpdated(productName, productName));
+		verifyTrue(productSearchPage.isPictureImageUpdated(productName, productName));
 
 		productDetailPage = productSearchPage.clickToEditButtonByProductName(productName);
 		productDetailPage.clickToExpandPanelByName("Pictures");
 		productDetailPage.sleepInSecond(2);
 		productDetailPage.clickToDeleteButtonAtPictureName(productAvatarTitle);
-		Assert.assertTrue(productDetailPage.isMessageDisplayedInEmptyTable(driver, "productpictures"));
+		verifyTrue(productDetailPage.isMessageDisplayedInEmptyTable(driver, "productpictures"));
 
 		productSearchPage = productDetailPage.clickToSaveButton();
 		productSearchPage.enterToProductNameTextbox(productName);
 		productSearchPage.clickToSearchButton();
-		Assert.assertTrue(productSearchPage.isPictureImageUpdated(productName, "default-image"));
+		verifyTrue(productSearchPage.isPictureImageUpdated(productName, "default-image"));
 	}
 
 	@AfterClass
