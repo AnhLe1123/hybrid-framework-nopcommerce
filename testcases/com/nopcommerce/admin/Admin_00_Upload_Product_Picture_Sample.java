@@ -14,7 +14,7 @@ import pageObjects.admin.PageGeneratorManager;
 import pageObjects.admin.ProductDetailPageObject;
 import pageObjects.admin.ProductSearchPageObject;
 
-public class Admin_01_Upload_Product_Picture extends BaseTest {
+public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 	WebDriver driver;
 	String productName = "Flower Girl Bracelet";
 	String productAvatarImg = "travel.png";

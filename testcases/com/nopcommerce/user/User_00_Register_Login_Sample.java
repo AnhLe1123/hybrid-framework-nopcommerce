@@ -24,7 +24,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class User_01_Register_Login extends BaseTest {
+public class User_00_Register_Login_Sample extends BaseTest {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String emailAddress, password;
@@ -41,7 +41,7 @@ public class User_01_Register_Login extends BaseTest {
 	@Test
 	public void User_01_Register_To_System() {
 		homePage = PageGeneratorManager.getHomePage(driver);
-		Assert.assertTrue(homePage.isHomePageSliderDisplayed());
+		verifyTrue(homePage.isHomePageSliderDisplayed());
 
 		registerPage = homePage.clickToRegisterLink();
 

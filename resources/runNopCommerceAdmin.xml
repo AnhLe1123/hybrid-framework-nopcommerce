@@ -3,12 +3,13 @@
 <parameter name="url" value="https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F" />
 	<listeners>
 		<listener class-name="commons.MethodListener" />
+		<listener class-name="reportConfig.ExtentTestListener" />
 	</listeners>
 
   <test name="Run on FIREFOX">
   <parameter name="browser" value="firefox"/>
     <classes>
-      <class name="com.nopcommerce.admin.Admin_01_Upload_Product_Picture"/>
+      <class name="com.nopcommerce.admin.Admin_00_Upload_Product_Picture_Sample"/>
     </classes>
   </test>
   

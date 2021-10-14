@@ -3,12 +3,13 @@
 <parameter name="url" value="https://demo.nopcommerce.com/" />
 	<listeners>
 		<listener class-name="commons.MethodListener" />
+		<listener class-name="reportConfig.ExtentTestListener" />
 	</listeners>
 
   <test name="Run on FIREFOX">
   <parameter name="browser" value="firefox"/>
     <classes>
-      <class name="com.nopcommerce.user.User_01_Register_Login"/>
+      <class name="com.nopcommerce.user.User_01_Register"/>
     </classes>
   </test>
   
