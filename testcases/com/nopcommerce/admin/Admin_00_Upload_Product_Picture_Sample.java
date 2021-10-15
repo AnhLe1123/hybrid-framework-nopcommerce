@@ -1,7 +1,6 @@
 package com.nopcommerce.admin;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -72,9 +71,9 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		verifyTrue(productSearchPage.isPictureImageUpdated(productName, "default-image"));
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void cleanBrowser() {
-		driver.quit();
+		closeBrowserAndDriver();
 	}
 
 	LoginPageObject loginPage;

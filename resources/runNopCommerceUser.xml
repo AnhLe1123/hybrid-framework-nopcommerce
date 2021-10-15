@@ -2,8 +2,10 @@
 <suite parallel="false" name="User - NopCommerce">
 <parameter name="url" value="https://demo.nopcommerce.com/" />
 	<listeners>
+		<listener class-name = "org.uncommons.reportng.HTMLReporter"/>
+		<listener class-name = "org.uncommons.reportng.JUnitXMLReporter"/>
 		<listener class-name="commons.MethodListener" />
-		<listener class-name="reportConfig.ExtentTestListener" />
+		<listener class-name="reportConfig.ReportNGListener" />
 	</listeners>
 
   <test name="Run on FIREFOX">

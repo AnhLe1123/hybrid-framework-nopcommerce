@@ -16,17 +16,24 @@ import pageObjects.user.WishlistPageObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import java.lang.reflect.Method;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
 public class User_00_Register_Login_Sample extends BaseTest {
 	WebDriver driver;
-	String projectPath = System.getProperty("user.dir");
+
+	HomePageObject homePage;
+	LoginPageObject loginPage;
+	SearchPageObject searchPage;
+	SiteMapPageObject siteMapPage;
+	WishlistPageObject wishlistPage;
+	RegisterPageObject registerPage;
+	MyAccountPageObject myAccountPage;
+	ShippingAndReturnPageObject shippingAndReturnPage;
+
 	String emailAddress, password;
 
 	@Parameters({ "browser", "url" })
@@ -74,7 +81,7 @@ public class User_00_Register_Login_Sample extends BaseTest {
 	}
 
 	@Test
-	public void User_03_Switch_Page() {
+	public void User_03_Switch_Page(Method method) {
 		homePage.openFooterPageByName(driver, "Search");
 		searchPage = PageGeneratorManager.getSearchPage(driver);
 
@@ -91,17 +98,9 @@ public class User_00_Register_Login_Sample extends BaseTest {
 		wishlistPage = homePage.openWishListPageFromHeader(driver);
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void cleanBrowser() {
-		driver.quit();
+		closeBrowserAndDriver();
 	}
 
-	HomePageObject homePage;
-	LoginPageObject loginPage;
-	SearchPageObject searchPage;
-	SiteMapPageObject siteMapPage;
-	WishlistPageObject wishlistPage;
-	RegisterPageObject registerPage;
-	MyAccountPageObject myAccountPage;
-	ShippingAndReturnPageObject shippingAndReturnPage;
 }
