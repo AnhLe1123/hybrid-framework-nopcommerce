@@ -63,7 +63,7 @@ public class User_00_Register_Login_Sample extends BaseTest {
 		registerPage.inputToPasswordTextbox(password);
 		registerPage.inputToConfirmPasswordTextbox(password);
 		registerPage.clickToRegisterButton();
-		Assert.assertTrue(registerPage.isSuccessMessageDisplayed());
+		verifyTrue(registerPage.isSuccessMessageDisplayed());
 
 		homePage = registerPage.clickToLogoutLink();
 		verifyTrue(homePage.isHomePageSliderDisplayed());

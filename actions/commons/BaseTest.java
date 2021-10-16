@@ -102,7 +102,7 @@ public class BaseTest {
 
 	protected String generateEmail() {
 		Random rand = new Random();
-		return rand.nextInt(9999) + "@gmail.com";
+		return "abc" + rand.nextInt(9999) + "@gmail.com";
 	}
 
 	private String getSlash(String folderName) {
@@ -122,7 +122,7 @@ public class BaseTest {
 		} catch (Throwable e) {
 			pass = false;
 
-			// Add lỗi vào ReportNG
+			// Add issues in ReportNG
 			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
 			Reporter.getCurrentTestResult().setThrowable(e);
 		}
