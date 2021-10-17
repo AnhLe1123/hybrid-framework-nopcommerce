@@ -25,7 +25,7 @@ public class User_01_Register extends BaseTest {
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
 		driver = getBrowserDriver(browserName, appUrl);
 
-		validEmailAddress = generateEmail();
+		validEmailAddress = "abc" + generateFakeNumber() + "@gmail.com";
 		invalidEmailAddress = "1234@asdf#!";
 		password = "123456";
 		firstName = "John";
@@ -36,13 +36,14 @@ public class User_01_Register extends BaseTest {
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 
 		log.info("Pre-condition - Step 03: Click to Register link");
-		registerPage = homePage.clickToRegisterLink();
+		homePage.openHeaderPageByName(driver, "register");
+		registerPage = PageGeneratorManager.getRegisterPage(driver);
 	}
 
 	@Test
 	public void User_01_Register_With_Empty_Data() {
 		log.info("User_01_Register_With_Empty_Data - Step 01: Click to Register button");
-		registerPage.clickToRegisterButton();
+		registerPage.clickToButtonByText(driver, "Register");
 
 		log.info("User_01_Register_With_Empty_Data - Step 02: Verify error message displayed at all required fields");
 		verifyEquals(registerPage.getErrorMessageByFieldName("FirstName"), "First name is required.");
@@ -59,10 +60,10 @@ public class User_01_Register extends BaseTest {
 		registerPage.refreshCurrentPage(driver);
 
 		log.info("User_02_Register_With_Invalid_Email - Step 02: Enter to Email textbox with value: " + invalidEmailAddress);
-		registerPage.inputToEmailTextbox(invalidEmailAddress);
+		registerPage.inputToTextboxByID(driver, "Email", invalidEmailAddress);
 
 		log.info("User_02_Register_With_Invalid_Email - Step 03: Click to Register button");
-		registerPage.clickToRegisterButton();
+		registerPage.clickToButtonByText(driver, "Register");
 
 		log.info("User_02_Register_With_Invalid_Email - Step 04: Verify error message 'Wrong email' displayed at field Email");
 		verifyEquals(registerPage.getErrorMessageByFieldName("Email"), "Wrong email");
@@ -75,56 +76,58 @@ public class User_01_Register extends BaseTest {
 		registerPage.refreshCurrentPage(driver);
 
 		log.info("User_02_Register_With_Invalid_Email - Step 02: Enter to Firstname textbox with value: " + firstName);
-		registerPage.inputToFirstNameTextbox(firstName);
+		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
 
 		log.info("User_02_Register_With_Invalid_Email - Step 03: Enter to Lastname textbox with value: " + lastName);
-		registerPage.inputToLastNameTextbox(lastName);
+		registerPage.inputToTextboxByID(driver, "LastName", lastName);
 
 		log.info("User_02_Register_With_Invalid_Email - Step 04: Enter to Email textbox with value: " + validEmailAddress);
-		registerPage.inputToEmailTextbox(validEmailAddress);
+		registerPage.inputToTextboxByID(driver, "Email", validEmailAddress);
 
 		log.info("User_02_Register_With_Invalid_Email - Step 05: Enter to Password textbox with value: " + password);
-		registerPage.inputToPasswordTextbox(password);
+		registerPage.inputToTextboxByID(driver, "Password", password);
 
 		log.info("User_02_Register_With_Invalid_Email - Step 06: Enter to Confirm Password textbox with value: " + password);
-		registerPage.inputToConfirmPasswordTextbox(password);
+		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("User_02_Register_With_Invalid_Email - Step 07: Click to Register button");
-		registerPage.clickToRegisterButton();
+		registerPage.clickToButtonByText(driver, "Register");
 
 		log.info("User_02_Register_With_Invalid_Email - Step 08: Verify success message");
 		verifyTrue(registerPage.isSuccessMessageDisplayed());
 
 		log.info("User_02_Register_With_Invalid_Email - Step 09: Click to Logout link");
-		homePage = registerPage.clickToLogoutLink();
+		registerPage.openHeaderPageByName(driver, "logout");
+		homePage = PageGeneratorManager.getHomePage(driver);
 
 		log.info("User_02_Register_With_Invalid_Email - Step 10: Verify HomePage slider displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 
 		log.info("User_02_Register_With_Invalid_Email - Step 11: Click to Register link");
-		registerPage = homePage.clickToRegisterLink();
+		homePage.openHeaderPageByName(driver, "register");
+		registerPage = PageGeneratorManager.getRegisterPage(driver);
 
 	}
 
 	@Test
 	public void User_04_Register_With_Existing_Email() {
 		log.info("User_04_Register_With_Existing_Email - Step 01: Enter to Firstname textbox with value: " + firstName);
-		registerPage.inputToFirstNameTextbox(firstName);
+		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
 
 		log.info("User_04_Register_With_Existing_Email - Step 02: Enter to Lastname textbox with value: " + firstName);
-		registerPage.inputToLastNameTextbox(lastName);
+		registerPage.inputToTextboxByID(driver, "LastName", lastName);
 
 		log.info("User_04_Register_With_Existing_Email - Step 03: Enter to Email textbox with value: " + firstName);
-		registerPage.inputToEmailTextbox(validEmailAddress);
+		registerPage.inputToTextboxByID(driver, "Email", validEmailAddress);
 
 		log.info("User_04_Register_With_Existing_Email - Step 04: Enter to Password textbox with value: " + password);
-		registerPage.inputToPasswordTextbox(password);
+		registerPage.inputToTextboxByID(driver, "Password", password);
 
 		log.info("User_04_Register_With_Existing_Email - Step 05: Enter to Confirm Password textbox with value: " + password);
-		registerPage.inputToConfirmPasswordTextbox(password);
+		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("User_04_Register_With_Existing_Email - Step 06: Click to Register button");
-		registerPage.clickToRegisterButton();
+		registerPage.clickToButtonByText(driver, "Register");
 
 		log.info("User_04_Register_With_Existing_Email - Step 07: Verify error message for existing email displayed");
 		verifyTrue(registerPage.isErrorMessageForExistingEmailDisplayed());
@@ -133,13 +136,16 @@ public class User_01_Register extends BaseTest {
 
 	@Test
 	public void User_05_Register_With_Password_Less_Than_6_Chars() {
-		log.info("User_05_Register_With_Password_Less_Than_6_Chars - Step 01: Enter to Password textbox with value '123'");
-		registerPage.inputToPasswordTextbox("123");
+		log.info("User_05_Register_With_Password_Less_Than_6_Chars - Step 01: Click to Register link");
+		registerPage.openHeaderPageByName(driver, "register");
 
-		log.info("User_05_Register_With_Password_Less_Than_6_Chars - Step 02: Click to Register button");
-		registerPage.clickToRegisterButton();
+		log.info("User_05_Register_With_Password_Less_Than_6_Chars - Step 02: Enter to Password textbox with value '123'");
+		registerPage.inputToTextboxByID(driver, "Password", "123");
 
-		log.info("User_05_Register_With_Password_Less_Than_6_Chars - Step 03: Verify displayed error message: 'Password must meet the following rules: must have at least 6 characters'");
+		log.info("User_05_Register_With_Password_Less_Than_6_Chars - Step 03: Click to Register button");
+		registerPage.clickToButtonByText(driver, "Register");
+
+		log.info("User_05_Register_With_Password_Less_Than_6_Chars - Step 04: Verify displayed error message: 'Password must meet the following rules: must have at least 6 characters'");
 		verifyEquals(registerPage.getErrorMessageByFieldName("Password"), "Password must meet the following rules:\nmust have at least 6 characters");
 
 	}
@@ -147,13 +153,13 @@ public class User_01_Register extends BaseTest {
 	@Test
 	public void User_06_Register_With_Confirm_Password_Not_Match_With_Password() {
 		log.info("User_06_Register_With_Confirm_Password_Not_Match_With_Password - Step 01: Enter to Password textbox with value: " + password);
-		registerPage.inputToPasswordTextbox(password);
+		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("User_06_Register_With_Confirm_Password_Not_Match_With_Password - Step 02: Enter to Confirm Password textbox with value: 654321");
-		registerPage.inputToConfirmPasswordTextbox("654321");
+		registerPage.inputToTextboxByID(driver, "ConfirmPassword", "654321");
 
 		log.info("User_06_Register_With_Confirm_Password_Not_Match_With_Password - Step 03: Click to Register button");
-		registerPage.clickToRegisterButton();
+		registerPage.clickToButtonByText(driver, "Register");
 
 		log.info("User_06_Register_With_Confirm_Password_Not_Match_With_Password - Step 04: Verify displayed error message: 'The password and confirmation password do not match.'");
 		verifyEquals(registerPage.getErrorMessageByFieldName("ConfirmPassword"), "The password and confirmation password do not match.");

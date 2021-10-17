@@ -100,9 +100,9 @@ public class BaseTest {
 		return driver;
 	}
 
-	protected String generateEmail() {
+	protected int generateFakeNumber() {
 		Random rand = new Random();
-		return "abc" + rand.nextInt(9999) + "@gmail.com";
+		return rand.nextInt(9999);
 	}
 
 	private String getSlash(String folderName) {

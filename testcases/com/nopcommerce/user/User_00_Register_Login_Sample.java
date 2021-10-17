@@ -16,10 +16,7 @@ import pageObjects.user.WishlistPageObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
-import java.lang.reflect.Method;
-
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
 public class User_00_Register_Login_Sample extends BaseTest {
@@ -34,15 +31,18 @@ public class User_00_Register_Login_Sample extends BaseTest {
 	MyAccountPageObject myAccountPage;
 	ShippingAndReturnPageObject shippingAndReturnPage;
 
-	String emailAddress, password;
+	String emailAddress, password, firstName, lastName, companyName;
 
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
 		driver = getBrowserDriver(browserName, appUrl);
 
-		emailAddress = generateEmail();
+		emailAddress = "abc" + generateFakeNumber() + "@gmail.com";
 		password = "123456";
+		firstName = "John";
+		lastName = "Terry";
+		companyName = "Automation Group";
 	}
 
 	@Test
@@ -50,38 +50,43 @@ public class User_00_Register_Login_Sample extends BaseTest {
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 
-		registerPage = homePage.clickToRegisterLink();
+		homePage.openHeaderPageByName(driver, "register");
+		registerPage = PageGeneratorManager.getRegisterPage(driver);
 
-		registerPage.clickToMaleGenderCheckbox();
-		registerPage.inputToFirstNameTextbox("John");
-		registerPage.inputToLastNameTextbox("Terry");
-		registerPage.selectDayOfBirthDropdown("25");
-		registerPage.selectMonthOfBirthDropdown("November");
-		registerPage.selectYearOfBirthDropdown("2000");
-		registerPage.inputToEmailTextbox(emailAddress);
-		registerPage.inputToCompanyNameTextbox("Automation Group");
-		registerPage.inputToPasswordTextbox(password);
-		registerPage.inputToConfirmPasswordTextbox(password);
-		registerPage.clickToRegisterButton();
+		registerPage.clickToRadioButtonByLabel(driver, "Male");
+		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
+		registerPage.inputToTextboxByID(driver, "LastName", lastName);
+		registerPage.selectDropdownByName(driver, "DateOfBirthDay", "20");
+		registerPage.selectDropdownByName(driver, "DateOfBirthMonth", "March");
+		registerPage.selectDropdownByName(driver, "DateOfBirthYear", "1990");
+		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
+		registerPage.inputToTextboxByID(driver, "Company", companyName);
+		registerPage.inputToTextboxByID(driver, "Password", password);
+		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
+		registerPage.clickToButtonByText(driver, "Register");
+
 		verifyTrue(registerPage.isSuccessMessageDisplayed());
 
-		homePage = registerPage.clickToLogoutLink();
+		registerPage.openHeaderPageByName(driver, "logout");
+		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 	}
 
 	@Test
 	public void User_02_Login_To_System() {
-		loginPage = homePage.clickToLoginLink();
+		homePage.openHeaderPageByName(driver, "login");
+		loginPage = PageGeneratorManager.getLoginPage(driver);
 
-		loginPage.inputToEmailTextbox(emailAddress);
-		loginPage.inputToPasswordTextbox(password);
-		homePage = loginPage.clickToLoginButton();
+		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
+		loginPage.inputToTextboxByID(driver, "Password", password);
+		loginPage.clickToButtonByText(driver, "Log in");
 
+		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 	}
 
 	@Test
-	public void User_03_Switch_Page(Method method) {
+	public void User_03_Switch_Page() {
 		homePage.openFooterPageByName(driver, "Search");
 		searchPage = PageGeneratorManager.getSearchPage(driver);
 
@@ -94,8 +99,11 @@ public class User_00_Register_Login_Sample extends BaseTest {
 		siteMapPage.openFooterPageByName(driver, "My account");
 		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
 
-		homePage = myAccountPage.clickToHomePageLogo(driver);
-		wishlistPage = homePage.openWishListPageFromHeader(driver);
+		myAccountPage.clickToHomePageLogo(driver);
+		homePage = PageGeneratorManager.getHomePage(driver);
+
+		homePage.openHeaderPageByName(driver, "wishlist");
+		wishlistPage = PageGeneratorManager.getWishlistPage(driver);
 	}
 
 	@AfterClass(alwaysRun = true)

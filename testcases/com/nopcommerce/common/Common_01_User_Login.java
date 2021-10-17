@@ -20,7 +20,7 @@ public class Common_01_User_Login extends BaseTest {
 	LoginPageObject loginPage;
 	RegisterPageObject registerPage;
 
-	String emailAddress, password;
+	String emailAddress, password, firstName, lastName;
 	public static Set<Cookie> loginPageCookie;
 
 	@Parameters({ "browser", "url" })
@@ -29,57 +29,62 @@ public class Common_01_User_Login extends BaseTest {
 		log.info("Pre-condition - Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
 		driver = getBrowserDriver(browserName, appUrl);
 
-		emailAddress = generateEmail();
+		emailAddress = "abc" + generateFakeNumber() + "@gmail.com";
 		password = "123456";
+		firstName = "John";
+		lastName = "Terry";
 
 		log.info("Common_01 - Step 01: Verify HomePage is displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 
 		log.info("Common_01 - Step 02: Click to Register link");
-		registerPage = homePage.clickToRegisterLink();
+		homePage.openHeaderPageByName(driver, "register");
+		registerPage = PageGeneratorManager.getRegisterPage(driver);
 
 		log.info("Common_01 - Step 03: Click to Male ratio button");
-		registerPage.clickToMaleGenderCheckbox();
+		registerPage.clickToRadioButtonByLabel(driver, "Male");
 
 		log.info("Common_01 - Step 04: Enter to Firstname textbox");
-		registerPage.inputToFirstNameTextbox("John");
+		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
 
 		log.info("Common_01 - Step 05: Enter to Lastname textbox");
-		registerPage.inputToLastNameTextbox("Terry");
+		registerPage.inputToTextboxByID(driver, "LastName", lastName);
 
 		log.info("Common_01 - Step 06: Enter to Email textbox with value: " + emailAddress);
-		registerPage.inputToEmailTextbox(emailAddress);
+		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Common_01 - Step 07: Enter to Password textbox with value: " + password);
-		registerPage.inputToPasswordTextbox(password);
+		registerPage.inputToTextboxByID(driver, "Password", password);
 
 		log.info("Common_01 - Step 08: Enter to Confirm Password textbox with value: " + password);
-		registerPage.inputToConfirmPasswordTextbox(password);
+		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("Common_01 - Step 09: Click to Register button");
-		registerPage.clickToRegisterButton();
+		registerPage.clickToButtonByText(driver, "Register");
 
 		log.info("Common_01 - Step 10: Verify success message displayed");
 		verifyTrue(registerPage.isSuccessMessageDisplayed());
 
 		log.info("Common_01 - Step 11: Click to Logout link");
-		homePage = registerPage.clickToLogoutLink();
+		registerPage.openHeaderPageByName(driver, "logout");
+		homePage = PageGeneratorManager.getHomePage(driver);
 
 		log.info("Common_01 - Step 12: Verify HomePage displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 
 		log.info("Common_01 - Step 13: Click to Login link");
-		loginPage = homePage.clickToLoginLink();
+		homePage.openHeaderPageByName(driver, "login");
+		loginPage = PageGeneratorManager.getLoginPage(driver);
 
 		log.info("Common_01 - Step 14: Enter to Email textbox with value: " + emailAddress);
-		loginPage.inputToEmailTextbox(emailAddress);
+		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Common_01 - Step 15: Enter to Password textbox with value: " + password);
-		loginPage.inputToPasswordTextbox(password);
+		loginPage.inputToTextboxByID(driver, "Password", password);
 
 		log.info("Common_01 - Step 16: Click to Login button");
-		homePage = loginPage.clickToLoginButton();
+		loginPage.clickToButtonByText(driver, "Log in");
 
 		log.info("Common_01 - Step 17: Verify HomePage is displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
