@@ -11,6 +11,11 @@ public class PageGeneratorManager {
 	private static WishlistPageObject wishlistPage;
 	private static MyAccountPageObject myAccountPage;
 	private static ShippingAndReturnPageObject shippingAndReturnPage;
+	private static MyAddressPageObject myAddressPage;
+	private static MyPasswordPageObject myPasswordPage;
+	private static MyProductReviewPageObject myProductReviewPage;
+	private static ProductDetailPageObject productDetailPage;
+	private static ProductReviewPageObject productReviewPage;
 	
 	private PageGeneratorManager() {
 		
@@ -70,5 +75,40 @@ public class PageGeneratorManager {
 			shippingAndReturnPage = new ShippingAndReturnPageObject(driver);
 		}
 		return shippingAndReturnPage;
+	}
+	
+	public static MyAddressPageObject getMyAddressPage(WebDriver driver) {
+		if(myAddressPage == null) {
+			myAddressPage = new MyAddressPageObject(driver);
+		}
+		return myAddressPage;
+	}
+	
+	public static MyPasswordPageObject getMyPasswordPage(WebDriver driver) {
+		if(myPasswordPage == null) {
+			myPasswordPage = new MyPasswordPageObject(driver);
+		}
+		return myPasswordPage;
+	}
+	
+	public static MyProductReviewPageObject getMyProductReviewPage(WebDriver driver) {
+		if(myProductReviewPage == null) {
+			myProductReviewPage = new MyProductReviewPageObject(driver);
+		}
+		return myProductReviewPage;
+	}
+	
+	public static ProductDetailPageObject getProductDetailPage(WebDriver driver) {
+		if(productDetailPage == null) {
+			productDetailPage = new ProductDetailPageObject(driver);
+		}
+		return productDetailPage;
+	}
+	
+	public static ProductReviewPageObject getProductReviewPage(WebDriver driver) {
+		if(productReviewPage == null) {
+			productReviewPage = new ProductReviewPageObject(driver);
+		}
+		return productReviewPage;
 	}
 }

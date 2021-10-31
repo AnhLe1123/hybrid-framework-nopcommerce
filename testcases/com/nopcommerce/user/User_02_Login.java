@@ -83,87 +83,87 @@ public class User_02_Login extends BaseTest {
 	}
 
 	@Test
-	public void User_01_Login_With_Empty_Data() {
-		log.info("User_01 - Step 01: Input empty Email textbox");
+	public void Login_01_Login_With_Empty_Data() {
+		log.info("Login_01 - Step 01: Input empty Email textbox");
 		loginPage.inputToTextboxByID(driver, "Email", "");
 
-		log.info("User_01 - Step 02: Click to Login button");
+		log.info("Login_01 - Step 02: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
 
-		log.info("User_01 - Step 03: Verify displayed error message 'Please enter your email'");
+		log.info("Login_01 - Step 03: Verify displayed error message 'Please enter your email'");
 		verifyEquals(loginPage.getEmailErrorMessage(), "Please enter your email");
 	}
 
 	@Test
-	public void User_02_Login_With_Invalid_Email() {
-		log.info("User_02 - Step 01: Input to Email textbox with value: " + invalidEmail);
+	public void Login_02_Login_With_Invalid_Email() {
+		log.info("Login_02 - Step 01: Input to Email textbox with value: " + invalidEmail);
 		loginPage.inputToTextboxByID(driver, "Email", invalidEmail);
 
-		log.info("User_02 - Step 02: Click to Login button");
+		log.info("Login_02 - Step 02: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
 
-		log.info("User_02 - Step 03: Verify displayed error message 'Wrong email'");
+		log.info("Login_02 - Step 03: Verify displayed error message 'Wrong email'");
 		verifyEquals(loginPage.getEmailErrorMessage(), "Wrong email");
 	}
 
 	@Test
-	public void User_03_Login_With_Not_Registered_Email() {
-		log.info("User_03 - Step 01: Input to Email textbox with value: " + notRegisteredEmail);
+	public void Login_03_Login_With_Not_Registered_Email() {
+		log.info("Login_03 - Step 01: Input to Email textbox with value: " + notRegisteredEmail);
 		loginPage.inputToTextboxByID(driver, "Email", notRegisteredEmail);
 
-		log.info("User_03 - Step 02: Input to Password textbox with value: " + invalidEmail);
+		log.info("Login_03 - Step 02: Input to Password textbox with value: " + invalidEmail);
 		loginPage.inputToTextboxByID(driver, "Password", correctPassword);
 
-		log.info("User_03 - Step 03: Click to Login button");
+		log.info("Login_03 - Step 03: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
 
-		log.info("User_03 - Step 04: Verify displayed error message 'Login was unsuccessful. Please correct the errors and try again. No customer account found'");
+		log.info("Login_03 - Step 04: Verify displayed error message 'Login was unsuccessful. Please correct the errors and try again. No customer account found'");
 		verifyTrue(loginPage.isUnccessfulErrorMessageByTextDisplayed("No customer account found"));
 	}
 
 	@Test
-	public void User_04_Login_With_Registered_Email_And_Empty_Password() {
-		log.info("User_04 - Step 01: Input to Email textbox with value: " + registeredEmail);
+	public void Login_04_Login_With_Registered_Email_And_Empty_Password() {
+		log.info("Login_04 - Step 01: Input to Email textbox with value: " + registeredEmail);
 		loginPage.inputToTextboxByID(driver, "Email", registeredEmail);
 
-		log.info("User_04 - Step 02: Input empty Password textbox");
+		log.info("Login_04 - Step 02: Input empty Password textbox");
 		loginPage.inputToTextboxByID(driver, "Password", "");
 
-		log.info("User_04 - Step 03: Click to Login button");
+		log.info("Login_04 - Step 03: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
 
-		log.info("User_04 - Step 04: Verify displayed error message 'Login was unsuccessful. Please correct the errors and try again. No customer account found'");
+		log.info("Login_04 - Step 04: Verify displayed error message 'Login was unsuccessful. Please correct the errors and try again. No customer account found'");
 		verifyTrue(loginPage.isUnccessfulErrorMessageByTextDisplayed("The credentials provided are incorrect"));
 	}
 
 	@Test
-	public void User_05_Login_With_Registered_Email_And_Wrong_Password() {
-		log.info("User_05 - Step 01: Input to Email textbox with value: " + registeredEmail);
+	public void Login_05_Login_With_Registered_Email_And_Wrong_Password() {
+		log.info("Login_05 - Step 01: Input to Email textbox with value: " + registeredEmail);
 		loginPage.inputToTextboxByID(driver, "Email", registeredEmail);
 
-		log.info("User_05 - Step 02: Input to Password textbox with value: " + wrongPassword);
+		log.info("Login_05 - Step 02: Input to Password textbox with value: " + wrongPassword);
 		loginPage.inputToTextboxByID(driver, "Password", wrongPassword);
 
-		log.info("User_05 - Step 03: Click to Login button");
+		log.info("Login_05 - Step 03: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
 
-		log.info("User_05 - Step 04: Verify displayed error message 'Login was unsuccessful. Please correct the errors and try again. No customer account found'");
+		log.info("Login_05 - Step 04: Verify displayed error message 'Login was unsuccessful. Please correct the errors and try again. No customer account found'");
 		verifyTrue(loginPage.isUnccessfulErrorMessageByTextDisplayed("The credentials provided are incorrect"));
 	}
 
 	@Test
-	public void User_06_Login_With_Registered_Email_And_Correct_Password() {
-		log.info("User_06 - Step 01: Input to Email textbox with value: " + registeredEmail);
+	public void Login_06_Login_With_Registered_Email_And_Correct_Password() {
+		log.info("Login_06 - Step 01: Input to Email textbox with value: " + registeredEmail);
 		loginPage.inputToTextboxByID(driver, "Email", registeredEmail);
 
-		log.info("User_06 - Step 02: Input to Password textbox with value: " + correctPassword);
+		log.info("Login_06 - Step 02: Input to Password textbox with value: " + correctPassword);
 		loginPage.inputToTextboxByID(driver, "Password", correctPassword);
 
-		log.info("User_06 - Step 03: Click to Login button");
+		log.info("Login_06 - Step 03: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
 		homePage = PageGeneratorManager.getHomePage(driver);
 
-		log.info("User_06 - Step 04: Verify HomePage displayed");
+		log.info("Login_06 - Step 04: Verify HomePage displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 	}
 

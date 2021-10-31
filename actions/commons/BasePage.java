@@ -187,6 +187,11 @@ public class BasePage {
 		select = new Select(getElement(driver, locator));
 		return select.getFirstSelectedOption().getText();
 	}
+	
+	protected String getSelectedItemInDropdown(WebDriver driver, String locator, String... params) {
+		select = new Select(getElement(driver, getDynamicLocator(locator, params)));
+		return select.getFirstSelectedOption().getText();
+	}
 
 	protected boolean isDropdownMultiple(WebDriver driver, String locator) {
 		select = new Select(getElement(driver, locator));
@@ -307,6 +312,10 @@ public class BasePage {
 
 	protected boolean isElementSelected(WebDriver driver, String locator) {
 		return getElement(driver, locator).isSelected();
+	}
+	
+	protected boolean isElementSelected(WebDriver driver, String locator, String... params) {
+		return getElement(driver, getDynamicLocator(locator, params)).isSelected();
 	}
 
 	protected boolean isElementEnabled(WebDriver driver, String locator) {
@@ -507,25 +516,71 @@ public class BasePage {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LINK_HEADER, pageName);
 		clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_HEADER, pageName);
 	}
+	
+	public void openSidebarPageByName(WebDriver driver, String pageName) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LINK_SIDEBAR, pageName);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_SIDEBAR, pageName);
+	}
 
 	public void clickToRadioButtonByLabel(WebDriver driver, String labelText) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_TEXT, labelText);
 		clickToElement(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_TEXT, labelText);
+	}
+	
+	public boolean isRadioButtonByLabelSelected(WebDriver driver, String labelText) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_TEXT, labelText);
+		return isElementSelected(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_TEXT, labelText);
 	}
 
 	public void inputToTextboxByID(WebDriver driver, String textboxID, String value) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
 		sendkeyToElement(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, value, textboxID);
 	}
+	
+	public String getValueInTextboxByID(WebDriver driver, String textboxID) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
+		return getElementAttribute(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, "value", textboxID);
+	}
 
 	public void selectDropdownByName(WebDriver driver, String dropdownName, String itemText) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_DROPDOWN_BY_NAME, dropdownName);
 		selectItemInDropdownByText(driver, UserBasePageUI.DYNAMIC_DROPDOWN_BY_NAME, itemText, dropdownName);
 	}
+	
+	public String getSelectedItemInDropdownByName(WebDriver driver, String dropdownName) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_DROPDOWN_BY_NAME, dropdownName);
+		return getSelectedItemInDropdown(driver, UserBasePageUI.DYNAMIC_DROPDOWN_BY_NAME, dropdownName);
+	}
 
 	public void clickToButtonByText(WebDriver driver, String buttonText) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_TEXT, buttonText);
 		clickToElement(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_TEXT, buttonText);
+	}
+	
+	public boolean isPageTitleByTextDisplayed(WebDriver driver, String pageTitleText) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_PAGE_TITLE_BY_TEXT, pageTitleText);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_PAGE_TITLE_BY_TEXT, pageTitleText);
+	}
+	
+	public boolean isInfoDisplayedByFieldName(WebDriver driver, String fieldName, String textValue) {
+		waitForAllElementsVisible(driver, UserBasePageUI.DYNAMIC_INFO_BY_FIELD_NAME, fieldName, textValue);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_INFO_BY_FIELD_NAME, fieldName, textValue);
+	}
+	
+	public void clickToProductTitleByName(WebDriver driver, String productName) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_PRODUCT_TITLE_BY_TEXT, productName);
+		scrollToElement(driver, UserBasePageUI.DYNAMIC_PRODUCT_TITLE_BY_TEXT, productName);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_PRODUCT_TITLE_BY_TEXT, productName);
+	}
+	
+	public boolean isReviewProductNameDisplayed(WebDriver driver, String productName) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_REVIEW_PRODUCT_BY_NAME, productName);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_REVIEW_PRODUCT_BY_NAME, productName);
+	}
+	
+	public boolean isReviewByTitleContentDisplayed(WebDriver driver, String reviewPart, String productName) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_REVIEW_TITLE_CONTENT_BY_PRODUCT_NAME, reviewPart, productName);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_REVIEW_TITLE_CONTENT_BY_PRODUCT_NAME, reviewPart, productName);
 	}
 
 	// Admin - NopCommerce
