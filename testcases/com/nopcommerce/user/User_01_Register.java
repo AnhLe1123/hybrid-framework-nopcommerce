@@ -6,6 +6,7 @@ import commons.BaseTest;
 import pageObjects.user.HomePageObject;
 import pageObjects.user.PageGeneratorManager;
 import pageObjects.user.RegisterPageObject;
+import utilities.DataUtil;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -17,6 +18,7 @@ public class User_01_Register extends BaseTest {
 	WebDriver driver;
 	HomePageObject homePage;
 	RegisterPageObject registerPage;
+	DataUtil fakeData;
 	String validEmailAddress, invalidEmailAddress, password, firstName, lastName;
 
 	@Parameters({ "browser", "url" })
@@ -24,12 +26,13 @@ public class User_01_Register extends BaseTest {
 	public void initBrowser(String browserName, String appUrl) {
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
 		driver = getBrowserDriver(browserName, appUrl);
+		fakeData = DataUtil.getData();
 
-		validEmailAddress = "abc" + generateFakeNumber() + "@gmail.com";
+		validEmailAddress = fakeData.getEmailAddress();
 		invalidEmailAddress = "1234@asdf#!";
-		password = "123456";
-		firstName = "John";
-		lastName = "Terry";
+		password = fakeData.getPassword();
+		firstName = fakeData.getFirstName();
+		lastName = fakeData.getLastName();
 
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
@@ -72,38 +75,38 @@ public class User_01_Register extends BaseTest {
 
 	@Test
 	public void User_03_Register_With_Valid_Data() {
-		log.info("User_02_Register_With_Invalid_Email - Step 01: Refresh page");
+		log.info("User_03_Register_With_Valid_Data - Step 01: Refresh page");
 		registerPage.refreshCurrentPage(driver);
 
-		log.info("User_02_Register_With_Invalid_Email - Step 02: Enter to Firstname textbox with value: " + firstName);
+		log.info("User_03_Register_With_Valid_Data - Step 02: Enter to Firstname textbox with value: " + firstName);
 		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
 
-		log.info("User_02_Register_With_Invalid_Email - Step 03: Enter to Lastname textbox with value: " + lastName);
+		log.info("User_03_Register_With_Valid_Data - Step 03: Enter to Lastname textbox with value: " + lastName);
 		registerPage.inputToTextboxByID(driver, "LastName", lastName);
 
-		log.info("User_02_Register_With_Invalid_Email - Step 04: Enter to Email textbox with value: " + validEmailAddress);
+		log.info("User_03_Register_With_Valid_Data - Step 04: Enter to Email textbox with value: " + validEmailAddress);
 		registerPage.inputToTextboxByID(driver, "Email", validEmailAddress);
 
-		log.info("User_02_Register_With_Invalid_Email - Step 05: Enter to Password textbox with value: " + password);
+		log.info("User_03_Register_With_Valid_Data - Step 05: Enter to Password textbox with value: " + password);
 		registerPage.inputToTextboxByID(driver, "Password", password);
 
-		log.info("User_02_Register_With_Invalid_Email - Step 06: Enter to Confirm Password textbox with value: " + password);
+		log.info("User_03_Register_With_Valid_Data - Step 06: Enter to Confirm Password textbox with value: " + password);
 		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
 
-		log.info("User_02_Register_With_Invalid_Email - Step 07: Click to Register button");
+		log.info("User_03_Register_With_Valid_Data - Step 07: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
 
-		log.info("User_02_Register_With_Invalid_Email - Step 08: Verify success message");
+		log.info("User_03_Register_With_Valid_Data - Step 08: Verify success message");
 		verifyTrue(registerPage.isSuccessMessageDisplayed());
 
-		log.info("User_02_Register_With_Invalid_Email - Step 09: Click to Logout link");
+		log.info("User_03_Register_With_Valid_Data - Step 09: Click to Logout link");
 		registerPage.openHeaderPageByName(driver, "logout");
 		homePage = PageGeneratorManager.getHomePage(driver);
 
-		log.info("User_02_Register_With_Invalid_Email - Step 10: Verify HomePage slider displayed");
+		log.info("User_03_Register_With_Valid_Data - Step 10: Verify HomePage slider displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 
-		log.info("User_02_Register_With_Invalid_Email - Step 11: Click to Register link");
+		log.info("User_03_Register_With_Valid_Data - Step 11: Click to Register link");
 		homePage.openHeaderPageByName(driver, "register");
 		registerPage = PageGeneratorManager.getRegisterPage(driver);
 
@@ -114,10 +117,10 @@ public class User_01_Register extends BaseTest {
 		log.info("User_04_Register_With_Existing_Email - Step 01: Enter to Firstname textbox with value: " + firstName);
 		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
 
-		log.info("User_04_Register_With_Existing_Email - Step 02: Enter to Lastname textbox with value: " + firstName);
+		log.info("User_04_Register_With_Existing_Email - Step 02: Enter to Lastname textbox with value: " + lastName);
 		registerPage.inputToTextboxByID(driver, "LastName", lastName);
 
-		log.info("User_04_Register_With_Existing_Email - Step 03: Enter to Email textbox with value: " + firstName);
+		log.info("User_04_Register_With_Existing_Email - Step 03: Enter to Email textbox with value: " + validEmailAddress);
 		registerPage.inputToTextboxByID(driver, "Email", validEmailAddress);
 
 		log.info("User_04_Register_With_Existing_Email - Step 04: Enter to Password textbox with value: " + password);

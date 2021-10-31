@@ -15,6 +15,7 @@ import org.testng.Assert;
 import org.testng.Reporter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import reportConfig.VerificationFailures;
 
 public class BaseTest {
 	private WebDriver driver;

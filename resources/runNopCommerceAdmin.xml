@@ -2,8 +2,10 @@
 <suite parallel="false" name="Admin - NopCommerce">
 <parameter name="url" value="https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F" />
 	<listeners>
-		<listener class-name="commons.MethodListener" />
-		<listener class-name="reportConfig.ExtentTestListener" />
+		<listener class-name = "org.uncommons.reportng.HTMLReporter"/>
+		<listener class-name = "org.uncommons.reportng.JUnitXMLReporter"/>
+		<listener class-name = "reportConfig.MethodListener" />
+		<listener class-name = "reportConfig.ReportNGListener" />
 	</listeners>
 
   <test name="Run on FIREFOX">

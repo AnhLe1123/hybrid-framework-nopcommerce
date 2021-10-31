@@ -20,15 +20,19 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 	String productAvatarAlt = "Avatar Alt";
 	String productAvatarTitle = "Avatar Title";
 	String productAvatarOrder = "1";
+	String adminEmail, adminPassword;
 
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
+		adminEmail = "admin@yourstore.com";
+		adminPassword = "admin";
+		
 		driver = getBrowserDriver(browserName, appUrl);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 
-		loginPage.enterToEmailTextbox("admin@yourstore.com");
-		loginPage.enterToPasswordTextbox("admin");
+		loginPage.enterToEmailTextbox(adminEmail);
+		loginPage.enterToPasswordTextbox(adminPassword);
 		dashboardPage = loginPage.clickToLoginButton();
 
 		dashboardPage.openSubmenuPageByName(driver, "Catalog", "Products");

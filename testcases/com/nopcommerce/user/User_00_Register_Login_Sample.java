@@ -12,6 +12,7 @@ import pageObjects.user.SearchPageObject;
 import pageObjects.user.ShippingAndReturnPageObject;
 import pageObjects.user.SiteMapPageObject;
 import pageObjects.user.WishlistPageObject;
+import utilities.DataUtil;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -22,6 +23,7 @@ import org.testng.annotations.AfterClass;
 public class User_00_Register_Login_Sample extends BaseTest {
 	WebDriver driver;
 
+	DataUtil fakeData;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	SearchPageObject searchPage;
@@ -31,18 +33,22 @@ public class User_00_Register_Login_Sample extends BaseTest {
 	MyAccountPageObject myAccountPage;
 	ShippingAndReturnPageObject shippingAndReturnPage;
 
-	String emailAddress, password, firstName, lastName, companyName;
+	String emailAddress, password, firstName, lastName, companyName, dateDOB, monthDOB, yearDOB;
 
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
 		driver = getBrowserDriver(browserName, appUrl);
+		fakeData = DataUtil.getData();
 
-		emailAddress = "abc" + generateFakeNumber() + "@gmail.com";
-		password = "123456";
-		firstName = "John";
-		lastName = "Terry";
-		companyName = "Automation Group";
+		emailAddress = fakeData.getEmailAddress();
+		password = fakeData.getPassword();
+		firstName = fakeData.getFirstName();
+		lastName = fakeData.getLastName();
+		companyName = fakeData.getCompanyName();
+		dateDOB = "20";
+		monthDOB = "March";
+		yearDOB = "1990";
 	}
 
 	@Test
@@ -56,9 +62,9 @@ public class User_00_Register_Login_Sample extends BaseTest {
 		registerPage.clickToRadioButtonByLabel(driver, "Male");
 		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
 		registerPage.inputToTextboxByID(driver, "LastName", lastName);
-		registerPage.selectDropdownByName(driver, "DateOfBirthDay", "20");
-		registerPage.selectDropdownByName(driver, "DateOfBirthMonth", "March");
-		registerPage.selectDropdownByName(driver, "DateOfBirthYear", "1990");
+		registerPage.selectDropdownByName(driver, "DateOfBirthDay", dateDOB);
+		registerPage.selectDropdownByName(driver, "DateOfBirthMonth", monthDOB);
+		registerPage.selectDropdownByName(driver, "DateOfBirthYear", yearDOB);
 		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
 		registerPage.inputToTextboxByID(driver, "Company", companyName);
 		registerPage.inputToTextboxByID(driver, "Password", password);

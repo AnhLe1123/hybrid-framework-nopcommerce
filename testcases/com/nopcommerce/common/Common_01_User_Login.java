@@ -5,6 +5,7 @@ import pageObjects.user.HomePageObject;
 import pageObjects.user.LoginPageObject;
 import pageObjects.user.PageGeneratorManager;
 import pageObjects.user.RegisterPageObject;
+import utilities.DataUtil;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -19,6 +20,7 @@ public class Common_01_User_Login extends BaseTest {
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	RegisterPageObject registerPage;
+	DataUtil fakeData;
 
 	String emailAddress, password, firstName, lastName;
 	public static Set<Cookie> loginPageCookie;
@@ -28,11 +30,12 @@ public class Common_01_User_Login extends BaseTest {
 	public void initBrowser(String browserName, String appUrl) {
 		log.info("Pre-condition - Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
 		driver = getBrowserDriver(browserName, appUrl);
+		fakeData = DataUtil.getData();
 
-		emailAddress = "abc" + generateFakeNumber() + "@gmail.com";
-		password = "123456";
-		firstName = "John";
-		lastName = "Terry";
+		emailAddress = fakeData.getEmailAddress();
+		password = fakeData.getPassword();
+		firstName = fakeData.getFirstName();
+		lastName = fakeData.getLastName();
 
 		log.info("Common_01 - Step 01: Verify HomePage is displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);

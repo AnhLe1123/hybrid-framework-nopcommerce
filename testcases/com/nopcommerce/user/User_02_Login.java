@@ -7,6 +7,7 @@ import pageObjects.user.HomePageObject;
 import pageObjects.user.LoginPageObject;
 import pageObjects.user.PageGeneratorManager;
 import pageObjects.user.RegisterPageObject;
+import utilities.DataUtil;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -16,21 +17,23 @@ import org.testng.annotations.AfterClass;
 
 public class User_02_Login extends BaseTest {
 	WebDriver driver;
+	DataUtil fakeData;
 	HomePageObject homePage;
-	RegisterPageObject registerPage;
 	LoginPageObject loginPage;
+	RegisterPageObject registerPage;
 	String registeredEmail, notRegisteredEmail, invalidEmail, correctPassword, wrongPassword, firstName, lastName;
 
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
+		fakeData = DataUtil.getData();
 		registeredEmail = "abc" + generateFakeNumber() + "@gmail.com";
 		notRegisteredEmail = "abc" + generateFakeNumber() + "@gmail.vn";
 		invalidEmail = "1234@asdf#!";
 		correctPassword = "123456";
 		wrongPassword = "654327";
-		firstName = "John";
-		lastName = "Terry";
+		firstName = fakeData.getFirstName();
+		lastName = fakeData.getLastName();
 
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
 		driver = getBrowserDriver(browserName, appUrl);

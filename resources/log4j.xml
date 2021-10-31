@@ -28,7 +28,7 @@
 		</layout>
 	</appender>
 
-	<appender name="reportng" class="commons.TestNGAppender">
+	<appender name="reportng" class="reportConfig.TestNGAppender">
 		<param name="Threshold" value="INFO" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%-5p] [%d] %m%n" />
