@@ -1,5 +1,6 @@
 package commons;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -71,7 +72,7 @@ public class BasePage {
 		return explicitWait.until(ExpectedConditions.alertIsPresent());
 	}
 
-	protected void acceptAlert(WebDriver driver) {
+	public void acceptAlert(WebDriver driver) {
 		alert = waitAlertPresence(driver);
 		alert.accept();
 		sleepInSecond(2);
@@ -251,10 +252,22 @@ public class BasePage {
 			getElement(driver, locator).click();
 		}
 	}
+	
+	protected void checkToCheckboxOrRadio(WebDriver driver, String locator, String... params) {
+		if (!isElementSelected(driver, getDynamicLocator(locator, params))) {
+			getElement(driver, getDynamicLocator(locator, params)).click();
+		}
+	}
 
 	protected void uncheckToCheckbox(WebDriver driver, String locator) {
 		if (isElementSelected(driver, locator)) {
 			getElement(driver, locator).click();
+		}
+	}
+	
+	protected void uncheckToCheckbox(WebDriver driver, String locator, String... params) {
+		if (isElementSelected(driver, getDynamicLocator(locator, params))) {
+			getElement(driver, getDynamicLocator(locator, params)).click();
 		}
 	}
 
@@ -527,6 +540,16 @@ public class BasePage {
 		clickToElement(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_TEXT, labelText);
 	}
 	
+	public void checkToCheckboxByLabel(WebDriver driver, String labelText) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_CHECKBOX_BY_TEXT, labelText);
+		checkToCheckboxOrRadio(driver, UserBasePageUI.DYNAMIC_CHECKBOX_BY_TEXT, labelText);
+	}
+	
+	public void uncheckToCheckboxByLabel(WebDriver driver, String labelText) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_CHECKBOX_BY_TEXT, labelText);
+		uncheckToCheckbox(driver, UserBasePageUI.DYNAMIC_CHECKBOX_BY_TEXT, labelText);
+	}
+	
 	public boolean isRadioButtonByLabelSelected(WebDriver driver, String labelText) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_TEXT, labelText);
 		return isElementSelected(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_TEXT, labelText);
@@ -581,6 +604,32 @@ public class BasePage {
 	public boolean isReviewByTitleContentDisplayed(WebDriver driver, String reviewPart, String productName) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_REVIEW_TITLE_CONTENT_BY_PRODUCT_NAME, reviewPart, productName);
 		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_REVIEW_TITLE_CONTENT_BY_PRODUCT_NAME, reviewPart, productName);
+	}
+	
+	public int getDisplayedProductsNumber(WebDriver driver) {
+		waitForAllElementsVisible(driver, UserBasePageUI.PRODUCTS_TITLE);
+		return getElementSize(driver, UserBasePageUI.PRODUCTS_TITLE);
+	}
+	
+	public List<String> getAllProductTitles(WebDriver driver) {
+		waitForAllElementsVisible(driver, UserBasePageUI.PRODUCTS_TITLE);
+		List<WebElement> allProductTitleElements = getElements(driver, UserBasePageUI.PRODUCTS_TITLE);
+		List<String> actualProductTitles = new ArrayList<>();
+		
+		for(WebElement productTitleElement: allProductTitleElements) {
+			actualProductTitles.add(productTitleElement.getText().trim());
+		}
+		return actualProductTitles;
+	}
+	
+	public boolean isProductTitlesContainKeyword(WebDriver driver, String keyword) {
+		List<String> productTitles = getAllProductTitles(driver);
+	    for (String title : productTitles) {
+	        if (!title.toLowerCase().contains(keyword.toLowerCase())) {
+	            return false;
+	        }
+	    }
+	    return true;
 	}
 
 	// Admin - NopCommerce
