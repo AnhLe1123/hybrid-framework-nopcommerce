@@ -16,8 +16,11 @@ public class UserBasePageUI {
 	public static final String DYNAMIC_PRODUCT_TITLE_BY_TEXT = "//h2[@class='product-title']//a[text()='%s']";
 	public static final String DYNAMIC_REVIEW_PRODUCT_BY_NAME = "//*[contains(string(), 'Product review')]//a[contains(string(), '%s')]";
 	public static final String DYNAMIC_REVIEW_TITLE_CONTENT_BY_PRODUCT_NAME = "//div[@class='%s' and contains(string(), '%s')]";
+	public static final String DYNAMIC_MENU_BY_NAME = "//ul[@class='top-menu notmobile']//a[contains(text(), '%s')]";
+	public static final String DYNAMIC_SUBMENU_BY_NAME = "//ul[@class='top-menu notmobile']//a[contains(text(), '%s')]//following-sibling::ul//a[contains(text(), '%s')]";
 	
 	//Hard Locator
 	public static final String HOME_PAGE_LOGO = "//img[@alt='nopCommerce demo store']";
 	public static final String PRODUCTS_TITLE = "//h2[@class='product-title']//a";
+	public static final String PRODUCTS_PRICE = "//div[@class='prices']/span";
 }

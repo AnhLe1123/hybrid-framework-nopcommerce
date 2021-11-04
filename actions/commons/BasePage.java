@@ -1,6 +1,7 @@
 package commons;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -72,7 +73,7 @@ public class BasePage {
 		return explicitWait.until(ExpectedConditions.alertIsPresent());
 	}
 
-	public void acceptAlert(WebDriver driver) {
+	protected void acceptAlert(WebDriver driver) {
 		alert = waitAlertPresence(driver);
 		alert.accept();
 		sleepInSecond(2);
@@ -272,11 +273,21 @@ public class BasePage {
 	}
 
 	protected boolean isElementDisplayed(WebDriver driver, String locator) {
-		return getElement(driver, locator).isDisplayed();
+		try {
+			return getElement(driver, locator).isDisplayed();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	protected boolean isElementDisplayed(WebDriver driver, String locator, String... params) {
-		return getElement(driver, getDynamicLocator(locator, params)).isDisplayed();
+		try {
+			return getElement(driver, getDynamicLocator(locator, params)).isDisplayed();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	protected boolean isElementUndisplayed(WebDriver driver, String locator) {
@@ -346,6 +357,11 @@ public class BasePage {
 	protected void hoverToElement(WebDriver driver, String locator) {
 		action = new Actions(driver);
 		action.moveToElement(getElement(driver, locator)).perform();
+	}
+	
+	protected void hoverToElement(WebDriver driver, String locator, String... params) {
+		action = new Actions(driver);
+		action.moveToElement(getElement(driver, getDynamicLocator(locator, params))).perform();
 	}
 
 	protected void doubleClickToElement(WebDriver driver, String locator) {
@@ -431,6 +447,18 @@ public class BasePage {
 	protected void removeAttributeInDOM(WebDriver driver, String locator, String attributeRemove) {
 		jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript("arguments[0].removeAttribute('" + attributeRemove + "');", getElement(driver, locator));
+	}
+	
+	protected boolean isJQueryAjaxLoadedSuccess(WebDriver driver) {
+		explicitWait = new WebDriverWait(driver, longTimeout);
+		jsExecutor = (JavascriptExecutor) driver;
+		ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				return (Boolean) jsExecutor.executeScript("return (window.jQuery !=null) && (jQuery.active === 0);");
+			}
+		};
+		return explicitWait.until(jQueryLoad);
 	}
 
 	protected boolean areJQueryAndJSLoadedSuccess(WebDriver driver) {
@@ -534,6 +562,14 @@ public class BasePage {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LINK_SIDEBAR, pageName);
 		clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_SIDEBAR, pageName);
 	}
+	
+	public void openUserSubmenuPageByName(WebDriver driver, String menuPageName, String submenuPageName) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_MENU_BY_NAME, menuPageName);
+		hoverToElement(driver, UserBasePageUI.DYNAMIC_MENU_BY_NAME, menuPageName);
+		
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_SUBMENU_BY_NAME, menuPageName, submenuPageName);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_SUBMENU_BY_NAME, menuPageName, submenuPageName);
+	}
 
 	public void clickToRadioButtonByLabel(WebDriver driver, String labelText) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_TEXT, labelText);
@@ -568,6 +604,7 @@ public class BasePage {
 	public void selectDropdownByName(WebDriver driver, String dropdownName, String itemText) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_DROPDOWN_BY_NAME, dropdownName);
 		selectItemInDropdownByText(driver, UserBasePageUI.DYNAMIC_DROPDOWN_BY_NAME, itemText, dropdownName);
+		isJQueryAjaxLoadedSuccess(driver);
 	}
 	
 	public String getSelectedItemInDropdownByName(WebDriver driver, String dropdownName) {
@@ -631,10 +668,72 @@ public class BasePage {
 	    }
 	    return true;
 	}
+	
+	public boolean isProductNameSortAscending(WebDriver driver) {
+		List<WebElement> productNameElements = getElements(driver, UserBasePageUI.PRODUCTS_TITLE);
+		List<String> productNameText = new ArrayList<String>();
+		
+		for (WebElement productName : productNameElements) {
+			productNameText.add(productName.getText());
+		}
+		
+		List<String> productNameTextClone = new ArrayList<String>(productNameText);
+		Collections.sort(productNameTextClone);
+		return productNameText.equals(productNameTextClone);
+	}
+	
+	public boolean isProductNameSortDescending(WebDriver driver) {
+		List<WebElement> productNameElements = getElements(driver, UserBasePageUI.PRODUCTS_TITLE);
+		List<String> productNameText = new ArrayList<String>();
+		
+		for (WebElement productName : productNameElements) {
+			productNameText.add(productName.getText());
+		}
+		
+		List<String> productNameTextClone = new ArrayList<String>(productNameText);
+		Collections.sort(productNameTextClone);
+		Collections.reverse(productNameTextClone);
+		return productNameText.equals(productNameTextClone);
+	}
+	
+	public boolean isProductPriceSortAscending(WebDriver driver) {
+		List<WebElement> productPriceElements = getElements(driver, UserBasePageUI.PRODUCTS_PRICE);
+		List<Float> productPriceValue = new ArrayList<Float>();
+		
+		for (WebElement productPrice : productPriceElements) {
+			productPriceValue.add(Float.parseFloat(productPrice.getText().replaceAll("[$,]", "")));
+		}
+		
+		List<Float> productPriceValueClone = new ArrayList<Float>(productPriceValue);
+		Collections.sort(productPriceValueClone);
+		return productPriceValue.equals(productPriceValueClone);
+	}
+	
+	public boolean isProductPriceSortDescending(WebDriver driver) {
+		List<WebElement> productPriceElements = getElements(driver, UserBasePageUI.PRODUCTS_PRICE);
+		List<Float> productPriceValue = new ArrayList<Float>();
+		
+		for (WebElement productPrice : productPriceElements) {
+			productPriceValue.add(Float.parseFloat(productPrice.getText().replaceAll("[$,]", "")));
+		}
+		
+		List<Float> productPriceValueClone = new ArrayList<Float>(productPriceValue);
+		Collections.sort(productPriceValueClone);
+		Collections.reverse(productPriceValueClone);
+		return productPriceValue.equals(productPriceValueClone);
+	}
+	
+	public boolean isNumberOfProductsDisplayedLessOrEqual(WebDriver driver, int displayPerPageNumber) {
+		if (getDisplayedProductsNumber(driver) <= displayPerPageNumber) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	// Admin - NopCommerce
 
-	public void openSubmenuPageByName(WebDriver driver, String menuPageName, String submenuPageName) {
+	public void openAdminSubmenuPageByName(WebDriver driver, String menuPageName, String submenuPageName) {
 		waitForElementClickable(driver, AdminBasePageUI.MENU_LINK_BY_NAME, menuPageName);
 		clickToElementByJS(driver, AdminBasePageUI.MENU_LINK_BY_NAME, menuPageName);
 
@@ -651,7 +750,7 @@ public class BasePage {
 		fullFileName = fullFileName.trim();
 		getElement(driver, AdminBasePageUI.UPLOAD_FILE_BY_CARD_NAME, cardName).sendKeys(fullFileName);
 	}
-
+	
 	public boolean isMessageDisplayedInEmptyTable(WebDriver driver, String tableName) {
 		waitForElementVisible(driver, AdminBasePageUI.NO_DATA_MESSAGE_BY_TABLE_NAME, tableName);
 		return isElementDisplayed(driver, AdminBasePageUI.NO_DATA_MESSAGE_BY_TABLE_NAME, tableName);

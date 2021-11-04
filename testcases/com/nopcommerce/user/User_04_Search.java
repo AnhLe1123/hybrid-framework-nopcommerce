@@ -231,6 +231,7 @@ public class User_04_Search extends BaseTest {
 		log.info("Search_05 - Step 07: Verify error message 'No products were found that matched your criteria.' displayed");
 		searchPage.isErrorMessageDisplayed("No products were found that matched your criteria.");
 	}
+	
 	@Test
 	public void Search_06_Advanced_Search_With_Sub_Categories() {
 		log.info("Search_06 - Step 01: Click to Search footer link");

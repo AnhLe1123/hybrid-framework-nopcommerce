@@ -35,7 +35,7 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		loginPage.enterToPasswordTextbox(adminPassword);
 		dashboardPage = loginPage.clickToLoginButton();
 
-		dashboardPage.openSubmenuPageByName(driver, "Catalog", "Products");
+		dashboardPage.openAdminSubmenuPageByName(driver, "Catalog", "Products");
 		productSearchPage = PageGeneratorManager.getProductSearchPage(driver);
 
 		productSearchPage.enterToProductNameTextbox(productName);

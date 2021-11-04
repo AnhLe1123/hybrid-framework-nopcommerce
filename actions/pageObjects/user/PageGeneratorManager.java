@@ -16,6 +16,7 @@ public class PageGeneratorManager {
 	private static MyProductReviewPageObject myProductReviewPage;
 	private static ProductDetailPageObject productDetailPage;
 	private static ProductReviewPageObject productReviewPage;
+	private static NotebooksPageObject notebooksPage;
 	
 	private PageGeneratorManager() {
 		
@@ -110,5 +111,12 @@ public class PageGeneratorManager {
 			productReviewPage = new ProductReviewPageObject(driver);
 		}
 		return productReviewPage;
+	}
+	
+	public static NotebooksPageObject getNotebooksPage(WebDriver driver) {
+		if(notebooksPage == null) {
+			notebooksPage = new NotebooksPageObject(driver);
+		}
+		return notebooksPage;
 	}
 }
