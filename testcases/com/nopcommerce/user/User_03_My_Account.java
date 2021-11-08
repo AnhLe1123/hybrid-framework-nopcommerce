@@ -340,7 +340,7 @@ public class User_03_My_Account extends BaseTest {
 	@Test
 	public void My_Account_04_My_Product_Reviews() {
 		log.info("My_Account_04 - Step 01: Click to Product title " + "'" + productTitle + " '");
-		homePage.clickToProductTitleByName(driver, "Build your own computer");
+		homePage.clickToProductTitleByName(driver, productTitle);
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
 		
 		log.info("My_Account_04 - Step 02: Click to 'Add your review' link");

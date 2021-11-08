@@ -17,6 +17,9 @@ public class PageGeneratorManager {
 	private static ProductDetailPageObject productDetailPage;
 	private static ProductReviewPageObject productReviewPage;
 	private static NotebooksPageObject notebooksPage;
+	private static DesktopsPageObject desktopsPage;
+	private static CompareProductPageObject compareProductPage;
+	private static ShoppingCartPageObject shoppingCartPage;
 	
 	private PageGeneratorManager() {
 		
@@ -118,5 +121,26 @@ public class PageGeneratorManager {
 			notebooksPage = new NotebooksPageObject(driver);
 		}
 		return notebooksPage;
+	}
+	
+	public static DesktopsPageObject getDesktopsPage(WebDriver driver) {
+		if(desktopsPage == null) {
+			desktopsPage = new DesktopsPageObject(driver);
+		}
+		return desktopsPage;
+	}
+	
+	public static ShoppingCartPageObject getShoppingCartPage(WebDriver driver) {
+		if(shoppingCartPage == null) {
+			shoppingCartPage = new ShoppingCartPageObject(driver);
+		}
+		return shoppingCartPage;
+	}
+	
+	public static CompareProductPageObject getCompareProductPage(WebDriver driver) {
+		if(compareProductPage == null) {
+			compareProductPage = new CompareProductPageObject(driver);
+		}
+		return compareProductPage;
 	}
 }

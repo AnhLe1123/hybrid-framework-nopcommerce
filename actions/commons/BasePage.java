@@ -247,6 +247,10 @@ public class BasePage {
 	protected int getElementSize(WebDriver driver, String locator) {
 		return getElements(driver, locator).size();
 	}
+	
+	protected int getElementSize(WebDriver driver, String locator, String... params) {
+		return getElements(driver, getDynamicLocator(locator, params)).size();
+	}
 
 	protected void checkToCheckboxOrRadio(WebDriver driver, String locator) {
 		if (!isElementSelected(driver, locator)) {
@@ -615,6 +619,13 @@ public class BasePage {
 	public void clickToButtonByText(WebDriver driver, String buttonText) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_TEXT, buttonText);
 		clickToElement(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_TEXT, buttonText);
+		isJQueryAjaxLoadedSuccess(driver);
+	}
+	
+	public void clickToButtonByLabelAndProductName(WebDriver driver, String productName, String buttonText) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_PRODUCT_NAME_AND_BUTTON_LABEL, productName, buttonText);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_PRODUCT_NAME_AND_BUTTON_LABEL, productName, buttonText);
+		isJQueryAjaxLoadedSuccess(driver);
 	}
 	
 	public boolean isPageTitleByTextDisplayed(WebDriver driver, String pageTitleText) {
@@ -729,6 +740,102 @@ public class BasePage {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean isAddProductToPageSuccessMessageDisplayed(WebDriver driver, String pageLink) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_ADD_PRODUCT_SUCCESS_MESSAGE_BY_PAGENAME, pageLink);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_ADD_PRODUCT_SUCCESS_MESSAGE_BY_PAGENAME, pageLink);
+	}
+	
+	public void clickToPageLinkInAddProductSuccessMessage(WebDriver driver, String pageLink) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_ADD_PRODUCT_SUCCESS_MESSAGE_BY_PAGENAME, pageLink);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_ADD_PRODUCT_SUCCESS_MESSAGE_BY_PAGENAME, pageLink);
+	}
+	
+	public boolean isProductQuantityByHeaderLabelDisplayed(WebDriver driver, String pageName, String quantity) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_QUANTITY_BY_HEADER_LABEL, pageName, quantity);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_QUANTITY_BY_HEADER_LABEL, pageName, quantity);
+	}
+	
+	public String getTextValueInTableAtColumnNameAndRowIndex(WebDriver driver, String columnName, String rowIndex) {
+		int columnIndex = getElementSize(driver, UserBasePageUI.DYNAMIC_TABLE_HEADER_BY_NAME, columnName) + 1;
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TABLE_CELL_BY_ROW_INDEX_AND_COLUMN_INDEX, rowIndex, String.valueOf(columnIndex));
+		return getElementText(driver, UserBasePageUI.DYNAMIC_TABLE_CELL_BY_ROW_INDEX_AND_COLUMN_INDEX, rowIndex, String.valueOf(columnIndex));
+	}
+	
+	public boolean isTableImageByProductNameDisplayed(WebDriver driver, String productName) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TABLE_IMG_BY_PRODUCT_NAME, productName);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_TABLE_IMG_BY_PRODUCT_NAME, productName);
+	}
+	
+	public boolean isTableImageByProductNameUndisplayed(WebDriver driver, String productName) {
+		waitForElementInvisible(driver, UserBasePageUI.DYNAMIC_TABLE_IMG_BY_PRODUCT_NAME, productName);
+		return isElementUndisplayed(driver, UserBasePageUI.DYNAMIC_TABLE_IMG_BY_PRODUCT_NAME, productName);
+	}
+	
+	public boolean isTableQuantityInputByProductNameDisplayed(WebDriver driver, String productName, String qtyValue) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TABLE_QTY_INPUT_BY_PRODUCT_NAME, productName, qtyValue);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_TABLE_QTY_INPUT_BY_PRODUCT_NAME, productName, qtyValue);
+	}
+	
+	public Float convertProductPriceToNumber(WebDriver driver, String productPrice) {
+		return Float.parseFloat(productPrice.replaceAll("[$,]", ""));
+	}
+	
+	public boolean isNoDataMessageByTextDisplayed(WebDriver driver, String textMessage) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_NO_DATA_MESSAGE_BY_TEXT, textMessage);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_NO_DATA_MESSAGE_BY_TEXT, textMessage);
+	}
+	
+	public void clickToRemoveIconInTableByProductName(WebDriver driver, String productName) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_TABLE_REMOVE_ICON_BY_PRODUCT_NAME, productName);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_TABLE_REMOVE_ICON_BY_PRODUCT_NAME, productName);
+	}
+	
+	public String getProductPriceByProductName(WebDriver driver, String productName) {
+		waitForAllElementsVisible(driver, UserBasePageUI.DYNAMIC_PRICE_BY_PRODUCT_NAME, productName);
+		return getElementText(driver, UserBasePageUI.DYNAMIC_PRICE_BY_PRODUCT_NAME, productName);
+	}
+	
+	public List<String> getRecentViewProductTitles(WebDriver driver) {
+		List<WebElement> recentViewElements = getElements(driver, UserBasePageUI.RECENTLY_VIEWED_PRODUCT_TITLES);
+		List<String> recentViewProductsText = new ArrayList<String>();
+		
+		for (WebElement element : recentViewElements) {
+			recentViewProductsText.add(element.getText());
+		}
+		return recentViewProductsText;
+	}
+	
+	public boolean isRecentlyViewedProductsDisplayed(WebDriver driver) {
+		List<String> actualRecentViewProducts = getRecentViewProductTitles(driver);
+		List<String> expectedRecentViewProducts = new ArrayList<String>();
+		List<String> displayedProductTitles = getAllProductTitles(driver);
+		Collections.reverse(displayedProductTitles);
+		
+		int productSize = displayedProductTitles.size();
+		
+		if (productSize > 0 && productSize <= 3) {
+			for (String productTitle : displayedProductTitles) {
+				expectedRecentViewProducts.add(productTitle);
+			}
+		} else if (productSize > 3) {
+			expectedRecentViewProducts.add(displayedProductTitles.get(0));
+			expectedRecentViewProducts.add(displayedProductTitles.get(1));
+			expectedRecentViewProducts.add(displayedProductTitles.get(2));
+		}
+		return actualRecentViewProducts.equals(expectedRecentViewProducts);
+	}
+	
+	public boolean isTextValueContainsMultipleKeywords(WebDriver driver, String textValue, List<String> items) {
+	    boolean found = true;
+	    for (String item : items) {
+	        if (!textValue.contains(item)) {
+	            found = false;
+	            break;
+	        }
+	    }
+	    return found;
 	}
 
 	// Admin - NopCommerce

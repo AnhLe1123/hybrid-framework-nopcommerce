@@ -17,10 +17,14 @@ public class User_05_Sort_Display_Paging extends BaseTest {
 	WebDriver driver;
 	HomePageObject homePage;
 	NotebooksPageObject notebooksPage;
+	String menuName, submenuName;
 
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
+		menuName = "Computers";
+		submenuName = "Notebooks";
+		
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
 		driver = getBrowserDriver(browserName, appUrl);
 
@@ -28,8 +32,8 @@ public class User_05_Sort_Display_Paging extends BaseTest {
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 		
-		log.info("Pre-condition - Step 03: Open submenu Notebooks");
-		homePage.openUserSubmenuPageByName(driver, "Computers", "Notebooks");
+		log.info("Pre-condition - Step 03: Open submenu " + submenuName);
+		homePage.openUserSubmenuPageByName(driver, menuName, submenuName);
 		notebooksPage = PageGeneratorManager.getNotebooksPage(driver);
 	}
 
