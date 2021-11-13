@@ -14,19 +14,16 @@ import pageObjects.admin.ProductDetailPageObject;
 import pageObjects.admin.ProductSearchPageObject;
 
 public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
-	WebDriver driver;
-	String productName = "Flower Girl Bracelet";
-	String productAvatarImg = "travel.png";
-	String productAvatarAlt = "Avatar Alt";
-	String productAvatarTitle = "Avatar Title";
-	String productAvatarOrder = "1";
-	String adminEmail, adminPassword;
-
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
 		adminEmail = "admin@yourstore.com";
 		adminPassword = "admin";
+		productName = "Flower Girl Bracelet";
+		productAvatarImg = "travel.png";
+		productAvatarAlt = "Avatar Alt";
+		productAvatarTitle = "Avatar Title";
+		productAvatarOrder = "1";
 		
 		driver = getBrowserDriver(browserName, appUrl);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
@@ -80,8 +77,10 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		closeBrowserAndDriver();
 	}
 
+	WebDriver driver;
 	LoginPageObject loginPage;
 	DashboardPageObject dashboardPage;
 	ProductSearchPageObject productSearchPage;
 	ProductDetailPageObject productDetailPage;
+	String adminEmail, adminPassword, productName, productAvatarImg, productAvatarAlt, productAvatarTitle, productAvatarOrder;
 }

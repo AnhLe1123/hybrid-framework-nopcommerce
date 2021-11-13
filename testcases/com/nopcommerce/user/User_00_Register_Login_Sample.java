@@ -21,26 +21,11 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_00_Register_Login_Sample extends BaseTest {
-	WebDriver driver;
-
-	DataUtil fakeData;
-	HomePageObject homePage;
-	LoginPageObject loginPage;
-	SearchPageObject searchPage;
-	SiteMapPageObject siteMapPage;
-	WishlistPageObject wishlistPage;
-	RegisterPageObject registerPage;
-	MyAccountPageObject myAccountPage;
-	ShippingAndReturnPageObject shippingAndReturnPage;
-
-	String emailAddress, password, firstName, lastName, companyName, dateDOB, monthDOB, yearDOB;
-
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
 		driver = getBrowserDriver(browserName, appUrl);
 		fakeData = DataUtil.getData();
-
 		emailAddress = fakeData.getEmailAddress();
 		password = fakeData.getPassword();
 		firstName = fakeData.getFirstName();
@@ -116,5 +101,16 @@ public class User_00_Register_Login_Sample extends BaseTest {
 	public void cleanBrowser() {
 		closeBrowserAndDriver();
 	}
-
+	
+	WebDriver driver;
+	DataUtil fakeData;
+	HomePageObject homePage;
+	LoginPageObject loginPage;
+	SearchPageObject searchPage;
+	SiteMapPageObject siteMapPage;
+	WishlistPageObject wishlistPage;
+	RegisterPageObject registerPage;
+	MyAccountPageObject myAccountPage;
+	ShippingAndReturnPageObject shippingAndReturnPage;
+	String emailAddress, password, firstName, lastName, companyName, dateDOB, monthDOB, yearDOB;
 }

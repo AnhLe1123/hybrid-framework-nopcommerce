@@ -15,12 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_01_Register extends BaseTest {
-	WebDriver driver;
-	HomePageObject homePage;
-	RegisterPageObject registerPage;
-	DataUtil fakeData;
-	String validEmailAddress, invalidEmailAddress, password, firstName, lastName;
-
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
@@ -174,4 +168,10 @@ public class User_01_Register extends BaseTest {
 		log.info("Post-condition - Close browser and driver");
 		closeBrowserAndDriver();
 	}
+	
+	WebDriver driver;
+	HomePageObject homePage;
+	RegisterPageObject registerPage;
+	DataUtil fakeData;
+	String validEmailAddress, invalidEmailAddress, password, firstName, lastName;
 }

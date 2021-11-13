@@ -404,9 +404,14 @@ public class BasePage {
 		return textActual.equals(textExpected);
 	}
 
-	protected void scrollToBottomPage(WebDriver driver) {
+	public void scrollToBottomPage(WebDriver driver) {
 		jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+	}
+	
+	public void scrollToTopPage(WebDriver driver) {
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
 	}
 
 	protected void navigateToUrlByJS(WebDriver driver, String url) {
@@ -747,6 +752,12 @@ public class BasePage {
 		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_ADD_PRODUCT_SUCCESS_MESSAGE_BY_PAGENAME, pageLink);
 	}
 	
+	public void clickToCloseButtonAtMessage(WebDriver driver) {
+		waitForElementVisible(driver, UserBasePageUI.CLOSE_BUTTON_AT_MESSAGE);
+		clickToElement(driver, UserBasePageUI.CLOSE_BUTTON_AT_MESSAGE);
+		waitForElementInvisible(driver, UserBasePageUI.CLOSE_BUTTON_AT_MESSAGE);
+	}
+	
 	public void clickToPageLinkInAddProductSuccessMessage(WebDriver driver, String pageLink) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_ADD_PRODUCT_SUCCESS_MESSAGE_BY_PAGENAME, pageLink);
 		clickToElement(driver, UserBasePageUI.DYNAMIC_ADD_PRODUCT_SUCCESS_MESSAGE_BY_PAGENAME, pageLink);
@@ -768,6 +779,11 @@ public class BasePage {
 		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_TABLE_IMG_BY_PRODUCT_NAME, productName);
 	}
 	
+	public boolean isImageByProductDisplayedAtMiniCart(WebDriver driver, String productName) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_IMG_BY_PRODUCT_NAME_AT_MINICART, productName);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_IMG_BY_PRODUCT_NAME_AT_MINICART, productName);
+	}
+	
 	public boolean isTableImageByProductNameUndisplayed(WebDriver driver, String productName) {
 		waitForElementInvisible(driver, UserBasePageUI.DYNAMIC_TABLE_IMG_BY_PRODUCT_NAME, productName);
 		return isElementUndisplayed(driver, UserBasePageUI.DYNAMIC_TABLE_IMG_BY_PRODUCT_NAME, productName);
@@ -776,6 +792,11 @@ public class BasePage {
 	public boolean isTableQuantityInputByProductNameDisplayed(WebDriver driver, String productName, String qtyValue) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TABLE_QTY_INPUT_BY_PRODUCT_NAME, productName, qtyValue);
 		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_TABLE_QTY_INPUT_BY_PRODUCT_NAME, productName, qtyValue);
+	}
+	
+	public void inputToQuantityTextboxAtTableByProductName(WebDriver driver, String productName, String qtyValue) {
+		waitForElementVisible(driver, UserBasePageUI.QUANTITY_TEXTBOX_AT_TABLE_BY_PRODUCT_NAME, productName);
+		sendkeyToElement(driver, UserBasePageUI.QUANTITY_TEXTBOX_AT_TABLE_BY_PRODUCT_NAME, qtyValue, productName);
 	}
 	
 	public Float convertProductPriceToNumber(WebDriver driver, String productPrice) {
@@ -836,6 +857,48 @@ public class BasePage {
 	        }
 	    }
 	    return found;
+	}
+	
+	public void hoverToHeaderLink(WebDriver driver, String pageName) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_LINK_HEADER, pageName);
+		scrollToElement(driver, UserBasePageUI.DYNAMIC_LINK_HEADER, pageName);
+		hoverToElement(driver, UserBasePageUI.DYNAMIC_LINK_HEADER, pageName);
+	}
+	
+	public String getItemsCountAtMiniCart(WebDriver driver) {
+		waitForElementVisible(driver, UserBasePageUI.COUNT_ITEMS_AT_MINI_CART);
+		return getElementText(driver, UserBasePageUI.COUNT_ITEMS_AT_MINI_CART);
+	}
+	
+	public String getProductTextValueAtMiniCart(WebDriver driver) {
+		waitForElementVisible(driver, UserBasePageUI.PRODUCT_INFO_AT_MINI_CART);
+		return getElementText(driver, UserBasePageUI.PRODUCT_INFO_AT_MINI_CART);
+	}
+	
+	public String getSubTotalPriceAtMiniCart(WebDriver driver) {
+		waitForElementVisible(driver, UserBasePageUI.SUBTOTAL_AT_MINICART);
+		return getElementText(driver, UserBasePageUI.SUBTOTAL_AT_MINICART);
+	}
+	
+	public String getOrderInfoByTitleAndFieldName(WebDriver driver, String orderTitle, String fieldLabel) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_ORDER_INFO_BY_TITLE_AND_FIELD_NAME, orderTitle, fieldLabel);
+		return getElementText(driver, UserBasePageUI.DYNAMIC_ORDER_INFO_BY_TITLE_AND_FIELD_NAME, orderTitle, fieldLabel);
+	}
+	
+	public boolean isProductInfoDisplayedAtTable(WebDriver driver, String sku, String productName, String productPrice, String quantity, String subtotal) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_SKU_PRODUCT_NAME_PRICE_QUANTITY_SUBTOTAL_AT_TABLE, sku, productName, productPrice, quantity, subtotal);
+		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_SKU_PRODUCT_NAME_PRICE_QUANTITY_SUBTOTAL_AT_TABLE, sku, productName, productPrice, quantity, subtotal);
+	}
+	
+	
+	public String getGiftWrappingCheckoutConfirmation(WebDriver driver) {
+		waitForElementVisible(driver, UserBasePageUI.GIFT_WRAPPING_CHECKOUT);
+		return getElementText(driver, UserBasePageUI.GIFT_WRAPPING_CHECKOUT);
+	}
+	
+	public String getValueAtCheckoutCartByLabel(WebDriver driver, String labelName) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_VALUE_BY_LABEL, labelName);
+		return getElementText(driver, UserBasePageUI.DYNAMIC_VALUE_BY_LABEL, labelName);
 	}
 
 	// Admin - NopCommerce

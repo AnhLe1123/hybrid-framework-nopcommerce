@@ -14,11 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_05_Sort_Display_Paging extends BaseTest {
-	WebDriver driver;
-	HomePageObject homePage;
-	NotebooksPageObject notebooksPage;
-	String menuName, submenuName;
-
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
@@ -123,4 +118,9 @@ public class User_05_Sort_Display_Paging extends BaseTest {
 		log.info("Post-condition - Close browser and driver");
 		closeBrowserAndDriver();
 	}
+	
+	WebDriver driver;
+	HomePageObject homePage;
+	NotebooksPageObject notebooksPage;
+	String menuName, submenuName;
 }

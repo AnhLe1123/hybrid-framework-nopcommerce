@@ -16,4 +16,9 @@ public class ProductDetailPageObject extends BasePage {
 		waitForElementClickable(driver, ProductDetailPageUI.ADD_REVIEW_LINK);
 		clickToElement(driver, ProductDetailPageUI.ADD_REVIEW_LINK);
 	}
+	
+	public String getProductPrice() {
+		waitForElementVisible(driver, ProductDetailPageUI.PRODUCT_PRICE);
+		return getElementText(driver, ProductDetailPageUI.PRODUCT_PRICE);
+	}
 }

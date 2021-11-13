@@ -20,6 +20,8 @@ public class PageGeneratorManager {
 	private static DesktopsPageObject desktopsPage;
 	private static CompareProductPageObject compareProductPage;
 	private static ShoppingCartPageObject shoppingCartPage;
+	private static CheckoutPageObject checkoutPage;
+	private static MyOrdersPageObject myOrdersPage;
 	
 	private PageGeneratorManager() {
 		
@@ -142,5 +144,19 @@ public class PageGeneratorManager {
 			compareProductPage = new CompareProductPageObject(driver);
 		}
 		return compareProductPage;
+	}
+	
+	public static CheckoutPageObject getCheckoutPage(WebDriver driver) {
+		if(checkoutPage == null) {
+			checkoutPage = new CheckoutPageObject(driver);
+		}
+		return checkoutPage;
+	}
+	
+	public static MyOrdersPageObject getMyOrdersPage(WebDriver driver) {
+		if(myOrdersPage == null) {
+			myOrdersPage = new MyOrdersPageObject(driver);
+		}
+		return myOrdersPage;
 	}
 }

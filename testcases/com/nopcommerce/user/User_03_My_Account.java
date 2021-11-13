@@ -22,21 +22,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_03_My_Account extends BaseTest {
-	WebDriver driver;
-	DataUtil fakeData;
-	HomePageObject homePage;
-	LoginPageObject loginPage;
-	RegisterPageObject registerPage;
-	MyAccountPageObject myAccountPage;
-	MyAddressPageObject myAddressPage;
-	MyPasswordPageObject myPasswordPage;
-	ProductDetailPageObject productDetailPage;
-	ProductReviewPageObject productReviewPage;
-	MyProductReviewPageObject myProductReviewPage;
-	String gender, firstName, lastName, dateDOB, monthDOB, yearDOB, emailAddress, companyName, password, editGender, editFirstName, editLastName, editFullName, editDateDOB, editMonthDOB, editYearDOB, editCompanyName, editEmailAddress,
-			editPassword, country, state, city, firstAddress, secondAddress, zipCode, phoneNumber, faxNumber;
-	String productTitle, productReviewTitle, productReviewContent;
-
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String appUrl) {
@@ -71,7 +56,7 @@ public class User_03_My_Account extends BaseTest {
 		zipCode = fakeData.getZipCode();
 		phoneNumber = fakeData.getPhoneNumber();
 		faxNumber = fakeData.getFaxNumber();
-		
+
 		productTitle = "Build your own computer";
 		productReviewTitle = "Computer review";
 		productReviewContent = "Good quality and customer service.";
@@ -342,41 +327,41 @@ public class User_03_My_Account extends BaseTest {
 		log.info("My_Account_04 - Step 01: Click to Product title " + "'" + productTitle + " '");
 		homePage.clickToProductTitleByName(driver, productTitle);
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
-		
+
 		log.info("My_Account_04 - Step 02: Click to 'Add your review' link");
 		productDetailPage.clickToAddReviewLink();
 		productReviewPage = PageGeneratorManager.getProductReviewPage(driver);
-		
+
 		log.info("My_Account_04 - Step 03: Enter to Review Title textbox with content: " + productReviewTitle);
 		productReviewPage.inputToTextboxByID(driver, "AddProductReview_Title", productReviewTitle);
-		
+
 		log.info("My_Account_04 - Step 04: Enter to Review Text textarea with content: " + productReviewContent);
 		productReviewPage.inputToReviewTextArea(productReviewContent);
-		log.info("My_Account_04 - Step 05: Click to Rate option with value: " );
+		log.info("My_Account_04 - Step 05: Click to Rate option with value: ");
 		productReviewPage.clickToRatingRatioByValue("4");
-		
+
 		log.info("My_Account_04 - Step 06: Click to Submit Review button");
 		productReviewPage.clickToButtonByText(driver, "Submit review");
-		
+
 		log.info("My_Account_04 - Step 07: Verify Success message 'Product review is successfully added.' displayed");
 		verifyTrue(productReviewPage.isAddReviewSuccessMessageDisplayed());
-		
+
 		log.info("My_Account_04 - Step 08: Verify Product Name, Review title and Review text displayed in Product review page");
 		verifyTrue(productReviewPage.isReviewProductNameDisplayed(driver, productTitle));
 		verifyTrue(productReviewPage.isReviewByTitleContentDisplayed(driver, "review-title", productReviewTitle));
 		verifyTrue(productReviewPage.isReviewByTitleContentDisplayed(driver, "text-body", productReviewContent));
-		
+
 		log.info("My_Account_04 - Step 09: Click to 'My Account' header link");
 		productReviewPage.openHeaderPageByName(driver, "account");
 		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
-		
+
 		log.info("My_Account_04 - Step 10: Click to 'My product reviews' link at sidebar");
 		myAccountPage.openSidebarPageByName(driver, "My product reviews");
 		myProductReviewPage = PageGeneratorManager.getMyProductReviewPage(driver);
-		
+
 		log.info("My_Account_04 - Step 11: Verify My Product Review page displayed");
 		verifyTrue(myProductReviewPage.isPageTitleByTextDisplayed(driver, "My account - My product reviews"));
-		
+
 		log.info("My_Account_04 - Step 12: Verify Review title and Review text displayed in My Product review page");
 		verifyTrue(productReviewPage.isReviewByTitleContentDisplayed(driver, "review-title", productReviewTitle));
 		verifyTrue(productReviewPage.isReviewByTitleContentDisplayed(driver, "review-text", productReviewContent));
@@ -388,4 +373,19 @@ public class User_03_My_Account extends BaseTest {
 		log.info("Post-condition - Close browser and driver");
 		closeBrowserAndDriver();
 	}
+
+	WebDriver driver;
+	DataUtil fakeData;
+	HomePageObject homePage;
+	LoginPageObject loginPage;
+	RegisterPageObject registerPage;
+	MyAccountPageObject myAccountPage;
+	MyAddressPageObject myAddressPage;
+	MyPasswordPageObject myPasswordPage;
+	ProductDetailPageObject productDetailPage;
+	ProductReviewPageObject productReviewPage;
+	MyProductReviewPageObject myProductReviewPage;
+	String gender, firstName, lastName, dateDOB, monthDOB, yearDOB, emailAddress, companyName, password, editGender, editFirstName, editLastName, editFullName, editDateDOB, editMonthDOB, editYearDOB, editCompanyName, editEmailAddress,
+			editPassword, country, state, city, firstAddress, secondAddress, zipCode, phoneNumber, faxNumber, productTitle, productReviewTitle, productReviewContent;
+
 }

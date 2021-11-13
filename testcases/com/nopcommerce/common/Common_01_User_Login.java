@@ -16,22 +16,12 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 public class Common_01_User_Login extends BaseTest {
-	WebDriver driver;
-	HomePageObject homePage;
-	LoginPageObject loginPage;
-	RegisterPageObject registerPage;
-	DataUtil fakeData;
-
-	String emailAddress, password, firstName, lastName;
-	public static Set<Cookie> loginPageCookie;
-
 	@Parameters({ "browser", "url" })
 	@BeforeTest
 	public void initBrowser(String browserName, String appUrl) {
 		log.info("Pre-condition - Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
 		driver = getBrowserDriver(browserName, appUrl);
 		fakeData = DataUtil.getData();
-
 		emailAddress = fakeData.getEmailAddress();
 		password = fakeData.getPassword();
 		firstName = fakeData.getFirstName();
@@ -100,4 +90,11 @@ public class Common_01_User_Login extends BaseTest {
 		closeBrowserAndDriver();
 	}
 
+	WebDriver driver;
+	HomePageObject homePage;
+	LoginPageObject loginPage;
+	RegisterPageObject registerPage;
+	DataUtil fakeData;
+	String emailAddress, password, firstName, lastName;
+	public static Set<Cookie> loginPageCookie;
 }
