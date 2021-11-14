@@ -404,12 +404,12 @@ public class BasePage {
 		return textActual.equals(textExpected);
 	}
 
-	public void scrollToBottomPage(WebDriver driver) {
+	protected void scrollToBottomPage(WebDriver driver) {
 		jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 	}
 	
-	public void scrollToTopPage(WebDriver driver) {
+	protected void scrollToTopPage(WebDriver driver) {
 		jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
 	}
@@ -451,6 +451,11 @@ public class BasePage {
 	protected void sendkeyToElementByJS(WebDriver driver, String locator, String value) {
 		jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript("arguments[0].setAttribute('value', '" + value + "')", getElement(driver, locator));
+	}
+	
+	protected void sendkeyToElementByJS(WebDriver driver, String locator, String value, String... params) {
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].setAttribute('value', '" + value + "')", getElement(driver, getDynamicLocator(locator, params)));
 	}
 
 	protected void removeAttributeInDOM(WebDriver driver, String locator, String attributeRemove) {
@@ -585,12 +590,12 @@ public class BasePage {
 		clickToElement(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_TEXT, labelText);
 	}
 	
-	public void checkToCheckboxByLabel(WebDriver driver, String labelText) {
+	public void checkToUserCheckboxByLabel(WebDriver driver, String labelText) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_CHECKBOX_BY_TEXT, labelText);
 		checkToCheckboxOrRadio(driver, UserBasePageUI.DYNAMIC_CHECKBOX_BY_TEXT, labelText);
 	}
 	
-	public void uncheckToCheckboxByLabel(WebDriver driver, String labelText) {
+	public void uncheckToUserCheckboxByLabel(WebDriver driver, String labelText) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_CHECKBOX_BY_TEXT, labelText);
 		uncheckToCheckbox(driver, UserBasePageUI.DYNAMIC_CHECKBOX_BY_TEXT, labelText);
 	}
@@ -600,17 +605,17 @@ public class BasePage {
 		return isElementSelected(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_TEXT, labelText);
 	}
 
-	public void inputToTextboxByID(WebDriver driver, String textboxID, String value) {
+	public void inputToUserTextboxByID(WebDriver driver, String textboxID, String value) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
 		sendkeyToElement(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, value, textboxID);
 	}
 	
-	public String getValueInTextboxByID(WebDriver driver, String textboxID) {
+	public String getValueInUserTextboxByID(WebDriver driver, String textboxID) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
 		return getElementAttribute(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, "value", textboxID);
 	}
 
-	public void selectDropdownByName(WebDriver driver, String dropdownName, String itemText) {
+	public void selectUserDropdownByName(WebDriver driver, String dropdownName, String itemText) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_DROPDOWN_BY_NAME, dropdownName);
 		selectItemInDropdownByText(driver, UserBasePageUI.DYNAMIC_DROPDOWN_BY_NAME, itemText, dropdownName);
 		isJQueryAjaxLoadedSuccess(driver);
@@ -768,7 +773,7 @@ public class BasePage {
 		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_QUANTITY_BY_HEADER_LABEL, pageName, quantity);
 	}
 	
-	public String getTextValueInTableAtColumnNameAndRowIndex(WebDriver driver, String columnName, String rowIndex) {
+	public String getTextValueInUserTableAtColumnNameAndRowIndex(WebDriver driver, String columnName, String rowIndex) {
 		int columnIndex = getElementSize(driver, UserBasePageUI.DYNAMIC_TABLE_HEADER_BY_NAME, columnName) + 1;
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TABLE_CELL_BY_ROW_INDEX_AND_COLUMN_INDEX, rowIndex, String.valueOf(columnIndex));
 		return getElementText(driver, UserBasePageUI.DYNAMIC_TABLE_CELL_BY_ROW_INDEX_AND_COLUMN_INDEX, rowIndex, String.valueOf(columnIndex));
@@ -799,7 +804,7 @@ public class BasePage {
 		sendkeyToElement(driver, UserBasePageUI.QUANTITY_TEXTBOX_AT_TABLE_BY_PRODUCT_NAME, qtyValue, productName);
 	}
 	
-	public Float convertProductPriceToNumber(WebDriver driver, String productPrice) {
+	public Float convertUserProductPriceToNumber(WebDriver driver, String productPrice) {
 		return Float.parseFloat(productPrice.replaceAll("[$,]", ""));
 	}
 	
@@ -890,7 +895,6 @@ public class BasePage {
 		return isElementDisplayed(driver, UserBasePageUI.DYNAMIC_SKU_PRODUCT_NAME_PRICE_QUANTITY_SUBTOTAL_AT_TABLE, sku, productName, productPrice, quantity, subtotal);
 	}
 	
-	
 	public String getGiftWrappingCheckoutConfirmation(WebDriver driver) {
 		waitForElementVisible(driver, UserBasePageUI.GIFT_WRAPPING_CHECKOUT);
 		return getElementText(driver, UserBasePageUI.GIFT_WRAPPING_CHECKOUT);
@@ -909,6 +913,7 @@ public class BasePage {
 
 		waitForElementClickable(driver, AdminBasePageUI.SUBMENU_LINK_BY_NAME, submenuPageName);
 		clickToElement(driver, AdminBasePageUI.SUBMENU_LINK_BY_NAME, submenuPageName);
+		isJQueryAjaxLoadedSuccess(driver);
 	}
 
 	public void uploadFileAtCardName(WebDriver driver, String cardName, String... fileNames) {
@@ -924,6 +929,43 @@ public class BasePage {
 	public boolean isMessageDisplayedInEmptyTable(WebDriver driver, String tableName) {
 		waitForElementVisible(driver, AdminBasePageUI.NO_DATA_MESSAGE_BY_TABLE_NAME, tableName);
 		return isElementDisplayed(driver, AdminBasePageUI.NO_DATA_MESSAGE_BY_TABLE_NAME, tableName);
+	}
+	
+	public String getTextValueInAdminTableAtColumnNameAndRowIndex(WebDriver driver, String columnName, String rowIndex) {
+		int columnIndex = getElementSize(driver, AdminBasePageUI.DYNAMIC_TABLE_HEADER_BY_NAME, columnName) + 1;
+		waitForElementVisible(driver, AdminBasePageUI.DYNAMIC_TABLE_CELL_BY_ROW_INDEX_AND_COLUMN_INDEX, rowIndex, String.valueOf(columnIndex));
+		return getElementText(driver, AdminBasePageUI.DYNAMIC_TABLE_CELL_BY_ROW_INDEX_AND_COLUMN_INDEX, rowIndex, String.valueOf(columnIndex));
+	}
+	
+	public void selectAdminDropdownByName(WebDriver driver, String dropdownName, String itemText) {
+		waitForElementVisible(driver, AdminBasePageUI.DROPDOWN_BY_NAME, dropdownName);
+		selectItemInDropdownByText(driver, AdminBasePageUI.DROPDOWN_BY_NAME, itemText, dropdownName);
+		isJQueryAjaxLoadedSuccess(driver);
+	}
+	
+	public void checkToAdminCheckboxByID(WebDriver driver, String checkboxID) {
+		waitForElementClickable(driver, AdminBasePageUI.CHECKBOX_BY_ID, checkboxID);
+		checkToCheckboxOrRadio(driver, AdminBasePageUI.CHECKBOX_BY_ID, checkboxID);
+	}
+	
+	public void uncheckToAdminCheckboxByID(WebDriver driver, String checkboxID) {
+		waitForElementClickable(driver, AdminBasePageUI.CHECKBOX_BY_ID, checkboxID);
+		uncheckToCheckbox(driver, AdminBasePageUI.CHECKBOX_BY_ID, checkboxID);
+	}
+	
+	public boolean isAdminCheckboxByIDSelected(WebDriver driver, String checkboxID) {
+		waitForElementVisible(driver, AdminBasePageUI.CHECKBOX_BY_ID, checkboxID);
+		return isElementSelected(driver, AdminBasePageUI.CHECKBOX_BY_ID, checkboxID);
+	}
+	
+	public void inputToAdminTextboxByID(WebDriver driver, String textboxID, String value) {
+		waitForElementVisible(driver, AdminBasePageUI.TEXTBOX_BY_ID, textboxID);
+		sendkeyToElement(driver, AdminBasePageUI.TEXTBOX_BY_ID, value, textboxID);
+	}
+	
+	public String getValueInAdminTextboxByID(WebDriver driver, String textboxID) {
+		waitForElementVisible(driver, AdminBasePageUI.TEXTBOX_BY_ID, textboxID);
+		return getElementAttribute(driver, AdminBasePageUI.TEXTBOX_BY_ID, "value", textboxID);
 	}
 
 	private Alert alert;

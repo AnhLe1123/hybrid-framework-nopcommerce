@@ -128,19 +128,19 @@ public class User_07_Order extends BaseTest {
 		registerPage.clickToRadioButtonByLabel(driver, gender);
 
 		log.info("Pre-condition - Step 05: Enter to Firstname textbox with value: " + firstName);
-		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
+		registerPage.inputToUserTextboxByID(driver, "FirstName", firstName);
 
 		log.info("Pre-condition - Step 06: Enter to Lastname textbox with value: " + lastName);
-		registerPage.inputToTextboxByID(driver, "LastName", lastName);
+		registerPage.inputToUserTextboxByID(driver, "LastName", lastName);
 
 		log.info("Pre-condition - Step 07: Enter to Email textbox with value: " + emailAddress);
-		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
+		registerPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Pre-condition - Step 08: Enter to Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "Password", password);
+		registerPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Pre-condition - Step 09: Enter to Confirm Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("Pre-condition - Step 10: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
@@ -160,10 +160,10 @@ public class User_07_Order extends BaseTest {
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 
 		log.info("Pre-condition - Step 15: Enter to Email textbox with value: " + emailAddress);
-		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
+		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Pre-condition - Step 16: Enter to Password textbox with value: " + password);
-		loginPage.inputToTextboxByID(driver, "Password", password);
+		loginPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Pre-condition - Step 17: Click to Login link");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -184,11 +184,11 @@ public class User_07_Order extends BaseTest {
 	@Test
 	public void Order_01_Add_Product_To_Cart() {
 		log.info("Order_01 - Step 01: Select option in processor dropdown with value: " + processor);
-		productDetailPage.selectDropdownByName(driver, "product_attribute_1", processor);
+		productDetailPage.selectUserDropdownByName(driver, "product_attribute_1", processor);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_01 - Step 02: Select option in ram dropdown with value: " + ram);
-		productDetailPage.selectDropdownByName(driver, "product_attribute_2", ram);
+		productDetailPage.selectUserDropdownByName(driver, "product_attribute_2", ram);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_01 - Step 03: Check to hdd radio with value: " + hdd);
@@ -200,19 +200,19 @@ public class User_07_Order extends BaseTest {
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_01 - Step 05: Check to software checkbox with value: " + softwareMS);
-		productDetailPage.checkToCheckboxByLabel(driver, softwareMS);
+		productDetailPage.checkToUserCheckboxByLabel(driver, softwareMS);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_01 - Step 06: Check to software checkbox with value: " + softwareAcrobat);
-		productDetailPage.checkToCheckboxByLabel(driver, softwareAcrobat);
+		productDetailPage.checkToUserCheckboxByLabel(driver, softwareAcrobat);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_01 - Step 07: Check to software checkbox with value: " + softwareCommander);
-		productDetailPage.checkToCheckboxByLabel(driver, softwareCommander);
+		productDetailPage.checkToUserCheckboxByLabel(driver, softwareCommander);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_01 - Step 08: Input to Quanity textbox with value: " + productQuantity);
-		productDetailPage.inputToTextboxByID(driver, "product_enteredQuantity_1", productQuantity);
+		productDetailPage.inputToUserTextboxByID(driver, "product_enteredQuantity_1", productQuantity);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_01 - Step 09: Verify product price displayed with value: " + productPrice);
@@ -243,8 +243,8 @@ public class User_07_Order extends BaseTest {
 
 		log.info("Order_01 - Step 17: Verify sub-total price displayed in mini shopping cart");
 		subTotalPrice = productDetailPage.getSubTotalPriceAtMiniCart(driver);
-		actualSubTotalPrice = productDetailPage.convertProductPriceToNumber(driver, subTotalPrice);
-		expectedSubTotalPrice = productDetailPage.convertProductPriceToNumber(driver, productPrice) * productDetailPage.convertProductPriceToNumber(driver, productQuantity);
+		actualSubTotalPrice = productDetailPage.convertUserProductPriceToNumber(driver, subTotalPrice);
+		expectedSubTotalPrice = productDetailPage.convertUserProductPriceToNumber(driver, productPrice) * productDetailPage.convertUserProductPriceToNumber(driver, productQuantity);
 		verifyEquals(actualSubTotalPrice, expectedSubTotalPrice);
 	}
 
@@ -262,11 +262,11 @@ public class User_07_Order extends BaseTest {
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
 
 		log.info("Order_02 - Step 04: Reselect option in processor dropdown with value: " + editProcessor);
-		productDetailPage.selectDropdownByName(driver, "product_attribute_1", editProcessor);
+		productDetailPage.selectUserDropdownByName(driver, "product_attribute_1", editProcessor);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_02 - Step 05: Reselect option in ram dropdown with value: " + editRam);
-		productDetailPage.selectDropdownByName(driver, "product_attribute_2", editRam);
+		productDetailPage.selectUserDropdownByName(driver, "product_attribute_2", editRam);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_02 - Step 06: Recheck to hdd radio with value: " + editHdd);
@@ -278,22 +278,22 @@ public class User_07_Order extends BaseTest {
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_02 - Step 08: Check to software checkbox with value: " + softwareMS);
-		productDetailPage.checkToCheckboxByLabel(driver, softwareMS);
+		productDetailPage.checkToUserCheckboxByLabel(driver, softwareMS);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_02 - Step 09: Uncheck to software checkbox with value: " + softwareAcrobat);
-		productDetailPage.uncheckToCheckboxByLabel(driver, softwareAcrobat);
+		productDetailPage.uncheckToUserCheckboxByLabel(driver, softwareAcrobat);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_02 - Step 10: Uncheck to software checkbox with value: " + softwareCommander);
-		productDetailPage.uncheckToCheckboxByLabel(driver, softwareCommander);
+		productDetailPage.uncheckToUserCheckboxByLabel(driver, softwareCommander);
 		productDetailPage.sleepInSecond(1);
 
 		log.info("Order_02 - Step 11: Verify new product price displayed with value: " + editProductPrice);
 		verifyEquals(productDetailPage.getProductPrice(), editProductPrice);
 
 		log.info("Order_02 - Step 12: Input to Quanity textbox with new value: " + editProductQuantity);
-		productDetailPage.inputToTextboxByID(driver, "product_enteredQuantity_1", editProductQuantity);
+		productDetailPage.inputToUserTextboxByID(driver, "product_enteredQuantity_1", editProductQuantity);
 
 		log.info("Order_02 - Step 13: Click to Update button");
 		productDetailPage.clickToButtonByText(driver, "Update");
@@ -320,8 +320,8 @@ public class User_07_Order extends BaseTest {
 
 		log.info("Order_02 - Step 20: Verify sub-total price displayed in mini shopping cart");
 		editSubTotalPrice = productDetailPage.getSubTotalPriceAtMiniCart(driver);
-		editActualSubTotalPrice = productDetailPage.convertProductPriceToNumber(driver, editSubTotalPrice);
-		editExpectedSubTotalPrice = productDetailPage.convertProductPriceToNumber(driver, editProductPrice) * productDetailPage.convertProductPriceToNumber(driver, editProductQuantity);
+		editActualSubTotalPrice = productDetailPage.convertUserProductPriceToNumber(driver, editSubTotalPrice);
+		editExpectedSubTotalPrice = productDetailPage.convertUserProductPriceToNumber(driver, editProductPrice) * productDetailPage.convertUserProductPriceToNumber(driver, editProductQuantity);
 		verifyEquals(editActualSubTotalPrice, editExpectedSubTotalPrice);
 	}
 
@@ -362,12 +362,12 @@ public class User_07_Order extends BaseTest {
 		shoppingCartPage = PageGeneratorManager.getShoppingCartPage(driver);
 
 		log.info("Order_04 - Step 06: Verify product info in table");
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "SKU", "1"), orderSKU);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "SKU", "1"), orderSKU);
 		verifyTrue(shoppingCartPage.isTableImageByProductNameDisplayed(driver, orderProductTitle));
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Product(s)", "1"), orderProductTitle);
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Price", "1"), orderProductPrice);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Product(s)", "1"), orderProductTitle);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Price", "1"), orderProductPrice);
 		verifyTrue(shoppingCartPage.isTableQuantityInputByProductNameDisplayed(driver, orderProductTitle, orderProductQuantity));
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Total", "1"), orderProductSubTotal);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Total", "1"), orderProductSubTotal);
 
 		log.info("Order_04 - Step 07: Select gift wrapping dropdown with value " + giftWrapping);
 		shoppingCartPage.selectOptionInGiftWrappingDropdown(giftWrapping);
@@ -402,22 +402,22 @@ public class User_07_Order extends BaseTest {
 		checkoutPage.isActiveTabByName("Billing address");
 
 		log.info("Order_04 - Step 17: Select option in Billing Country dropdown with value: " + country);
-		checkoutPage.selectDropdownByName(driver, "BillingNewAddress.CountryId", country);
+		checkoutPage.selectUserDropdownByName(driver, "BillingNewAddress.CountryId", country);
 
 		log.info("Order_04 - Step 18: Select option in Billing State dropdown with value: " + state);
-		checkoutPage.selectDropdownByName(driver, "BillingNewAddress.StateProvinceId", state);
+		checkoutPage.selectUserDropdownByName(driver, "BillingNewAddress.StateProvinceId", state);
 
 		log.info("Order_04 - Step 19: Input to Billing City textbox with value: " + city);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", city);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_City", city);
 
 		log.info("Order_04 - Step 20: Input to Billing Address textbox with value: " + address);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", address);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_Address1", address);
 
 		log.info("Order_04 - Step 21: Input to Billing Zipcode textbox with value: " + zip);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_ZipPostalCode", zip);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_ZipPostalCode", zip);
 
 		log.info("Order_04 - Step 22: Input to Billing Phone textbox with value: " + phone);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", phone);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_PhoneNumber", phone);
 
 		log.info("Order_04 - Step 23: Click to Continue button");
 		checkoutPage.clickToContinueButtonByTabName("Billing address");
@@ -604,12 +604,12 @@ public class User_07_Order extends BaseTest {
 		shoppingCartPage = PageGeneratorManager.getShoppingCartPage(driver);
 
 		log.info("Order_05 - Step 06: Verify product info in table");
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "SKU", "1"), orderSKU);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "SKU", "1"), orderSKU);
 		verifyTrue(shoppingCartPage.isTableImageByProductNameDisplayed(driver, orderProductTitle));
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Product(s)", "1"), orderProductTitle);
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Price", "1"), orderProductPrice);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Product(s)", "1"), orderProductTitle);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Price", "1"), orderProductPrice);
 		verifyTrue(shoppingCartPage.isTableQuantityInputByProductNameDisplayed(driver, orderProductTitle, orderProductQuantity));
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Total", "1"), orderProductSubTotal);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Total", "1"), orderProductSubTotal);
 
 		log.info("Order_05 - Step 07: Select gift wrapping dropdown with value " + giftWrapping);
 		shoppingCartPage.selectOptionInGiftWrappingDropdown(giftWrapping);
@@ -644,7 +644,7 @@ public class User_07_Order extends BaseTest {
 		checkoutPage.isActiveTabByName("Billing address");
 
 		log.info("Order_05 - Step 17: Select option in Billing Address dropdown with value: " + existAddressInfo);
-		checkoutPage.selectDropdownByName(driver, "billing_address_id", existAddressInfo);
+		checkoutPage.selectUserDropdownByName(driver, "billing_address_id", existAddressInfo);
 
 		log.info("Order_05 - Step 18: Click to Continue button");
 		checkoutPage.clickToContinueButtonByTabName("Billing address");
@@ -671,22 +671,22 @@ public class User_07_Order extends BaseTest {
 		checkoutPage.isActiveTabByName("Payment information");
 
 		log.info("Order_05 - Step 26: Select option in Credit card dropdown with value: " + cardType);
-		checkoutPage.selectDropdownByName(driver, "CreditCardType", cardType);
+		checkoutPage.selectUserDropdownByName(driver, "CreditCardType", cardType);
 
 		log.info("Order_05 - Step 27: Input to Cardholder name with value: " + cardHolder);
-		checkoutPage.inputToTextboxByID(driver, "CardholderName", cardHolder);
+		checkoutPage.inputToUserTextboxByID(driver, "CardholderName", cardHolder);
 
 		log.info("Order_05 - Step 28: Input to Card number with value: " + cardNumber);
-		checkoutPage.inputToTextboxByID(driver, "CardNumber", cardNumber);
+		checkoutPage.inputToUserTextboxByID(driver, "CardNumber", cardNumber);
 
 		log.info("Order_05 - Step 29: Select option in Expired month dropdown with value: " + expiredMonth);
-		checkoutPage.selectDropdownByName(driver, "ExpireMonth", expiredMonth);
+		checkoutPage.selectUserDropdownByName(driver, "ExpireMonth", expiredMonth);
 
 		log.info("Order_05 - Step 30: Select option in Expired year dropdown with value: " + expiredYear);
-		checkoutPage.selectDropdownByName(driver, "ExpireYear", expiredYear);
+		checkoutPage.selectUserDropdownByName(driver, "ExpireYear", expiredYear);
 
 		log.info("Order_05 - Step 31: Input to Card code textbox with value: " + cardCode);
-		checkoutPage.inputToTextboxByID(driver, "CardCode", cardCode);
+		checkoutPage.inputToUserTextboxByID(driver, "CardCode", cardCode);
 
 		log.info("Order_05 - Step 32: Click to Continue button");
 		checkoutPage.clickToContinueButtonByTabName("Payment information");
@@ -832,7 +832,7 @@ public class User_07_Order extends BaseTest {
 		verifyEquals(productDetailPage.getProductPrice(), updateProductPrice);
 
 		log.info("Order_06 - Step 04: Input to Quanity textbox with value: " + productQuantity);
-		productDetailPage.inputToTextboxByID(driver, "product_enteredQuantity_3", productQuantity);
+		productDetailPage.inputToUserTextboxByID(driver, "product_enteredQuantity_3", productQuantity);
 
 		log.info("Order_06 - Step 05: Click to Add to cart button");
 		productDetailPage.clickToButtonByText(driver, "Add to cart");
@@ -852,9 +852,9 @@ public class User_07_Order extends BaseTest {
 		shoppingCartPage.clickToButtonByText(driver, "Update shopping cart");
 
 		log.info("Order_06 - Step 10: Verify new Total price displayed");
-		totalPrice = shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Total", "1");
-		actualTotalPrice = shoppingCartPage.convertProductPriceToNumber(driver, totalPrice);
-		expectedTotalPrice = shoppingCartPage.convertProductPriceToNumber(driver, updateProductPrice) * productDetailPage.convertProductPriceToNumber(driver, updateProductQuantiy);
+		totalPrice = shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Total", "1");
+		actualTotalPrice = shoppingCartPage.convertUserProductPriceToNumber(driver, totalPrice);
+		expectedTotalPrice = shoppingCartPage.convertUserProductPriceToNumber(driver, updateProductPrice) * productDetailPage.convertUserProductPriceToNumber(driver, updateProductQuantiy);
 		verifyEquals(actualTotalPrice, expectedTotalPrice);
 
 		log.info("Order_06 - Step 11: Click to Remove icon");
@@ -895,7 +895,7 @@ public class User_07_Order extends BaseTest {
 		shoppingCartPage.clickToButtonByText(driver, "Update shopping cart");
 
 		log.info("Order_07 - Step 10: Verify Total is updated with value: " + reorderSubtotal);
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Total", "1"), reorderSubtotal);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Total", "1"), reorderSubtotal);
 
 		log.info("Order_07 - Step 11: Check to Agree term checkbox");
 		shoppingCartPage.checkToServiceTermAgreementCheckbox();
@@ -909,34 +909,34 @@ public class User_07_Order extends BaseTest {
 		checkoutPage.isActiveTabByName("Billing address");
 
 		log.info("Order_07 - Step 14: Select option 'New Address' in Billing Country dropdown");
-		checkoutPage.selectDropdownByName(driver, "billing_address_id", "New Address");
+		checkoutPage.selectUserDropdownByName(driver, "billing_address_id", "New Address");
 
 		log.info("Order_07 - Step 15: Input to Firstname textbox with value: " + reorderFirstName);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_FirstName", reorderFirstName);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_FirstName", reorderFirstName);
 		
 		log.info("Order_07 - Step 16: Input to Lastname textbox with value: " + reorderLastName);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_LastName", reorderLastName);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_LastName", reorderLastName);
 		
 		log.info("Order_07 - Step 17: Input to Email textbox with value: " + reorderEmail);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Email", reorderEmail);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_Email", reorderEmail);
 		
 		log.info("Order_07 - Step 18: Select option in Country dropdown with value: " + reorderCountry);
-		checkoutPage.selectDropdownByName(driver, "BillingNewAddress.CountryId", reorderCountry);
+		checkoutPage.selectUserDropdownByName(driver, "BillingNewAddress.CountryId", reorderCountry);
 		
 		log.info("Order_07 - Step 19: Select option in State dropdown with value: " + reorderState);
-		checkoutPage.selectDropdownByName(driver, "BillingNewAddress.StateProvinceId", reorderState);
+		checkoutPage.selectUserDropdownByName(driver, "BillingNewAddress.StateProvinceId", reorderState);
 		
 		log.info("Order_07 - Step 20: Input to City textbox with value: " + reorderCity);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", reorderCity);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_City", reorderCity);
 		
 		log.info("Order_07 - Step 21: Input to Address 1 textbox with value: " + reorderAddress);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", reorderAddress);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_Address1", reorderAddress);
 		
 		log.info("Order_07 - Step 22: Input to Zipcode textbox with value: " + reorderZip);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_ZipPostalCode", reorderZip);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_ZipPostalCode", reorderZip);
 		
 		log.info("Order_07 - Step 23: Input to Phone number textbox with value: " + reorderPhone);
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", reorderPhone);
+		checkoutPage.inputToUserTextboxByID(driver, "BillingNewAddress_PhoneNumber", reorderPhone);
 		
 		log.info("Order_07 - Step 24: Click to Continue button");
 		checkoutPage.clickToContinueButtonByTabName("Billing address");

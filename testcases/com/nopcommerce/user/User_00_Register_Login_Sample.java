@@ -45,15 +45,15 @@ public class User_00_Register_Login_Sample extends BaseTest {
 		registerPage = PageGeneratorManager.getRegisterPage(driver);
 
 		registerPage.clickToRadioButtonByLabel(driver, "Male");
-		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
-		registerPage.inputToTextboxByID(driver, "LastName", lastName);
-		registerPage.selectDropdownByName(driver, "DateOfBirthDay", dateDOB);
-		registerPage.selectDropdownByName(driver, "DateOfBirthMonth", monthDOB);
-		registerPage.selectDropdownByName(driver, "DateOfBirthYear", yearDOB);
-		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
-		registerPage.inputToTextboxByID(driver, "Company", companyName);
-		registerPage.inputToTextboxByID(driver, "Password", password);
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
+		registerPage.inputToUserTextboxByID(driver, "FirstName", firstName);
+		registerPage.inputToUserTextboxByID(driver, "LastName", lastName);
+		registerPage.selectUserDropdownByName(driver, "DateOfBirthDay", dateDOB);
+		registerPage.selectUserDropdownByName(driver, "DateOfBirthMonth", monthDOB);
+		registerPage.selectUserDropdownByName(driver, "DateOfBirthYear", yearDOB);
+		registerPage.inputToUserTextboxByID(driver, "Email", emailAddress);
+		registerPage.inputToUserTextboxByID(driver, "Company", companyName);
+		registerPage.inputToUserTextboxByID(driver, "Password", password);
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", password);
 		registerPage.clickToButtonByText(driver, "Register");
 
 		verifyTrue(registerPage.isSuccessMessageDisplayed());
@@ -68,8 +68,8 @@ public class User_00_Register_Login_Sample extends BaseTest {
 		homePage.openHeaderPageByName(driver, "login");
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 
-		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
-		loginPage.inputToTextboxByID(driver, "Password", password);
+		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
+		loginPage.inputToUserTextboxByID(driver, "Password", password);
 		loginPage.clickToButtonByText(driver, "Log in");
 
 		homePage = PageGeneratorManager.getHomePage(driver);

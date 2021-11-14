@@ -62,31 +62,31 @@ public class User_04_Search extends BaseTest {
 		registerPage.clickToRadioButtonByLabel(driver, gender);
 
 		log.info("Pre-condition - Step 05: Enter to Firstname textbox with value: " + firstName);
-		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
+		registerPage.inputToUserTextboxByID(driver, "FirstName", firstName);
 
 		log.info("Pre-condition - Step 06: Enter to Lastname textbox with value: " + lastName);
-		registerPage.inputToTextboxByID(driver, "LastName", lastName);
+		registerPage.inputToUserTextboxByID(driver, "LastName", lastName);
 
 		log.info("Pre-condition - Step 07: Select option in 'DateOfBirthDay' dropdown: " + dateDOB);
-		registerPage.selectDropdownByName(driver, "DateOfBirthDay", dateDOB);
+		registerPage.selectUserDropdownByName(driver, "DateOfBirthDay", dateDOB);
 
 		log.info("Pre-condition - Step 08: Select option in 'DateOfBirthMonth' dropdown: " + monthDOB);
-		registerPage.selectDropdownByName(driver, "DateOfBirthMonth", monthDOB);
+		registerPage.selectUserDropdownByName(driver, "DateOfBirthMonth", monthDOB);
 
 		log.info("Pre-condition - Step 09: Select option in 'DateOfBirthYear' dropdown: " + yearDOB);
-		registerPage.selectDropdownByName(driver, "DateOfBirthYear", yearDOB);
+		registerPage.selectUserDropdownByName(driver, "DateOfBirthYear", yearDOB);
 
 		log.info("Pre-condition - Step 10: Enter to Email textbox with value: " + emailAddress);
-		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
+		registerPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Pre-condition - Step 10: Enter to Company Name textbox with value: " + companyName);
-		registerPage.inputToTextboxByID(driver, "Company", companyName);
+		registerPage.inputToUserTextboxByID(driver, "Company", companyName);
 
 		log.info("Pre-condition - Step 11: Enter to Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "Password", password);
+		registerPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Pre-condition - Step 12: Enter to Confirm Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("Pre-condition - Step 13: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
@@ -106,10 +106,10 @@ public class User_04_Search extends BaseTest {
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 
 		log.info("Pre-condition - Step 18: Enter to Email textbox with value: " + emailAddress);
-		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
+		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Pre-condition - Step 18: Enter to Password textbox with value: " + password);
-		loginPage.inputToTextboxByID(driver, "Password", password);
+		loginPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Pre-condition - Step 19: Click to Login link");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -129,7 +129,7 @@ public class User_04_Search extends BaseTest {
 	@Test
 	public void Search_01_Search_With_Empty_Data() {
 		log.info("Search_02 - Step 02: Enter to Search Keyword textbox with empty value");
-		searchPage.inputToTextboxByID(driver, "q", "");
+		searchPage.inputToUserTextboxByID(driver, "q", "");
 
 		log.info("Search_01 - Step 01: Click to Search button");
 		searchPage.clickToFormSearchButton();
@@ -144,7 +144,7 @@ public class User_04_Search extends BaseTest {
 		searchPage.openFooterPageByName(driver, "Search");
 
 		log.info("Search_02 - Step 02: Enter to Search Keyword textbox with value: " + searchKeywordNotExist);
-		searchPage.inputToTextboxByID(driver, "q", searchKeywordNotExist);
+		searchPage.inputToUserTextboxByID(driver, "q", searchKeywordNotExist);
 
 		log.info("Search_02 - Step 03: Click to Search button");
 		searchPage.clickToFormSearchButton();
@@ -159,7 +159,7 @@ public class User_04_Search extends BaseTest {
 		searchPage.openFooterPageByName(driver, "Search");
 
 		log.info("Search_03 - Step 02: Enter to Search Keyword textbox with value: " + searchKeywordRelative);
-		searchPage.inputToTextboxByID(driver, "q", searchKeywordRelative);
+		searchPage.inputToUserTextboxByID(driver, "q", searchKeywordRelative);
 
 		log.info("Search_03 - Step 03: Click to Search button");
 		searchPage.clickToFormSearchButton();
@@ -180,7 +180,7 @@ public class User_04_Search extends BaseTest {
 		searchPage.openFooterPageByName(driver, "Search");
 
 		log.info("Search_04 - Step 02: Enter to Search Keyword textbox with value: " + searchKeywordAbsolute);
-		searchPage.inputToTextboxByID(driver, "q", searchKeywordAbsolute);
+		searchPage.inputToUserTextboxByID(driver, "q", searchKeywordAbsolute);
 
 		log.info("Search_04 - Step 03: Click to Search button");
 		searchPage.clickToFormSearchButton();
@@ -201,16 +201,16 @@ public class User_04_Search extends BaseTest {
 		searchPage.openFooterPageByName(driver, "Search");
 
 		log.info("Search_05 - Step 02: Enter to Search Keyword textbox with value: " + advancedSearchKeyword);
-		searchPage.inputToTextboxByID(driver, "q", advancedSearchKeyword);
+		searchPage.inputToUserTextboxByID(driver, "q", advancedSearchKeyword);
 
 		log.info("Search_05 - Step 03: Click to 'Advanced search' checkbox");
-		searchPage.checkToCheckboxByLabel(driver, "Advanced search");
+		searchPage.checkToUserCheckboxByLabel(driver, "Advanced search");
 
 		log.info("Search_05 - Step 04: Select item in dropdown 'Category' with value: " + category);
-		searchPage.selectDropdownByName(driver, "cid", category);
+		searchPage.selectUserDropdownByName(driver, "cid", category);
 
 		log.info("Search_05 - Step 05: Uncheck to checkbox sub category");
-		searchPage.uncheckToCheckboxByLabel(driver, "Automatically search sub categories");
+		searchPage.uncheckToUserCheckboxByLabel(driver, "Automatically search sub categories");
 
 		log.info("Search_05 - Step 06: Click to Search button");
 		searchPage.clickToFormSearchButton();
@@ -225,16 +225,16 @@ public class User_04_Search extends BaseTest {
 		searchPage.openFooterPageByName(driver, "Search");
 
 		log.info("Search_06 - Step 02: Enter to Search Keyword textbox with value: " + advancedSearchKeyword);
-		searchPage.inputToTextboxByID(driver, "q", advancedSearchKeyword);
+		searchPage.inputToUserTextboxByID(driver, "q", advancedSearchKeyword);
 
 		log.info("Search_06 - Step 03: Click to 'Advanced search' checkbox");
-		searchPage.checkToCheckboxByLabel(driver, "Advanced search");
+		searchPage.checkToUserCheckboxByLabel(driver, "Advanced search");
 
 		log.info("Search_06 - Step 04: Select item in dropdown 'Category' with value: " + category);
-		searchPage.selectDropdownByName(driver, "cid", category);
+		searchPage.selectUserDropdownByName(driver, "cid", category);
 
 		log.info("Search_06 - Step 05: Check to checkbox sub category");
-		searchPage.checkToCheckboxByLabel(driver, "Automatically search sub categories");
+		searchPage.checkToUserCheckboxByLabel(driver, "Automatically search sub categories");
 
 		log.info("Search_06 - Step 06: Click to Search button");
 		searchPage.clickToFormSearchButton();
@@ -255,19 +255,19 @@ public class User_04_Search extends BaseTest {
 		searchPage.openFooterPageByName(driver, "Search");
 
 		log.info("Search_07 - Step 02: Enter to Search Keyword textbox with value: " + advancedSearchKeyword);
-		searchPage.inputToTextboxByID(driver, "q", advancedSearchKeyword);
+		searchPage.inputToUserTextboxByID(driver, "q", advancedSearchKeyword);
 
 		log.info("Search_07 - Step 03: Click to 'Advanced search' checkbox");
-		searchPage.checkToCheckboxByLabel(driver, "Advanced search");
+		searchPage.checkToUserCheckboxByLabel(driver, "Advanced search");
 
 		log.info("Search_07 - Step 04: Select item in dropdown 'Category' with value: " + category);
-		searchPage.selectDropdownByName(driver, "cid", category);
+		searchPage.selectUserDropdownByName(driver, "cid", category);
 
 		log.info("Search_07 - Step 05: Check to checkbox sub category");
-		searchPage.checkToCheckboxByLabel(driver, "Automatically search sub categories");
+		searchPage.checkToUserCheckboxByLabel(driver, "Automatically search sub categories");
 
 		log.info("Search_07 - Step 06: Select item in dropdown 'Manufacturer' with value: " + incorrectManufacturer);
-		searchPage.selectDropdownByName(driver, "mid", incorrectManufacturer);
+		searchPage.selectUserDropdownByName(driver, "mid", incorrectManufacturer);
 
 		log.info("Search_07 - Step 07: Click to Search button");
 		searchPage.clickToFormSearchButton();
@@ -282,19 +282,19 @@ public class User_04_Search extends BaseTest {
 		searchPage.openFooterPageByName(driver, "Search");
 
 		log.info("Search_08 - Step 02: Enter to Search Keyword textbox with value: " + advancedSearchKeyword);
-		searchPage.inputToTextboxByID(driver, "q", advancedSearchKeyword);
+		searchPage.inputToUserTextboxByID(driver, "q", advancedSearchKeyword);
 
 		log.info("Search_08 - Step 03: Click to 'Advanced search' checkbox");
-		searchPage.checkToCheckboxByLabel(driver, "Advanced search");
+		searchPage.checkToUserCheckboxByLabel(driver, "Advanced search");
 
 		log.info("Search_08 - Step 04: Select item in dropdown 'Category' with value: " + category);
-		searchPage.selectDropdownByName(driver, "cid", category);
+		searchPage.selectUserDropdownByName(driver, "cid", category);
 
 		log.info("Search_08 - Step 05: Check to checkbox sub category");
-		searchPage.checkToCheckboxByLabel(driver, "Automatically search sub categories");
+		searchPage.checkToUserCheckboxByLabel(driver, "Automatically search sub categories");
 
 		log.info("Search_08 - Step 06: Select item in dropdown 'Manufacturer' with value: " + correctManufacturer);
-		searchPage.selectDropdownByName(driver, "mid", correctManufacturer);
+		searchPage.selectUserDropdownByName(driver, "mid", correctManufacturer);
 
 		log.info("Search_08 - Step 07: Click to Search button");
 		searchPage.clickToFormSearchButton();

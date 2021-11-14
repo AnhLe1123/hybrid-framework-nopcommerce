@@ -76,31 +76,31 @@ public class User_03_My_Account extends BaseTest {
 		registerPage.clickToRadioButtonByLabel(driver, gender);
 
 		log.info("Pre-condition - Step 05: Enter to Firstname textbox with value: " + firstName);
-		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
+		registerPage.inputToUserTextboxByID(driver, "FirstName", firstName);
 
 		log.info("Pre-condition - Step 06: Enter to Lastname textbox with value: " + lastName);
-		registerPage.inputToTextboxByID(driver, "LastName", lastName);
+		registerPage.inputToUserTextboxByID(driver, "LastName", lastName);
 
 		log.info("Pre-condition - Step 07: Select option in 'DateOfBirthDay' dropdown: " + dateDOB);
-		registerPage.selectDropdownByName(driver, "DateOfBirthDay", dateDOB);
+		registerPage.selectUserDropdownByName(driver, "DateOfBirthDay", dateDOB);
 
 		log.info("Pre-condition - Step 08: Select option in 'DateOfBirthMonth' dropdown: " + monthDOB);
-		registerPage.selectDropdownByName(driver, "DateOfBirthMonth", monthDOB);
+		registerPage.selectUserDropdownByName(driver, "DateOfBirthMonth", monthDOB);
 
 		log.info("Pre-condition - Step 09: Select option in 'DateOfBirthYear' dropdown: " + yearDOB);
-		registerPage.selectDropdownByName(driver, "DateOfBirthYear", yearDOB);
+		registerPage.selectUserDropdownByName(driver, "DateOfBirthYear", yearDOB);
 
 		log.info("Pre-condition - Step 10: Enter to Email textbox with value: " + emailAddress);
-		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
+		registerPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Pre-condition - Step 10: Enter to Company Name textbox with value: " + companyName);
-		registerPage.inputToTextboxByID(driver, "Company", companyName);
+		registerPage.inputToUserTextboxByID(driver, "Company", companyName);
 
 		log.info("Pre-condition - Step 11: Enter to Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "Password", password);
+		registerPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Pre-condition - Step 12: Enter to Confirm Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("Pre-condition - Step 13: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
@@ -120,10 +120,10 @@ public class User_03_My_Account extends BaseTest {
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 
 		log.info("Pre-condition - Step 18: Enter to Email textbox with value: " + emailAddress);
-		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
+		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Pre-condition - Step 18: Enter to Password textbox with value: " + password);
-		loginPage.inputToTextboxByID(driver, "Password", password);
+		loginPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Pre-condition - Step 19: Click to Login link");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -146,34 +146,34 @@ public class User_03_My_Account extends BaseTest {
 		myAccountPage.clickToRadioButtonByLabel(driver, editGender);
 
 		log.info("My_Account_01 - Step 02: Enter to Firstname textbox in My account page with value: " + editFirstName);
-		myAccountPage.inputToTextboxByID(driver, "FirstName", editFirstName);
+		myAccountPage.inputToUserTextboxByID(driver, "FirstName", editFirstName);
 
 		log.info("My_Account_01 - Step 03: Enter to Lastname textbox in My account page with value: " + editLastName);
-		myAccountPage.inputToTextboxByID(driver, "LastName", editLastName);
+		myAccountPage.inputToUserTextboxByID(driver, "LastName", editLastName);
 
 		log.info("My_Account_01 - Step 04: Select option in 'DateOfBirthDay' dropdown in My account page with value: " + editDateDOB);
-		myAccountPage.selectDropdownByName(driver, "DateOfBirthDay", editDateDOB);
+		myAccountPage.selectUserDropdownByName(driver, "DateOfBirthDay", editDateDOB);
 
 		log.info("My_Account_01 - Step 05: Select option in 'DateOfBirthMonth' dropdown in My account page with value: " + editMonthDOB);
-		myAccountPage.selectDropdownByName(driver, "DateOfBirthMonth", editMonthDOB);
+		myAccountPage.selectUserDropdownByName(driver, "DateOfBirthMonth", editMonthDOB);
 
 		log.info("My_Account_01 - Step 06: Select option in 'DateOfBirthYear' dropdown in My account page with value: " + editYearDOB);
-		myAccountPage.selectDropdownByName(driver, "DateOfBirthYear", editYearDOB);
+		myAccountPage.selectUserDropdownByName(driver, "DateOfBirthYear", editYearDOB);
 
 		log.info("My_Account_01 - Step 07: Enter to Email textbox in My account page with value : " + editEmailAddress);
-		myAccountPage.inputToTextboxByID(driver, "Email", editEmailAddress);
+		myAccountPage.inputToUserTextboxByID(driver, "Email", editEmailAddress);
 
 		log.info("My_Account_01 - Step 08: Enter to Company Name textbox with value in My account page with value : " + editCompanyName);
-		myAccountPage.inputToTextboxByID(driver, "Company", editCompanyName);
+		myAccountPage.inputToUserTextboxByID(driver, "Company", editCompanyName);
 
 		log.info("My_Account_01 - Step 09: Click to Save button");
 		myAccountPage.clickToButtonByText(driver, "Save");
 
 		log.info("My_Account_01 - Step 10: Verify new First Name with value: " + editFirstName);
-		verifyEquals(myAccountPage.getValueInTextboxByID(driver, "FirstName"), editFirstName);
+		verifyEquals(myAccountPage.getValueInUserTextboxByID(driver, "FirstName"), editFirstName);
 
 		log.info("My_Account_01 - Step 11: Verify new Last Name with value: " + editLastName);
-		verifyEquals(myAccountPage.getValueInTextboxByID(driver, "LastName"), editLastName);
+		verifyEquals(myAccountPage.getValueInUserTextboxByID(driver, "LastName"), editLastName);
 
 		log.info("My_Account_01 - Step 12: Verify new selected option in 'DateOfBirthDay' dropdown with value : " + editDateDOB);
 		verifyEquals(myAccountPage.getSelectedItemInDropdownByName(driver, "DateOfBirthDay"), editDateDOB);
@@ -185,10 +185,10 @@ public class User_03_My_Account extends BaseTest {
 		verifyEquals(myAccountPage.getSelectedItemInDropdownByName(driver, "DateOfBirthYear"), editYearDOB);
 
 		log.info("My_Account_01 - Step 15: Verify new Email Address with value: " + editEmailAddress);
-		verifyEquals(myAccountPage.getValueInTextboxByID(driver, "Email"), editEmailAddress);
+		verifyEquals(myAccountPage.getValueInUserTextboxByID(driver, "Email"), editEmailAddress);
 
 		log.info("My_Account_01 - Step 16: Verify new Company Name with value: " + editCompanyName);
-		verifyEquals(myAccountPage.getValueInTextboxByID(driver, "Company"), editCompanyName);
+		verifyEquals(myAccountPage.getValueInUserTextboxByID(driver, "Company"), editCompanyName);
 	}
 
 	@Test
@@ -204,40 +204,40 @@ public class User_03_My_Account extends BaseTest {
 		myAddressPage.clickToButtonByText(driver, "Add new");
 
 		log.info("My_Account_02 - Step 04: Enter to First Name textbox in My address page with value: " + editFirstName);
-		myAddressPage.inputToTextboxByID(driver, "Address_FirstName", editFirstName);
+		myAddressPage.inputToUserTextboxByID(driver, "Address_FirstName", editFirstName);
 
 		log.info("My_Account_02 - Step 05: Enter to Last Name textbox in My address page with value: " + editLastName);
-		myAddressPage.inputToTextboxByID(driver, "Address_LastName", editLastName);
+		myAddressPage.inputToUserTextboxByID(driver, "Address_LastName", editLastName);
 
 		log.info("My_Account_02 - Step 06: Enter to Email textbox in My address page with value: " + editEmailAddress);
-		myAddressPage.inputToTextboxByID(driver, "Address_Email", editEmailAddress);
+		myAddressPage.inputToUserTextboxByID(driver, "Address_Email", editEmailAddress);
 
 		log.info("My_Account_02 - Step 07: Enter to Company textbox in My address page with value: " + companyName);
-		myAddressPage.inputToTextboxByID(driver, "Address_Company", companyName);
+		myAddressPage.inputToUserTextboxByID(driver, "Address_Company", companyName);
 
 		log.info("My_Account_02 - Step 08: Select option in Country dropdown in My address page with value: " + country);
-		myAddressPage.selectDropdownByName(driver, "Address.CountryId", country);
+		myAddressPage.selectUserDropdownByName(driver, "Address.CountryId", country);
 
 		log.info("My_Account_02 - Step 09: Select option in State dropdown in My address page with value: " + state);
-		myAddressPage.selectDropdownByName(driver, "Address.StateProvinceId", state);
+		myAddressPage.selectUserDropdownByName(driver, "Address.StateProvinceId", state);
 
 		log.info("My_Account_02 - Step 10: Enter to City textbox in My address page with value: " + city);
-		myAddressPage.inputToTextboxByID(driver, "Address_City", city);
+		myAddressPage.inputToUserTextboxByID(driver, "Address_City", city);
 
 		log.info("My_Account_02 - Step 11: Enter to Address 1 textbox in My address page with value: " + firstAddress);
-		myAddressPage.inputToTextboxByID(driver, "Address_Address1", firstAddress);
+		myAddressPage.inputToUserTextboxByID(driver, "Address_Address1", firstAddress);
 
 		log.info("My_Account_02 - Step 12: Enter to Address 2 textbox in My address page with value: " + secondAddress);
-		myAddressPage.inputToTextboxByID(driver, "Address_Address2", secondAddress);
+		myAddressPage.inputToUserTextboxByID(driver, "Address_Address2", secondAddress);
 
 		log.info("My_Account_02 - Step 13: Enter to Postal Code textbox in My address page with value: " + zipCode);
-		myAddressPage.inputToTextboxByID(driver, "Address_ZipPostalCode", zipCode);
+		myAddressPage.inputToUserTextboxByID(driver, "Address_ZipPostalCode", zipCode);
 
 		log.info("My_Account_02 - Step 14: Enter to Phone Number textbox in My address page with value: " + phoneNumber);
-		myAddressPage.inputToTextboxByID(driver, "Address_PhoneNumber", phoneNumber);
+		myAddressPage.inputToUserTextboxByID(driver, "Address_PhoneNumber", phoneNumber);
 
 		log.info("My_Account_02 - Step 15: Enter to Fax Number textbox in My address page with value: " + faxNumber);
-		myAddressPage.inputToTextboxByID(driver, "Address_FaxNumber", faxNumber);
+		myAddressPage.inputToUserTextboxByID(driver, "Address_FaxNumber", faxNumber);
 
 		log.info("My_Account_02 - Step 16: Click to 'Save' button");
 		myAddressPage.clickToButtonByText(driver, "Save");
@@ -264,13 +264,13 @@ public class User_03_My_Account extends BaseTest {
 		verifyTrue(myPasswordPage.isPageTitleByTextDisplayed(driver, "My account - Change password"));
 
 		log.info("My_Account_03 - Step 03: Enter to Old Password textbox with value: " + password);
-		myPasswordPage.inputToTextboxByID(driver, "OldPassword", password);
+		myPasswordPage.inputToUserTextboxByID(driver, "OldPassword", password);
 
 		log.info("My_Account_03 - Step 04: Enter to New Password textbox with value: " + editPassword);
-		myPasswordPage.inputToTextboxByID(driver, "NewPassword", editPassword);
+		myPasswordPage.inputToUserTextboxByID(driver, "NewPassword", editPassword);
 
 		log.info("My_Account_03 - Step 05: Enter to Confirm Password textbox with value: " + editPassword);
-		myPasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", editPassword);
+		myPasswordPage.inputToUserTextboxByID(driver, "ConfirmNewPassword", editPassword);
 
 		log.info("My_Account_03 - Step 06: Click to Change Password button");
 		myPasswordPage.clickToButtonByText(driver, "Change password");
@@ -294,10 +294,10 @@ public class User_03_My_Account extends BaseTest {
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 
 		log.info("My_Account_03 - Step 12: Enter to Email textbox with value: " + editEmailAddress);
-		loginPage.inputToTextboxByID(driver, "Email", editEmailAddress);
+		loginPage.inputToUserTextboxByID(driver, "Email", editEmailAddress);
 
 		log.info("My_Account_03 - Step 13: Enter to Password textbox with old password: " + password);
-		loginPage.inputToTextboxByID(driver, "Password", password);
+		loginPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("My_Account_03 - Step 14: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -309,10 +309,10 @@ public class User_03_My_Account extends BaseTest {
 		loginPage.openHeaderPageByName(driver, "login");
 
 		log.info("My_Account_03 - Step 17: Enter to Email textbox with value: " + editEmailAddress);
-		loginPage.inputToTextboxByID(driver, "Email", editEmailAddress);
+		loginPage.inputToUserTextboxByID(driver, "Email", editEmailAddress);
 
 		log.info("My_Account_03 - Step 18: Enter to Password textbox with new password: " + editPassword);
-		loginPage.inputToTextboxByID(driver, "Password", editPassword);
+		loginPage.inputToUserTextboxByID(driver, "Password", editPassword);
 
 		log.info("My_Account_03 - Step 19: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -333,7 +333,7 @@ public class User_03_My_Account extends BaseTest {
 		productReviewPage = PageGeneratorManager.getProductReviewPage(driver);
 
 		log.info("My_Account_04 - Step 03: Enter to Review Title textbox with content: " + productReviewTitle);
-		productReviewPage.inputToTextboxByID(driver, "AddProductReview_Title", productReviewTitle);
+		productReviewPage.inputToUserTextboxByID(driver, "AddProductReview_Title", productReviewTitle);
 
 		log.info("My_Account_04 - Step 04: Enter to Review Text textarea with content: " + productReviewContent);
 		productReviewPage.inputToReviewTextArea(productReviewContent);

@@ -35,7 +35,7 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		dashboardPage.openAdminSubmenuPageByName(driver, "Catalog", "Products");
 		productSearchPage = PageGeneratorManager.getProductSearchPage(driver);
 
-		productSearchPage.enterToProductNameTextbox(productName);
+		productSearchPage.inputToProductNameTextbox(productName);
 		productSearchPage.clickToSearchButton();
 		productDetailPage = productSearchPage.clickToEditButtonByProductName(productName);
 	}
@@ -47,8 +47,8 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		productDetailPage.uploadFileAtCardName(driver, "pictures", productAvatarImg);
 		verifyTrue(productDetailPage.isPictureUploadedSuccessByFileName(productAvatarImg));
 
-		productDetailPage.enterToAltTextbox(productAvatarAlt);
-		productDetailPage.enterToAltTitlebox(productAvatarTitle);
+		productDetailPage.inputToAltTextbox(productAvatarAlt);
+		productDetailPage.inputToAltTitlebox(productAvatarTitle);
 		productDetailPage.clickToUpDownInDisplayedOrderTextbox("Increase");
 		productDetailPage.clickToAddPictureButton();
 		verifyTrue(productDetailPage.isPictureImageDisplayed(productName, productAvatarOrder, productAvatarAlt, productAvatarTitle));
@@ -56,7 +56,7 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		productSearchPage = productDetailPage.clickToSaveButton();
 		verifyTrue(productSearchPage.isSuccessMessageDisplayed("The product has been updated successfully."));
 
-		productSearchPage.enterToProductNameTextbox(productName);
+		productSearchPage.inputToProductNameTextbox(productName);
 		productSearchPage.clickToSearchButton();
 		verifyTrue(productSearchPage.isPictureImageUpdated(productName, productName));
 
@@ -67,7 +67,7 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		verifyTrue(productDetailPage.isMessageDisplayedInEmptyTable(driver, "productpictures"));
 
 		productSearchPage = productDetailPage.clickToSaveButton();
-		productSearchPage.enterToProductNameTextbox(productName);
+		productSearchPage.inputToProductNameTextbox(productName);
 		productSearchPage.clickToSearchButton();
 		verifyTrue(productSearchPage.isPictureImageUpdated(productName, "default-image"));
 	}

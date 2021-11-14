@@ -10,4 +10,7 @@ public class ProductDetailPageUI {
 	public static final String PICTURE_TABLE_BY_NAME_ORDER_ALT_TITLE = "//a[contains(@href, '%s')]/parent::td/following-sibling::td[@data-columnname='DisplayOrder' and text()='%s']/following-sibling::td[@data-columnname='OverrideAltAttribute' and text()='%s']/following-sibling::td[@data-columnname='OverrideTitleAttribute' and text()='%s']";
 	public static final String SAVE_BUTTON = "//button[@name='save']";
 	public static final String DELETE_BUTTON_BY_IMAGE_TITLE = "//td[text()='%s']/following-sibling::td/a[contains(string(), 'Delete')]";
+	public static final String PAGE_TITLE_BY_PRODUCT_NAME = "//div[contains(@class, 'content-header')]//h1[contains(text(), '%s')]";
+	public static final String CATEGORY_TAG_BY_TEXT = "//ul[@id='SelectedCategoryIds_taglist']//li//span[text()='%s']";
+	public static final String DROPDOWN_VALUE_BY_DROPDOWN_ID = "//input[@id='%s']/preceding-sibling::input";
 }

@@ -43,19 +43,19 @@ public class User_02_Login extends BaseTest {
 		registerPage.clickToRadioButtonByLabel(driver, "Male");
 
 		log.info("Pre-condition - Step 05: Enter to Firstname textbox");
-		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
+		registerPage.inputToUserTextboxByID(driver, "FirstName", firstName);
 
 		log.info("Pre-condition - Step 06: Enter to Lastname textbox");
-		registerPage.inputToTextboxByID(driver, "LastName", lastName);
+		registerPage.inputToUserTextboxByID(driver, "LastName", lastName);
 
 		log.info("Pre-condition - Step 07: Enter to Email textbox with value: " + registeredEmail);
-		registerPage.inputToTextboxByID(driver, "Email", registeredEmail);
+		registerPage.inputToUserTextboxByID(driver, "Email", registeredEmail);
 
 		log.info("Pre-condition - Step 08: Enter to Password textbox with value: " + correctPassword);
-		registerPage.inputToTextboxByID(driver, "Password", correctPassword);
+		registerPage.inputToUserTextboxByID(driver, "Password", correctPassword);
 
 		log.info("Pre-condition - Step 09: Enter to Confirm Password textbox with value: " + correctPassword);
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", correctPassword);
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", correctPassword);
 
 		log.info("Pre-condition - Step 10: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
@@ -78,7 +78,7 @@ public class User_02_Login extends BaseTest {
 	@Test
 	public void Login_01_Login_With_Empty_Data() {
 		log.info("Login_01 - Step 01: Input empty Email textbox");
-		loginPage.inputToTextboxByID(driver, "Email", "");
+		loginPage.inputToUserTextboxByID(driver, "Email", "");
 
 		log.info("Login_01 - Step 02: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -90,7 +90,7 @@ public class User_02_Login extends BaseTest {
 	@Test
 	public void Login_02_Login_With_Invalid_Email() {
 		log.info("Login_02 - Step 01: Input to Email textbox with value: " + invalidEmail);
-		loginPage.inputToTextboxByID(driver, "Email", invalidEmail);
+		loginPage.inputToUserTextboxByID(driver, "Email", invalidEmail);
 
 		log.info("Login_02 - Step 02: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -102,10 +102,10 @@ public class User_02_Login extends BaseTest {
 	@Test
 	public void Login_03_Login_With_Not_Registered_Email() {
 		log.info("Login_03 - Step 01: Input to Email textbox with value: " + notRegisteredEmail);
-		loginPage.inputToTextboxByID(driver, "Email", notRegisteredEmail);
+		loginPage.inputToUserTextboxByID(driver, "Email", notRegisteredEmail);
 
 		log.info("Login_03 - Step 02: Input to Password textbox with value: " + invalidEmail);
-		loginPage.inputToTextboxByID(driver, "Password", correctPassword);
+		loginPage.inputToUserTextboxByID(driver, "Password", correctPassword);
 
 		log.info("Login_03 - Step 03: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -117,10 +117,10 @@ public class User_02_Login extends BaseTest {
 	@Test
 	public void Login_04_Login_With_Registered_Email_And_Empty_Password() {
 		log.info("Login_04 - Step 01: Input to Email textbox with value: " + registeredEmail);
-		loginPage.inputToTextboxByID(driver, "Email", registeredEmail);
+		loginPage.inputToUserTextboxByID(driver, "Email", registeredEmail);
 
 		log.info("Login_04 - Step 02: Input empty Password textbox");
-		loginPage.inputToTextboxByID(driver, "Password", "");
+		loginPage.inputToUserTextboxByID(driver, "Password", "");
 
 		log.info("Login_04 - Step 03: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -132,10 +132,10 @@ public class User_02_Login extends BaseTest {
 	@Test
 	public void Login_05_Login_With_Registered_Email_And_Wrong_Password() {
 		log.info("Login_05 - Step 01: Input to Email textbox with value: " + registeredEmail);
-		loginPage.inputToTextboxByID(driver, "Email", registeredEmail);
+		loginPage.inputToUserTextboxByID(driver, "Email", registeredEmail);
 
 		log.info("Login_05 - Step 02: Input to Password textbox with value: " + wrongPassword);
-		loginPage.inputToTextboxByID(driver, "Password", wrongPassword);
+		loginPage.inputToUserTextboxByID(driver, "Password", wrongPassword);
 
 		log.info("Login_05 - Step 03: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -147,10 +147,10 @@ public class User_02_Login extends BaseTest {
 	@Test
 	public void Login_06_Login_With_Registered_Email_And_Correct_Password() {
 		log.info("Login_06 - Step 01: Input to Email textbox with value: " + registeredEmail);
-		loginPage.inputToTextboxByID(driver, "Email", registeredEmail);
+		loginPage.inputToUserTextboxByID(driver, "Email", registeredEmail);
 
 		log.info("Login_06 - Step 02: Input to Password textbox with value: " + correctPassword);
-		loginPage.inputToTextboxByID(driver, "Password", correctPassword);
+		loginPage.inputToUserTextboxByID(driver, "Password", correctPassword);
 
 		log.info("Login_06 - Step 03: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");

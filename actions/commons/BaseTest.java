@@ -76,7 +76,7 @@ public class BaseTest {
 
 		switch (browser) {
 		case FIREFOX:
-			// WebDriverManager.firefoxdriver().setup();
+//			WebDriverManager.firefoxdriver().setup();
 			System.setProperty("webdriver.gecko.driver", projectPath + getSlash("browserDrivers") + "geckodriver");
 			driver = new FirefoxDriver();
 			break;

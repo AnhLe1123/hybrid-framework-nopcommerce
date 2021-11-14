@@ -29,12 +29,12 @@ public class ProductDetailPageObject extends BasePage {
 		return isElementDisplayed(driver, ProductDetailPageUI.PICTURE_IMAGE_ADD_NEW_BY_FILE_NAME, fileName);
 	}
 
-	public void enterToAltTextbox(String altProductName) {
+	public void inputToAltTextbox(String altProductName) {
 		waitForElementVisible(driver, ProductDetailPageUI.ALT_TEXTBOX_ADD_NEW);
 		sendkeyToElement(driver, ProductDetailPageUI.ALT_TEXTBOX_ADD_NEW, altProductName);
 	}
 
-	public void enterToAltTitlebox(String titleProductName) {
+	public void inputToAltTitlebox(String titleProductName) {
 		waitForElementVisible(driver, ProductDetailPageUI.TITLE_TEXTBOX_ADD_NEW);
 		sendkeyToElement(driver, ProductDetailPageUI.TITLE_TEXTBOX_ADD_NEW, titleProductName);
 
@@ -67,5 +67,20 @@ public class ProductDetailPageObject extends BasePage {
 		clickToElement(driver, ProductDetailPageUI.DELETE_BUTTON_BY_IMAGE_TITLE, imageTitle);
 		sleepInSecond(2);
 		acceptAlert(driver);
+	}
+	
+	public boolean isTitleByProductNameDisplayed(String productName) {
+		waitForElementVisible(driver, ProductDetailPageUI.PAGE_TITLE_BY_PRODUCT_NAME, productName);
+		return isElementDisplayed(driver, ProductDetailPageUI.PAGE_TITLE_BY_PRODUCT_NAME, productName);
+	}
+	
+	public boolean isCategoryTagByLabelDisplayed(String categoryText) {
+		waitForElementVisible(driver, ProductDetailPageUI.CATEGORY_TAG_BY_TEXT, categoryText);
+		return isElementDisplayed(driver, ProductDetailPageUI.CATEGORY_TAG_BY_TEXT, categoryText);
+	}
+	
+	public String getValueInDropdownByID(String dropdownID) {
+		waitForElementVisible(driver, ProductDetailPageUI.DROPDOWN_VALUE_BY_DROPDOWN_ID, dropdownID);
+		return getElementAttribute(driver, ProductDetailPageUI.DROPDOWN_VALUE_BY_DROPDOWN_ID, "aria-valuenow", dropdownID);
 	}
 }

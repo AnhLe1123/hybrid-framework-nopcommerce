@@ -11,8 +11,18 @@ public class ProductSearchPageObject extends BasePage {
 	public ProductSearchPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
+	
+	public void clickToExpandSearchPanel() {
+		waitForElementVisible(driver, ProductSearchPageUI.SEARCH_ROW);
+		String searchIconStatus = getElementAttribute(driver, ProductSearchPageUI.SEARCH_ROW, "class");
+		
+		if (!searchIconStatus.contains("opened")) {
+			waitForElementClickable(driver, ProductSearchPageUI.SEARCH_ROW);
+			clickToElement(driver, ProductSearchPageUI.SEARCH_ROW);
+		}
+	}
 
-	public void enterToProductNameTextbox(String productName) {
+	public void inputToProductNameTextbox(String productName) {
 		waitForElementVisible(driver, ProductSearchPageUI.PRODUCT_NAME_TEXTBOX);
 		sendkeyToElementByJS(driver, ProductSearchPageUI.PRODUCT_NAME_TEXTBOX, productName);
 	}
@@ -20,6 +30,7 @@ public class ProductSearchPageObject extends BasePage {
 	public void clickToSearchButton() {
 		waitForElementClickable(driver, ProductSearchPageUI.SEARCH_BUTTON);
 		clickToElement(driver, ProductSearchPageUI.SEARCH_BUTTON);
+		isJQueryAjaxLoadedSuccess(driver);
 	}
 
 	public ProductDetailPageObject clickToEditButtonByProductName(String productName) {
@@ -37,6 +48,28 @@ public class ProductSearchPageObject extends BasePage {
 		imageName = imageName.replace(" ", "-").toLowerCase();
 		waitForElementVisible(driver, ProductSearchPageUI.PRODUCT_PICTURE_BY_PRODUCT_NAME, productName, imageName);
 		return isElementDisplayed(driver, ProductSearchPageUI.PRODUCT_PICTURE_BY_PRODUCT_NAME, productName, imageName);
+	}
+
+	public boolean isProductsNumberAtTableDisplayed(String dataTableInfo) {
+		waitForElementVisible(driver, ProductSearchPageUI.DATA_TABLE_INFO_BY_TEXT, dataTableInfo);
+		return isElementDisplayed(driver, ProductSearchPageUI.DATA_TABLE_INFO_BY_TEXT, dataTableInfo);
+	}
+
+	public boolean isPublishedIconDisplayedByValue(String isPublished) {
+		waitForElementVisible(driver, ProductSearchPageUI.PUBLISHED_ICON_BY_VALUE, isPublished);
+		return isElementDisplayed(driver, ProductSearchPageUI.PUBLISHED_ICON_BY_VALUE, isPublished);
+	}
+	
+	public void inputToGoSkuTextbox(String sku) {
+		waitForElementVisible(driver, ProductSearchPageUI.SKU_GO_TEXTBOX);
+		sendkeyToElementByJS(driver, ProductSearchPageUI.SKU_GO_TEXTBOX, sku);
+	}
+	
+	public ProductDetailPageObject clickToSkuGoButton() {
+		waitForElementClickable(driver, ProductSearchPageUI.SKU_GO_BUTTON);
+		clickToElementByJS(driver, ProductSearchPageUI.SKU_GO_BUTTON);
+		isJQueryAjaxLoadedSuccess(driver);
+		return PageGeneratorManager.getProductDetailPage(driver);
 	}
 
 }

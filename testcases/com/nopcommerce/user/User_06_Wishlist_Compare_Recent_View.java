@@ -67,19 +67,19 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		registerPage.clickToRadioButtonByLabel(driver, gender);
 
 		log.info("Pre-condition - Step 05: Enter to Firstname textbox with value: " + firstName);
-		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
+		registerPage.inputToUserTextboxByID(driver, "FirstName", firstName);
 
 		log.info("Pre-condition - Step 06: Enter to Lastname textbox with value: " + lastName);
-		registerPage.inputToTextboxByID(driver, "LastName", lastName);
+		registerPage.inputToUserTextboxByID(driver, "LastName", lastName);
 
 		log.info("Pre-condition - Step 07: Enter to Email textbox with value: " + emailAddress);
-		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
+		registerPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Pre-condition - Step 08: Enter to Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "Password", password);
+		registerPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Pre-condition - Step 09: Enter to Confirm Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("Pre-condition - Step 10: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
@@ -99,10 +99,10 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 
 		log.info("Pre-condition - Step 15: Enter to Email textbox with value: " + emailAddress);
-		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
+		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Pre-condition - Step 16: Enter to Password textbox with value: " + password);
-		loginPage.inputToTextboxByID(driver, "Password", password);
+		loginPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Pre-condition - Step 17: Click to Login link");
 		loginPage.clickToButtonByText(driver, "Log in");
@@ -123,12 +123,12 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 	@Test
 	public void Wishlist_Compare_Recent_View_01_Add_To_Wishlist() {
 		log.info("Wishlist_01 - Step 01: Select product specifications");
-		productDetailPage.selectDropdownByName(driver, "product_attribute_1", processor);
-		productDetailPage.selectDropdownByName(driver, "product_attribute_2", ram);
+		productDetailPage.selectUserDropdownByName(driver, "product_attribute_1", processor);
+		productDetailPage.selectUserDropdownByName(driver, "product_attribute_2", ram);
 		productDetailPage.clickToRadioButtonByLabel(driver, hdd);
 		productDetailPage.clickToRadioButtonByLabel(driver, os);
-		productDetailPage.checkToCheckboxByLabel(driver, software);
-		productDetailPage.inputToTextboxByID(driver, "product_enteredQuantity_1", productQuantity);
+		productDetailPage.checkToUserCheckboxByLabel(driver, software);
+		productDetailPage.inputToUserTextboxByID(driver, "product_enteredQuantity_1", productQuantity);
 
 		log.info("Wishlist_01 - Step 02: Click to 'Add to Wishlist button");
 		productDetailPage.clickToButtonByText(driver, "Add to wishlist");
@@ -147,18 +147,18 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		wishlistPage.isProductQuantityByHeaderLabelDisplayed(driver, "Wishlist", productQuantity);
 
 		log.info("Wishlist_01 - Step 07: Verify product info displayed in Wishlist");
-		verifyEquals(wishlistPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "SKU", "1"), productSKU);
+		verifyEquals(wishlistPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "SKU", "1"), productSKU);
 		verifyTrue(wishlistPage.isTableImageByProductNameDisplayed(driver, productTitle));
 
-		productSpecifications = wishlistPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Product(s)", "1");
+		productSpecifications = wishlistPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Product(s)", "1");
 		verifyTrue(wishlistPage.isTextValueContainsMultipleKeywords(driver, productSpecifications, expectedSpecifications));
 
-		verifyEquals(wishlistPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Price", "1"), productPrice);
+		verifyEquals(wishlistPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Price", "1"), productPrice);
 		verifyTrue(wishlistPage.isTableQuantityInputByProductNameDisplayed(driver, productTitle, productQuantity));
 
-		totalPrice = wishlistPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Total", "1");
-		actualTotalPrice = wishlistPage.convertProductPriceToNumber(driver, totalPrice);
-		expectedTotalPrice = wishlistPage.convertProductPriceToNumber(driver, productPrice) * wishlistPage.convertProductPriceToNumber(driver, productQuantity);
+		totalPrice = wishlistPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Total", "1");
+		actualTotalPrice = wishlistPage.convertUserProductPriceToNumber(driver, totalPrice);
+		expectedTotalPrice = wishlistPage.convertUserProductPriceToNumber(driver, productPrice) * wishlistPage.convertUserProductPriceToNumber(driver, productQuantity);
 		verifyEquals(actualTotalPrice, expectedTotalPrice);
 
 		log.info("Wishlist_01 - Step 08: Click to Wishlist sharing URL");
@@ -168,18 +168,18 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		wishlistPage.isPageTitleByTextDisplayed(driver, "Wishlist of " + fullName);
 
 		log.info("Wishlist_01 - Step 10: Verify product info displayed in Wishlist sharing");
-		verifyEquals(wishlistPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "SKU", "1"), productSKU);
+		verifyEquals(wishlistPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "SKU", "1"), productSKU);
 		verifyTrue(wishlistPage.isTableImageByProductNameDisplayed(driver, productTitle));
 
-		productSpecifications = wishlistPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Product(s)", "1");
+		productSpecifications = wishlistPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Product(s)", "1");
 		verifyTrue(wishlistPage.isTextValueContainsMultipleKeywords(driver, productSpecifications, expectedSpecifications));
 
-		verifyEquals(wishlistPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Price", "1"), productPrice);
-		verifyEquals(wishlistPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Qty.", "1"), productQuantity);
+		verifyEquals(wishlistPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Price", "1"), productPrice);
+		verifyEquals(wishlistPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Qty.", "1"), productQuantity);
 
-		totalPrice = wishlistPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Total", "1");
-		actualTotalPrice = wishlistPage.convertProductPriceToNumber(driver, totalPrice);
-		expectedTotalPrice = wishlistPage.convertProductPriceToNumber(driver, productPrice) * wishlistPage.convertProductPriceToNumber(driver, productQuantity);
+		totalPrice = wishlistPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Total", "1");
+		actualTotalPrice = wishlistPage.convertUserProductPriceToNumber(driver, totalPrice);
+		expectedTotalPrice = wishlistPage.convertUserProductPriceToNumber(driver, productPrice) * wishlistPage.convertUserProductPriceToNumber(driver, productQuantity);
 		verifyEquals(actualTotalPrice, expectedTotalPrice);
 	}
 
@@ -210,18 +210,18 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		shoppingCartPage.isProductQuantityByHeaderLabelDisplayed(driver, "Wishlist", "0");
 
 		log.info("Wishlist_02 - Step 08: Verify product info displayed in Shopping cart");
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "SKU", "1"), productSKU);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "SKU", "1"), productSKU);
 		verifyTrue(shoppingCartPage.isTableImageByProductNameDisplayed(driver, productTitle));
 
-		productSpecifications = shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Product(s)", "1");
+		productSpecifications = shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Product(s)", "1");
 		verifyTrue(shoppingCartPage.isTextValueContainsMultipleKeywords(driver, productSpecifications, expectedSpecifications));
 
-		verifyEquals(shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Price", "1"), productPrice);
+		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Price", "1"), productPrice);
 		verifyTrue(shoppingCartPage.isTableQuantityInputByProductNameDisplayed(driver, productTitle, productQuantity));
 
-		totalPrice = shoppingCartPage.getTextValueInTableAtColumnNameAndRowIndex(driver, "Total", "1");
-		actualTotalPrice = shoppingCartPage.convertProductPriceToNumber(driver, totalPrice);
-		expectedTotalPrice = shoppingCartPage.convertProductPriceToNumber(driver, productPrice) * shoppingCartPage.convertProductPriceToNumber(driver, productQuantity);
+		totalPrice = shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "Total", "1");
+		actualTotalPrice = shoppingCartPage.convertUserProductPriceToNumber(driver, totalPrice);
+		expectedTotalPrice = shoppingCartPage.convertUserProductPriceToNumber(driver, productPrice) * shoppingCartPage.convertUserProductPriceToNumber(driver, productQuantity);
 		verifyEquals(actualTotalPrice, expectedTotalPrice);
 
 		log.info("Wishlist_02 - Step 09: Click to 'Wishlist' header link");
@@ -243,12 +243,12 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
 
 		log.info("Wishlist_03 - Step 03: Select product specifications");
-		productDetailPage.selectDropdownByName(driver, "product_attribute_1", processor);
-		productDetailPage.selectDropdownByName(driver, "product_attribute_2", ram);
+		productDetailPage.selectUserDropdownByName(driver, "product_attribute_1", processor);
+		productDetailPage.selectUserDropdownByName(driver, "product_attribute_2", ram);
 		productDetailPage.clickToRadioButtonByLabel(driver, hdd);
 		productDetailPage.clickToRadioButtonByLabel(driver, os);
-		productDetailPage.checkToCheckboxByLabel(driver, software);
-		productDetailPage.inputToTextboxByID(driver, "product_enteredQuantity_1", productQuantity);
+		productDetailPage.checkToUserCheckboxByLabel(driver, software);
+		productDetailPage.inputToUserTextboxByID(driver, "product_enteredQuantity_1", productQuantity);
 
 		log.info("Wishlist_03 - Step 04: Click to 'Add to Wishlist button");
 		productDetailPage.clickToButtonByText(driver, "Add to wishlist");

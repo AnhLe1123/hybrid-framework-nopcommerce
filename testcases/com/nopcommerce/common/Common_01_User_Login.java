@@ -39,19 +39,19 @@ public class Common_01_User_Login extends BaseTest {
 		registerPage.clickToRadioButtonByLabel(driver, "Male");
 
 		log.info("Common_01 - Step 04: Enter to Firstname textbox");
-		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
+		registerPage.inputToUserTextboxByID(driver, "FirstName", firstName);
 
 		log.info("Common_01 - Step 05: Enter to Lastname textbox");
-		registerPage.inputToTextboxByID(driver, "LastName", lastName);
+		registerPage.inputToUserTextboxByID(driver, "LastName", lastName);
 
 		log.info("Common_01 - Step 06: Enter to Email textbox with value: " + emailAddress);
-		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
+		registerPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Common_01 - Step 07: Enter to Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "Password", password);
+		registerPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Common_01 - Step 08: Enter to Confirm Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("Common_01 - Step 09: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
@@ -71,10 +71,10 @@ public class Common_01_User_Login extends BaseTest {
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 
 		log.info("Common_01 - Step 14: Enter to Email textbox with value: " + emailAddress);
-		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
+		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Common_01 - Step 15: Enter to Password textbox with value: " + password);
-		loginPage.inputToTextboxByID(driver, "Password", password);
+		loginPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Common_01 - Step 16: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");

@@ -57,7 +57,7 @@ public class User_01_Register extends BaseTest {
 		registerPage.refreshCurrentPage(driver);
 
 		log.info("Register_02 - Step 02: Enter to Email textbox with value: " + invalidEmailAddress);
-		registerPage.inputToTextboxByID(driver, "Email", invalidEmailAddress);
+		registerPage.inputToUserTextboxByID(driver, "Email", invalidEmailAddress);
 
 		log.info("Register_02 - Step 03: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
@@ -73,19 +73,19 @@ public class User_01_Register extends BaseTest {
 		registerPage.refreshCurrentPage(driver);
 
 		log.info("Register_03 - Step 02: Enter to Firstname textbox with value: " + firstName);
-		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
+		registerPage.inputToUserTextboxByID(driver, "FirstName", firstName);
 
 		log.info("Register_03 - Step 03: Enter to Lastname textbox with value: " + lastName);
-		registerPage.inputToTextboxByID(driver, "LastName", lastName);
+		registerPage.inputToUserTextboxByID(driver, "LastName", lastName);
 
 		log.info("Register_03 - Step 04: Enter to Email textbox with value: " + validEmailAddress);
-		registerPage.inputToTextboxByID(driver, "Email", validEmailAddress);
+		registerPage.inputToUserTextboxByID(driver, "Email", validEmailAddress);
 
 		log.info("Register_03 - Step 05: Enter to Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "Password", password);
+		registerPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Register_03 - Step 06: Enter to Confirm Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("Register_03 - Step 07: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
@@ -109,19 +109,19 @@ public class User_01_Register extends BaseTest {
 	@Test
 	public void Register_04_Register_With_Existing_Email() {
 		log.info("Register_04 - Step 01: Enter to Firstname textbox with value: " + firstName);
-		registerPage.inputToTextboxByID(driver, "FirstName", firstName);
+		registerPage.inputToUserTextboxByID(driver, "FirstName", firstName);
 
 		log.info("Register_04 - Step 02: Enter to Lastname textbox with value: " + lastName);
-		registerPage.inputToTextboxByID(driver, "LastName", lastName);
+		registerPage.inputToUserTextboxByID(driver, "LastName", lastName);
 
 		log.info("Register_04 - Step 03: Enter to Email textbox with value: " + validEmailAddress);
-		registerPage.inputToTextboxByID(driver, "Email", validEmailAddress);
+		registerPage.inputToUserTextboxByID(driver, "Email", validEmailAddress);
 
 		log.info("Register_04 - Step 04: Enter to Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "Password", password);
+		registerPage.inputToUserTextboxByID(driver, "Password", password);
 
 		log.info("Register_04 - Step 05: Enter to Confirm Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("Register_04 - Step 06: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
@@ -137,7 +137,7 @@ public class User_01_Register extends BaseTest {
 		registerPage.openHeaderPageByName(driver, "register");
 
 		log.info("Register_05 - Step 02: Enter to Password textbox with value '123'");
-		registerPage.inputToTextboxByID(driver, "Password", "123");
+		registerPage.inputToUserTextboxByID(driver, "Password", "123");
 
 		log.info("Register_05 - Step 03: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");
@@ -150,10 +150,10 @@ public class User_01_Register extends BaseTest {
 	@Test
 	public void Register_06_Register_With_Confirm_Password_Not_Match_With_Password() {
 		log.info("Register_06 - Step 01: Enter to Password textbox with value: " + password);
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", password);
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", password);
 
 		log.info("Register_06 - Step 02: Enter to Confirm Password textbox with value: 654321");
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", "654321");
+		registerPage.inputToUserTextboxByID(driver, "ConfirmPassword", "654321");
 
 		log.info("Register_06 - Step 03: Click to Register button");
 		registerPage.clickToButtonByText(driver, "Register");

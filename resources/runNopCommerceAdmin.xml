@@ -11,7 +11,7 @@
   <test name="Run on FIREFOX">
   <parameter name="browser" value="firefox"/>
     <classes>
-      <class name="com.nopcommerce.admin.Admin_00_Upload_Product_Picture_Sample"/>
+      <class name="com.nopcommerce.admin.Admin_01_Search_Product"/>
     </classes>
   </test>
   
