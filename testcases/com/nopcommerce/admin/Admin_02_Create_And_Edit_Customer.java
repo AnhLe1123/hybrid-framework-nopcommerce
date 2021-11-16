@@ -134,7 +134,7 @@ public class Admin_02_Create_And_Edit_Customer extends BaseTest {
 		verifyEquals(customerDetailPage.getValueInAdminTextAreaByID(driver, "AdminComment"), cusComment);
 
 		log.info("Customer_01 - Step 15: Click back to Customer list");
-		customerSearchPage = customerDetailPage.checkToBackToCustomerListLink();
+		customerSearchPage = customerDetailPage.clickToBackToCustomerListLink();
 
 		log.info("Customer_01 - Step 16: Select option in Customer role dropdown with value: " + cusRole);
 		createCustomerPage.selectOptionAtCustomerRolesField(driver, cusRole);

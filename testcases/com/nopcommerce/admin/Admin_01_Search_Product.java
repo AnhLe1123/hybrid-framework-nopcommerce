@@ -55,7 +55,7 @@ public class Admin_01_Search_Product extends BaseTest {
 		productSearchPage.clickToSearchButton();
 
 		log.info("Search_01 - Step 03: Verify 1 item displayed in table");
-		verifyTrue(productSearchPage.isProductsNumberAtTableDisplayed("1-1 of 1 items"));
+		verifyTrue(productSearchPage.isItemsNumberAtTableDisplayed(driver, "products", "1-1 of 1 items"));
 		
 		log.info("Search_01 - Step 03: Verify product info displayed in table");
 		verifyTrue(productSearchPage.isPictureImageUpdated(productName, productName));
@@ -99,7 +99,7 @@ public class Admin_01_Search_Product extends BaseTest {
 		productSearchPage.clickToSearchButton();
 		
 		log.info("Search_03 - Step 05: Verify 1 item displayed in table");
-		verifyTrue(productSearchPage.isProductsNumberAtTableDisplayed("1-1 of 1 items"));
+		verifyTrue(productSearchPage.isItemsNumberAtTableDisplayed(driver, "products", "1-1 of 1 items"));
 		
 		log.info("Search_03 - Step 06: Verify product info displayed in table");
 		verifyTrue(productSearchPage.isPictureImageUpdated(productName, productName));
@@ -125,7 +125,7 @@ public class Admin_01_Search_Product extends BaseTest {
 		productSearchPage.clickToSearchButton();
 		
 		log.info("Search_04 - Step 05: Verify 1 item displayed in table");
-		verifyTrue(productSearchPage.isProductsNumberAtTableDisplayed("1-1 of 1 items"));
+		verifyTrue(productSearchPage.isItemsNumberAtTableDisplayed(driver, "products", "1-1 of 1 items"));
 		
 		log.info("Search_04 - Step 06: Verify product info displayed in table");
 		verifyTrue(productSearchPage.isPictureImageUpdated(productName, productName));
@@ -187,19 +187,16 @@ public class Admin_01_Search_Product extends BaseTest {
 		log.info("Search_06 - Step 08: Verify Categories textbox has value: " + childCategory);
 		verifyTrue(productDetailPage.isCategoryTagByLabelDisplayed(childCategory));
 		
-		log.info("Search_06 - Step 09: Verify Published checkbox is checked");
-		verifyTrue(productDetailPage.isAdminCheckboxByIDSelected(driver, "Published"));
-		
-		log.info("Search_06 - Step 10: Open Price tab");
+		log.info("Search_06 - Step 11: Open Price tab");
 		productDetailPage.clickToExpandPanelByName(driver, "Prices");
 		
-		log.info("Search_06 - Step 11: Verify Price textbox has equal value with: " + price);
+		log.info("Search_06 - Step 12: Verify Price textbox has equal value with: " + price);
 		verifyEquals(productDetailPage.getValueInDropdownByID("Price"), price);
 		
-		log.info("Search_06 - Step 12: Open Inventory tab");
+		log.info("Search_06 - Step 13: Open Inventory tab");
 		productDetailPage.clickToExpandPanelByName(driver, "Inventory");
 		
-		log.info("Search_06 - Step 13: Verify Stock quanity textbox displayed with value: " + stockQuantity);
+		log.info("Search_06 - Step 14: Verify Stock quanity textbox displayed with value: " + stockQuantity);
 		verifyEquals(productDetailPage.getValueInDropdownByID("StockQuantity"), stockQuantity);
 	}
 

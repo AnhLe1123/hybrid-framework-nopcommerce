@@ -20,4 +20,5 @@ public class AdminBasePageUI {
 	public static final String CLOSE_ICONS_AT_DROPDOWN_OPTION = "//label[text()='Customer roles']//ancestor::div[contains(@class, 'col-md')]/following-sibling::div//span[@class='k-select']";
 	public static final String TOOGLE_ICON_BY_CARD_NAME = "//div[@class='card-title' and contains(string(), '%s')]/following-sibling::div//i";
 	public static final String SUCCESS_MESSAGE = "//div[contains(@class, 'alert')]";
+	public static final String DATA_TABLE_INFO_BY_TABLE_NAME_AND_ITEMS_NUMBER_TEXT = "//div[@id='%s-grid_info' and text()='%s']";
 }

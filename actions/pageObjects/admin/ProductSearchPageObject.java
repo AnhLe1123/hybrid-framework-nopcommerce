@@ -40,11 +40,6 @@ public class ProductSearchPageObject extends BasePage {
 		return isElementDisplayed(driver, ProductSearchPageUI.PRODUCT_PICTURE_BY_PRODUCT_NAME, productName, imageName);
 	}
 
-	public boolean isProductsNumberAtTableDisplayed(String dataTableInfo) {
-		waitForElementVisible(driver, ProductSearchPageUI.DATA_TABLE_INFO_BY_TEXT, dataTableInfo);
-		return isElementDisplayed(driver, ProductSearchPageUI.DATA_TABLE_INFO_BY_TEXT, dataTableInfo);
-	}
-
 	public boolean isPublishedIconDisplayedByValue(String isPublished) {
 		waitForElementVisible(driver, ProductSearchPageUI.PUBLISHED_ICON_BY_VALUE, isPublished);
 		return isElementDisplayed(driver, ProductSearchPageUI.PUBLISHED_ICON_BY_VALUE, isPublished);

@@ -17,7 +17,7 @@ public class CustomerDetailPageObject extends BasePage {
 		return isElementDisplayed(driver, CustomerDetailPageUI.CUSTOMER_ROLE_SELECTED_ITEM_BY_TEXT, textOption);
 	}
 
-	public CustomerSearchPageObject checkToBackToCustomerListLink() {
+	public CustomerSearchPageObject clickToBackToCustomerListLink() {
 		waitForElementClickable(driver, CustomerDetailPageUI.BACK_TO_CUSTOMER_LIST_LINK);
 		clickToElement(driver, CustomerDetailPageUI.BACK_TO_CUSTOMER_LIST_LINK);
 		return PageGeneratorManager.getCustomerSearchPage(driver);

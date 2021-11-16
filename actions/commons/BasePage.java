@@ -1067,6 +1067,10 @@ public class BasePage {
 		return getElementText(driver, AdminBasePageUI.SUCCESS_MESSAGE);
 	}
 	
+	public boolean isItemsNumberAtTableDisplayed(WebDriver driver, String tableName, String dataTableInfo) {
+		waitForElementVisible(driver, AdminBasePageUI.DATA_TABLE_INFO_BY_TABLE_NAME_AND_ITEMS_NUMBER_TEXT, tableName, dataTableInfo);
+		return isElementDisplayed(driver, AdminBasePageUI.DATA_TABLE_INFO_BY_TABLE_NAME_AND_ITEMS_NUMBER_TEXT, tableName, dataTableInfo);
+	}
 
 	private Alert alert;
 	private Select select;
