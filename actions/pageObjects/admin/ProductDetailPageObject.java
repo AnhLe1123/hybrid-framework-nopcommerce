@@ -12,17 +12,6 @@ public class ProductDetailPageObject extends BasePage {
 		this.driver = driver;
 	}
 
-	public void clickToExpandPanelByName(String panelName) {
-		waitForElementVisible(driver, ProductDetailPageUI.TOOGLE_ICON_BY_CARD_NAME, panelName);
-		scrollToElement(driver, ProductDetailPageUI.TOOGLE_ICON_BY_CARD_NAME, panelName);
-		String toogleIconStatus = getElementAttribute(driver, ProductDetailPageUI.TOOGLE_ICON_BY_CARD_NAME, "class", panelName);
-
-		if (toogleIconStatus.contains("fa-plus")) {
-			waitForElementClickable(driver, ProductDetailPageUI.TOOGLE_ICON_BY_CARD_NAME, panelName);
-			clickToElement(driver, ProductDetailPageUI.TOOGLE_ICON_BY_CARD_NAME, panelName);
-		}
-	}
-
 	public boolean isPictureUploadedSuccessByFileName(String fileName) {
 		fileName = fileName.split("\\.")[0];
 		waitForElementVisible(driver, ProductDetailPageUI.PICTURE_IMAGE_ADD_NEW_BY_FILE_NAME, fileName);

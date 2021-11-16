@@ -7,6 +7,10 @@ public class PageGeneratorManager {
 	private static DashboardPageObject dashboardPage;
 	private static ProductSearchPageObject productSearchPage;
 	private static ProductDetailPageObject productDetailPage;
+	private static CustomerSearchPageObject customerSearchPage;
+	private static CreateCustomerPageObject createCustomerPage;
+	private static CustomerDetailPageObject customerDetailPage;
+	private static CustomerAddressPageObject customerAddressPage;
 
 	private PageGeneratorManager() {
 
@@ -39,5 +43,32 @@ public class PageGeneratorManager {
 		}
 		return productDetailPage;
 	}
-
+	
+	public static CustomerSearchPageObject getCustomerSearchPage(WebDriver driver) {
+		if (customerSearchPage == null) {
+			customerSearchPage = new CustomerSearchPageObject(driver);
+		}
+		return customerSearchPage;
+	}
+	
+	public static CreateCustomerPageObject getCreateCustomerPage(WebDriver driver) {
+		if (createCustomerPage == null) {
+			createCustomerPage = new CreateCustomerPageObject(driver);
+		}
+		return createCustomerPage;
+	}
+	
+	public static CustomerDetailPageObject getCustomerDetailPage(WebDriver driver) {
+		if (customerDetailPage == null) {
+			customerDetailPage = new CustomerDetailPageObject(driver);
+		}
+		return customerDetailPage;
+	}
+	
+	public static CustomerAddressPageObject getCustomerAddressPage(WebDriver driver) {
+		if (customerAddressPage == null) {
+			customerAddressPage = new CustomerAddressPageObject(driver);
+		}
+		return customerAddressPage;
+	}
 }

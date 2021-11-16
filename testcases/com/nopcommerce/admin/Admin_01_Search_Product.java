@@ -43,7 +43,7 @@ public class Admin_01_Search_Product extends BaseTest {
 		productSearchPage = PageGeneratorManager.getProductSearchPage(driver);
 		
 		log.info("Pre-condition - Step 04: Expand Search field");
-		productSearchPage.clickToExpandSearchPanel();
+		productSearchPage.clickToExpandSearchPanel(driver);
 	}
 
 	@Test
@@ -164,7 +164,7 @@ public class Admin_01_Search_Product extends BaseTest {
 		productSearchPage = PageGeneratorManager.getProductSearchPage(driver);
 		
 		log.info("Pre-condition - Step 02: Expand Search field");
-		productSearchPage.clickToExpandSearchPanel();
+		productSearchPage.clickToExpandSearchPanel(driver);
 		
 		log.info("Search_06 - Step 02: Input to 'Go directly to product SKU' textbox with value: " + sku);
 		productSearchPage.inputToGoSkuTextbox(sku);
@@ -176,7 +176,7 @@ public class Admin_01_Search_Product extends BaseTest {
 		productDetailPage.isTitleByProductNameDisplayed(productName);
 		
 		log.info("Search_06 - Step 05: Open Product info tab");
-		productDetailPage.clickToExpandPanelByName("Product info");
+		productDetailPage.clickToExpandPanelByName(driver, "Product info");
 		
 		log.info("Search_06 - Step 06: Verify Product name textbox has value: " + productName);
 		verifyEquals(productDetailPage.getValueInAdminTextboxByID(driver, "Name"), productName);
@@ -191,13 +191,13 @@ public class Admin_01_Search_Product extends BaseTest {
 		verifyTrue(productDetailPage.isAdminCheckboxByIDSelected(driver, "Published"));
 		
 		log.info("Search_06 - Step 10: Open Price tab");
-		productDetailPage.clickToExpandPanelByName("Prices");
+		productDetailPage.clickToExpandPanelByName(driver, "Prices");
 		
 		log.info("Search_06 - Step 11: Verify Price textbox has equal value with: " + price);
 		verifyEquals(productDetailPage.getValueInDropdownByID("Price"), price);
 		
 		log.info("Search_06 - Step 12: Open Inventory tab");
-		productDetailPage.clickToExpandPanelByName("Inventory");
+		productDetailPage.clickToExpandPanelByName(driver, "Inventory");
 		
 		log.info("Search_06 - Step 13: Verify Stock quanity textbox displayed with value: " + stockQuantity);
 		verifyEquals(productDetailPage.getValueInDropdownByID("StockQuantity"), stockQuantity);

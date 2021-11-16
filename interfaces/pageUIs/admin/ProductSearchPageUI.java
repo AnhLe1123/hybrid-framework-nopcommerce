@@ -5,7 +5,6 @@ public class ProductSearchPageUI {
 	public static final String SEARCH_BUTTON = "//button[@id='search-products']";
 	public static final String SKU_GO_TEXTBOX = "//input[@id='GoDirectlyToSku']";
 	public static final String SKU_GO_BUTTON = "//button[@id='go-to-product-by-sku']";
-	public static final String SEARCH_ROW = "//div[contains(@class, 'search-row')]";
 	
 	public static final String EDIT_BUTTON_BY_PRODUCT_NAME = "//td[text()='%s']/following-sibling::td/a[contains(text(), 'Edit')]";
 	public static final String SUCCESS_MESSAGE_NAME = "//div[contains(@class, 'alert-success') and contains(string(), '%s')]";

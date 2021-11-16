@@ -11,16 +11,6 @@ public class ProductSearchPageObject extends BasePage {
 	public ProductSearchPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
-	
-	public void clickToExpandSearchPanel() {
-		waitForElementVisible(driver, ProductSearchPageUI.SEARCH_ROW);
-		String searchIconStatus = getElementAttribute(driver, ProductSearchPageUI.SEARCH_ROW, "class");
-		
-		if (!searchIconStatus.contains("opened")) {
-			waitForElementClickable(driver, ProductSearchPageUI.SEARCH_ROW);
-			clickToElement(driver, ProductSearchPageUI.SEARCH_ROW);
-		}
-	}
 
 	public void inputToProductNameTextbox(String productName) {
 		waitForElementVisible(driver, ProductSearchPageUI.PRODUCT_NAME_TEXTBOX);

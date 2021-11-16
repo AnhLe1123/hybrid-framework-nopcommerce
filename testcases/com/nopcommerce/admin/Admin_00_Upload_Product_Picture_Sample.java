@@ -42,7 +42,7 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 
 	@Test
 	public void Admin_01_Upload_File() {
-		productDetailPage.clickToExpandPanelByName("Pictures");
+		productDetailPage.clickToExpandPanelByName(driver, "Pictures");
 		productDetailPage.sleepInSecond(2);
 		productDetailPage.uploadFileAtCardName(driver, "pictures", productAvatarImg);
 		verifyTrue(productDetailPage.isPictureUploadedSuccessByFileName(productAvatarImg));
@@ -61,7 +61,7 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		verifyTrue(productSearchPage.isPictureImageUpdated(productName, productName));
 
 		productDetailPage = productSearchPage.clickToEditButtonByProductName(productName);
-		productDetailPage.clickToExpandPanelByName("Pictures");
+		productDetailPage.clickToExpandPanelByName(driver, "Pictures");
 		productDetailPage.sleepInSecond(2);
 		productDetailPage.clickToDeleteButtonAtPictureName(productAvatarTitle);
 		verifyTrue(productDetailPage.isMessageDisplayedInEmptyTable(driver, "productpictures"));

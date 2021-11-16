@@ -209,15 +209,44 @@ public class BasePage {
 
 		for (WebElement item : allItems) {
 			if (item.getText().trim().equals(expectedItem)) {
-				jsExecutor = (JavascriptExecutor) driver;
-				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
-				sleepInSecond(1);
+				if (!item.isDisplayed()) {
+					jsExecutor = (JavascriptExecutor) driver;
+					jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
+					sleepInSecond(1);
+				}
 
 				item.click();
 				sleepInSecond(1);
 				break;
 			}
 		}
+	}
+	
+	protected void enterAndSelectItemInCustomDropdown(WebDriver driver, String parentXpath, String textboxXpath, String childExpath, String expectedItem) {
+		driver.findElement(By.xpath(parentXpath)).click();
+		sleepInSecond(1);
+		
+		driver.findElement(By.xpath(textboxXpath)).sendKeys(expectedItem);
+		sleepInSecond(1);
+		
+		List<WebElement> allItems = explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(childExpath)));
+		
+		for(WebElement item : allItems) {
+			if(item.getText().trim().equals(expectedItem)) {
+				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
+				sleepInSecond(2);
+				item.click();
+				break;
+			}
+		}
+	}
+	
+	protected void enterAndTabToCustomDropdown(WebDriver driver, String textboxXpath, String expectedItem) {
+		driver.findElement(By.xpath(textboxXpath)).sendKeys(expectedItem);
+		sleepInSecond(1);
+		
+		driver.findElement(By.xpath(textboxXpath)).sendKeys(Keys.TAB);
+		sleepInSecond(1);
 	}
 
 	protected String getElementAttribute(WebDriver driver, String locator, String attributeName) {
@@ -946,6 +975,7 @@ public class BasePage {
 	public void checkToAdminCheckboxByID(WebDriver driver, String checkboxID) {
 		waitForElementClickable(driver, AdminBasePageUI.CHECKBOX_BY_ID, checkboxID);
 		checkToCheckboxOrRadio(driver, AdminBasePageUI.CHECKBOX_BY_ID, checkboxID);
+		sleepInSecond(1);
 	}
 	
 	public void uncheckToAdminCheckboxByID(WebDriver driver, String checkboxID) {
@@ -963,10 +993,80 @@ public class BasePage {
 		sendkeyToElement(driver, AdminBasePageUI.TEXTBOX_BY_ID, value, textboxID);
 	}
 	
+	public void inputToAdminTextAreaByID(WebDriver driver, String textAreaID, String value) {
+		waitForElementVisible(driver, AdminBasePageUI.TEXTAREA_BY_ID, textAreaID);
+		sendkeyToElement(driver, AdminBasePageUI.TEXTAREA_BY_ID, value, textAreaID);
+	}
+	
 	public String getValueInAdminTextboxByID(WebDriver driver, String textboxID) {
 		waitForElementVisible(driver, AdminBasePageUI.TEXTBOX_BY_ID, textboxID);
 		return getElementAttribute(driver, AdminBasePageUI.TEXTBOX_BY_ID, "value", textboxID);
 	}
+	
+	public String getValueInAdminTextAreaByID(WebDriver driver, String textAreaID) {
+		waitForElementVisible(driver, AdminBasePageUI.TEXTAREA_BY_ID, textAreaID);
+		return getElementText(driver, AdminBasePageUI.TEXTAREA_BY_ID, textAreaID);
+	}
+	
+	public void clickToExpandSearchPanel(WebDriver driver) {
+		waitForElementVisible(driver, AdminBasePageUI.SEARCH_ROW);
+		String searchIconStatus = getElementAttribute(driver, AdminBasePageUI.SEARCH_ROW, "class");
+		
+		if (!searchIconStatus.contains("opened")) {
+			waitForElementClickable(driver, AdminBasePageUI.SEARCH_ROW);
+			clickToElement(driver, AdminBasePageUI.SEARCH_ROW);
+		}
+	}
+	
+	public void clickToAddNewButton(WebDriver driver) {
+		waitForElementVisible(driver, AdminBasePageUI.ADD_NEW_BUTTON);
+		clickToElement(driver, AdminBasePageUI.ADD_NEW_BUTTON);
+	}
+	
+	public void clickToAdminRadioButtonByLabel(WebDriver driver, String labelName) {
+		waitForElementVisible(driver, AdminBasePageUI.RADIO_BUTTON_BY_LABEL, labelName);
+		clickToElement(driver, AdminBasePageUI.RADIO_BUTTON_BY_LABEL, labelName);
+	}
+	
+	public boolean isAdminRadioButtonSelectedByLabel(WebDriver driver, String labelName) {
+		waitForElementVisible(driver, AdminBasePageUI.RADIO_BUTTON_BY_LABEL, labelName);
+		return isElementSelected(driver, AdminBasePageUI.RADIO_BUTTON_BY_LABEL, labelName);
+	}
+	
+	public void unselectAllOptionsAtCustomerRolesDropdown(WebDriver driver) {
+		List<WebElement> closeIcons = getElements(driver, AdminBasePageUI.CLOSE_ICONS_AT_DROPDOWN_OPTION);
+
+		for (WebElement closeIcon : closeIcons) {
+			if (closeIcons.size() > 0) {
+				closeIcon.click();
+			}
+		}
+	}
+	
+	public void selectOptionAtCustomerRolesField(WebDriver driver, String expectedItem) {
+		unselectAllOptionsAtCustomerRolesDropdown(driver);
+		sleepInSecond(1);
+		selectItemInCustomDropdown(driver, AdminBasePageUI.CUSTOMER_ROLE_DROPDOWN, AdminBasePageUI.CUSTOMER_ROLE_OPTIONS, expectedItem);
+		sleepInSecond(1);
+	}
+	
+	public void clickToExpandPanelByName(WebDriver driver, String panelName) {
+		waitForElementVisible(driver, AdminBasePageUI.TOOGLE_ICON_BY_CARD_NAME, panelName);
+		scrollToElement(driver, AdminBasePageUI.TOOGLE_ICON_BY_CARD_NAME, panelName);
+		String toogleIconStatus = getElementAttribute(driver, AdminBasePageUI.TOOGLE_ICON_BY_CARD_NAME, "class", panelName);
+
+		if (toogleIconStatus.contains("fa-plus")) {
+			waitForElementClickable(driver, AdminBasePageUI.TOOGLE_ICON_BY_CARD_NAME, panelName);
+			clickToElement(driver, AdminBasePageUI.TOOGLE_ICON_BY_CARD_NAME, panelName);
+		}
+		sleepInSecond(1);
+	}
+	
+	public String getDisplayedAminSuccessMessage(WebDriver driver) {
+		waitForElementVisible(driver, AdminBasePageUI.SUCCESS_MESSAGE);
+		return getElementText(driver, AdminBasePageUI.SUCCESS_MESSAGE);
+	}
+	
 
 	private Alert alert;
 	private Select select;
