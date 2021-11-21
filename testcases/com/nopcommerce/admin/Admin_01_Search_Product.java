@@ -32,6 +32,7 @@ public class Admin_01_Search_Product extends BaseTest {
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
 		driver = getBrowserDriver(browserName, appUrl);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 02: Login to Admin account with email: " + adminEmail + " and password: " + adminPassword);
 		loginPage.enterToEmailTextbox(adminEmail);
@@ -41,6 +42,7 @@ public class Admin_01_Search_Product extends BaseTest {
 		log.info("Pre-condition - Step 03: Open menu 'Catalog' and submenu 'Products'");
 		dashboardPage.openAdminSubmenuPageByName(driver, "Catalog", "Products");
 		productSearchPage = PageGeneratorManager.getProductSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 		
 		log.info("Pre-condition - Step 04: Expand Search field");
 		productSearchPage.clickToExpandSearchPanel(driver);
@@ -162,6 +164,7 @@ public class Admin_01_Search_Product extends BaseTest {
 		log.info("Search_06 - Step 01: Open menu 'Catalog' and submenu 'Products'");
 		dashboardPage.openAdminSubmenuPageByName(driver, "Catalog", "Products");
 		productSearchPage = PageGeneratorManager.getProductSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 		
 		log.info("Pre-condition - Step 02: Expand Search field");
 		productSearchPage.clickToExpandSearchPanel(driver);

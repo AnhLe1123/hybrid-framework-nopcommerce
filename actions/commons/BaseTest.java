@@ -2,6 +2,10 @@ package commons;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -9,8 +13,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 
@@ -27,7 +36,7 @@ public class BaseTest {
 	}
 
 	private enum BROWSER {
-		CHROME, FIREFOX, EDGE_CHRONIUM, EDGE_LEGACY, H_CHROME, H_FIREFOX;
+		CHROME, FIREFOX, SAFARI, EDGE_CHRONIUM, EDGE_LEGACY, H_CHROME, H_FIREFOX;
 	}
 
 	private enum OS {
@@ -45,26 +54,60 @@ public class BaseTest {
 	protected WebDriver getBrowserDriver(String browserName) {
 		BROWSER browser = BROWSER.valueOf(browserName.toUpperCase());
 
-		switch (browser) {
-		case FIREFOX:
+		if (browser == BROWSER.FIREFOX) {
 			// WebDriverManager.firefoxdriver().setup();
 			System.setProperty("webdriver.gecko.driver", projectPath + getSlash("browserDrivers") + "geckodriver");
-			driver = new FirefoxDriver();
-			break;
-
-		case CHROME:
+			
+			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
+			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.PROJECT_PATH + File.separator + "browserLogs" + File.separator + "Firefox.log");
+			
+			FirefoxOptions options = new FirefoxOptions();
+			options.addArguments("-private");
+			driver = new FirefoxDriver(options);
+			
+		} else if (browser == BROWSER.CHROME) {
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
-			break;
-
-		case EDGE_CHRONIUM:
+			
+			ChromeOptions options = new ChromeOptions();
+			options.setExperimentalOption("useAutomationExtension", false);
+			options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+			options.addArguments("--disable-infobars");
+			options.addArguments("--disable-notifications");
+			options.addArguments("--disable-geolocation");
+			options.addArguments("--incognito");
+			
+			Map<String, Object> prefs = new HashMap<String, Object>();
+			prefs.put("credentials_enable_service", false);
+			prefs.put("profile.password_manager_enabled", false);
+			options.setExperimentalOption("prefs", prefs);
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.EDGE_CHRONIUM) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
-			break;
-
-		default:
+			
+		} else if (browser == BROWSER.SAFARI) {
+			driver = new SafariDriver();
+			
+		} else if (browser == BROWSER.H_CHROME) {
+			WebDriverManager.chromedriver().setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setHeadless(true);
+			options.addArguments("window-size=1920x1080");
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.H_FIREFOX) {
+			// WebDriverManager.firefoxdriver().setup();
+			System.setProperty("webdriver.gecko.driver", projectPath + getSlash("browserDrivers") + "geckodriver");
+			FirefoxOptions options = new FirefoxOptions();
+			options.setHeadless(true);
+			options.addArguments("window-size=1920x1080");
+			driver = new FirefoxDriver(options);
+			
+		} else {
 			throw new RuntimeException("Please input the correct browser name!");
 		}
+		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 
@@ -74,26 +117,60 @@ public class BaseTest {
 	protected WebDriver getBrowserDriver(String browserName, String appUrl) {
 		BROWSER browser = BROWSER.valueOf(browserName.toUpperCase());
 
-		switch (browser) {
-		case FIREFOX:
-//			WebDriverManager.firefoxdriver().setup();
+		if (browser == BROWSER.FIREFOX) {
+			// WebDriverManager.firefoxdriver().setup();
 			System.setProperty("webdriver.gecko.driver", projectPath + getSlash("browserDrivers") + "geckodriver");
-			driver = new FirefoxDriver();
-			break;
-
-		case CHROME:
+			
+			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
+			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.PROJECT_PATH + File.separator + "browserLogs" + File.separator + "Firefox.log");
+			
+			FirefoxOptions options = new FirefoxOptions();
+			options.addArguments("-private");
+			driver = new FirefoxDriver(options);
+			
+		} else if (browser == BROWSER.CHROME) {
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
-			break;
-
-		case EDGE_CHRONIUM:
+			
+			ChromeOptions options = new ChromeOptions();
+			options.setExperimentalOption("useAutomationExtension", false);
+			options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+			options.addArguments("--disable-infobars");
+			options.addArguments("--disable-notifications");
+			options.addArguments("--disable-geolocation");
+			options.addArguments("--incognito");
+			
+			Map<String, Object> prefs = new HashMap<String, Object>();
+			prefs.put("credentials_enable_service", false);
+			prefs.put("profile.password_manager_enabled", false);
+			options.setExperimentalOption("prefs", prefs);
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.EDGE_CHRONIUM) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
-			break;
-
-		default:
+			
+		} else if (browser == BROWSER.SAFARI) {
+			driver = new SafariDriver();
+			
+		} else if (browser == BROWSER.H_CHROME) {
+			WebDriverManager.chromedriver().setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setHeadless(true);
+			options.addArguments("window-size=1920x1080");
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.H_FIREFOX) {
+			// WebDriverManager.firefoxdriver().setup();
+			System.setProperty("webdriver.gecko.driver", projectPath + getSlash("browserDrivers") + "geckodriver");
+			FirefoxOptions options = new FirefoxOptions();
+			options.setHeadless(true);
+			options.addArguments("window-size=1920x1080");
+			driver = new FirefoxDriver(options);
+			
+		} else {
 			throw new RuntimeException("Please input the correct browser name!");
 		}
+		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(appUrl);
@@ -230,6 +307,16 @@ public class BaseTest {
 				e.printStackTrace();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+			}
+		}
+	}
+	
+	protected void showBrowserConsoleLogs(WebDriver driver) {
+		if (driver.toString().contains("chrome")) {
+			LogEntries logs = driver.manage().logs().get("browser");
+			List<LogEntry> logList = logs.getAll();
+			for (LogEntry logging : logList) {
+				log.info("---------------- " + logging.getLevel().toString() + " ---------------- \n" + logging.getMessage());
 			}
 		}
 	}

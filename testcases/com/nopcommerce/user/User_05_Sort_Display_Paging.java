@@ -26,10 +26,12 @@ public class User_05_Sort_Display_Paging extends BaseTest {
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 		
 		log.info("Pre-condition - Step 03: Open submenu " + submenuName);
 		homePage.openUserSubmenuPageByName(driver, menuName, submenuName);
 		notebooksPage = PageGeneratorManager.getNotebooksPage(driver);
+		showBrowserConsoleLogs(driver);
 	}
 
 	@Test

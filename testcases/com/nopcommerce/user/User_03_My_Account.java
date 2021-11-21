@@ -67,10 +67,12 @@ public class User_03_My_Account extends BaseTest {
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 03: Click to Register link");
 		homePage.openHeaderPageByName(driver, "register");
 		registerPage = PageGeneratorManager.getRegisterPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 04: Click to gender ratio button with value: " + gender);
 		registerPage.clickToRadioButtonByLabel(driver, gender);
@@ -111,6 +113,7 @@ public class User_03_My_Account extends BaseTest {
 		log.info("Pre-condition - Step 15: Click to Logout link");
 		registerPage.openHeaderPageByName(driver, "logout");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 16: Verify HomePage displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
@@ -118,6 +121,7 @@ public class User_03_My_Account extends BaseTest {
 		log.info("Pre-condition - Step 17: Click to Login link");
 		homePage.openHeaderPageByName(driver, "login");
 		loginPage = PageGeneratorManager.getLoginPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 18: Enter to Email textbox with value: " + emailAddress);
 		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
@@ -131,10 +135,12 @@ public class User_03_My_Account extends BaseTest {
 		log.info("Pre-condition - Step 20: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 21: Click to My account link");
 		homePage.openHeaderPageByName(driver, "account");
 		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 22: Verify My Account page displayed");
 		verifyTrue(myAccountPage.isPageTitleByTextDisplayed(driver, "My account - Customer info"));
@@ -196,6 +202,7 @@ public class User_03_My_Account extends BaseTest {
 		log.info("My_Account_02 - Step 01: Click to Addresses link at sidebar");
 		myAccountPage.openSidebarPageByName(driver, "Addresses");
 		myAddressPage = PageGeneratorManager.getMyAddressPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("My_Account_02 - Step 02: Verify My Address page displayed");
 		verifyTrue(myAddressPage.isPageTitleByTextDisplayed(driver, "My account - Addresses"));
@@ -259,6 +266,7 @@ public class User_03_My_Account extends BaseTest {
 		log.info("My_Account_03 - Step 01: Click to Change Password link at sidebar");
 		myAddressPage.openSidebarPageByName(driver, "Change password");
 		myPasswordPage = PageGeneratorManager.getMyPasswordPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("My_Account_03 - Step 02: Verify Change Password page displayed");
 		verifyTrue(myPasswordPage.isPageTitleByTextDisplayed(driver, "My account - Change password"));
@@ -285,6 +293,7 @@ public class User_03_My_Account extends BaseTest {
 		log.info("My_Account_03 - Step 09: Click to Logout header link");
 		myPasswordPage.openHeaderPageByName(driver, "logout");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("My_Account_03 - Step 10: Verify HomePage Slider displayed");
 		homePage.isHomePageSliderDisplayed();
@@ -292,6 +301,7 @@ public class User_03_My_Account extends BaseTest {
 		log.info("My_Account_03 - Step 11: Click to Login header link");
 		homePage.openHeaderPageByName(driver, "login");
 		loginPage = PageGeneratorManager.getLoginPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("My_Account_03 - Step 12: Enter to Email textbox with value: " + editEmailAddress);
 		loginPage.inputToUserTextboxByID(driver, "Email", editEmailAddress);
@@ -317,6 +327,7 @@ public class User_03_My_Account extends BaseTest {
 		log.info("My_Account_03 - Step 19: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("My_Account_03 - Step 20: Verify HomePage Slider displayed");
 		homePage.isHomePageSliderDisplayed();

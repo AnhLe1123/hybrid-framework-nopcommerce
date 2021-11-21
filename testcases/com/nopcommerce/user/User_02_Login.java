@@ -34,10 +34,12 @@ public class User_02_Login extends BaseTest {
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 03: Click to Register link");
 		homePage.openHeaderPageByName(driver, "register");
 		registerPage = PageGeneratorManager.getRegisterPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 04: Click to Male ratio button");
 		registerPage.clickToRadioButtonByLabel(driver, "Male");
@@ -66,6 +68,7 @@ public class User_02_Login extends BaseTest {
 		log.info("Pre-condition - Step 12: Click to Logout link");
 		registerPage.openHeaderPageByName(driver, "logout");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 13: Verify HomePage displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
@@ -73,6 +76,7 @@ public class User_02_Login extends BaseTest {
 		log.info("Pre-condition - Step 14: Click to Login link");
 		homePage.openHeaderPageByName(driver, "login");
 		loginPage = PageGeneratorManager.getLoginPage(driver);
+		showBrowserConsoleLogs(driver);
 	}
 
 	@Test
@@ -155,6 +159,7 @@ public class User_02_Login extends BaseTest {
 		log.info("Login_06 - Step 03: Click to Login button");
 		loginPage.clickToButtonByText(driver, "Log in");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Login_06 - Step 04: Verify HomePage displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());

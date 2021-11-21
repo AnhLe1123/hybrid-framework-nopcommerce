@@ -58,10 +58,12 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 03: Click to Register link");
 		homePage.openHeaderPageByName(driver, "register");
 		registerPage = PageGeneratorManager.getRegisterPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 04: Click to gender ratio button with value: " + gender);
 		registerPage.clickToRadioButtonByLabel(driver, gender);
@@ -90,6 +92,7 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Pre-condition - Step 12: Click to Logout link");
 		registerPage.openHeaderPageByName(driver, "logout");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 13: Verify HomePage displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
@@ -97,6 +100,7 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Pre-condition - Step 14: Click to Login link");
 		homePage.openHeaderPageByName(driver, "login");
 		loginPage = PageGeneratorManager.getLoginPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 15: Enter to Email textbox with value: " + emailAddress);
 		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
@@ -110,14 +114,17 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Pre-condition - Step 18: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 19: Open submenu " + submenuName);
 		homePage.openUserSubmenuPageByName(driver, menuName, submenuName);
 		desktopsPage = PageGeneratorManager.getDesktopsPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("My_Account_04 - Step 01: Click to Product title " + "'" + productTitle + "'");
 		desktopsPage.clickToProductTitleByName(driver, productTitle);
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
+		showBrowserConsoleLogs(driver);
 	}
 
 	@Test
@@ -139,6 +146,7 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Wishlist_01 - Step 04: Open Wishlist page");
 		productDetailPage.clickToPageLinkInAddProductSuccessMessage(driver, "wishlist");
 		wishlistPage = PageGeneratorManager.getWishlistPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Wishlist_01 - Step 05: Verify Wishlist page displayed");
 		wishlistPage.isPageTitleByTextDisplayed(driver, "Wishlist");
@@ -188,10 +196,12 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Wishlist_02 - Step 01: Click to HomePage logo");
 		wishlistPage.clickToHomePageLogo(driver);
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Wishlist_02 - Step 02: Click to Wishlist header link");
 		homePage.openHeaderPageByName(driver, "wishlist");
 		wishlistPage = PageGeneratorManager.getWishlistPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Wishlist_02 - Step 03: Click to Add to cart checkbox");
 		wishlistPage.checkToAddToCartCheckbox();
@@ -199,6 +209,7 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Wishlist_02 - Step 04: Click to Add to cart button");
 		wishlistPage.clickToButtonByText(driver, "Add to cart");
 		shoppingCartPage = PageGeneratorManager.getShoppingCartPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Wishlist_02 - Step 05: Verify Shopping cart page displayed");
 		shoppingCartPage.isPageTitleByTextDisplayed(driver, "Shopping cart");
@@ -227,6 +238,7 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Wishlist_02 - Step 09: Click to 'Wishlist' header link");
 		shoppingCartPage.openHeaderPageByName(driver, "wishlist");
 		wishlistPage = PageGeneratorManager.getWishlistPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Wishlist_02 - Step 10: Verify message displayed 'The wishlist is empty!'");
 		verifyTrue(wishlistPage.isNoDataMessageByTextDisplayed(driver, "The wishlist is empty!"));
@@ -237,10 +249,12 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Wishlist_03 - Step 01: Open submenu " + submenuName);
 		wishlistPage.openUserSubmenuPageByName(driver, menuName, submenuName);
 		desktopsPage = PageGeneratorManager.getDesktopsPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Wishlist_03 - Step 02: Click to Product title " + "'" + productTitle + "'");
 		desktopsPage.clickToProductTitleByName(driver, productTitle);
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Wishlist_03 - Step 03: Select product specifications");
 		productDetailPage.selectUserDropdownByName(driver, "product_attribute_1", processor);
@@ -259,6 +273,7 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Wishlist_03 - Step 06: Open Wishlist page");
 		productDetailPage.clickToPageLinkInAddProductSuccessMessage(driver, "wishlist");
 		wishlistPage = PageGeneratorManager.getWishlistPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Wishlist_03 - Step 07: Verify Wishlist page displayed");
 		wishlistPage.isPageTitleByTextDisplayed(driver, "Wishlist");
@@ -278,6 +293,7 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Compare_01 - Step 01: Open submenu " + submenuName);
 		wishlistPage.openUserSubmenuPageByName(driver, menuName, submenuName);
 		desktopsPage = PageGeneratorManager.getDesktopsPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Compare_01 - Step 02: Get product price of compare products");
 		actualProductPrice = desktopsPage.getProductPriceByProductName(driver, productTitle);
@@ -298,6 +314,7 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Compare_01 - Step 07: Open Compare page");
 		desktopsPage.clickToPageLinkInAddProductSuccessMessage(driver, "product comparison");
 		compareProductPage = PageGeneratorManager.getCompareProductPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Compare_01 - Step 08: Verify Compare page displayed");
 		compareProductPage.isPageTitleByTextDisplayed(driver, "Compare products");
@@ -328,6 +345,7 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		log.info("Recent_View_01 - Step 01: Open submenu " + recentViewSubmenu);
 		compareProductPage.openUserSubmenuPageByName(driver, menuName, recentViewSubmenu);
 		notebooksPage = PageGeneratorManager.getNotebooksPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Recent_View_01 - Step 02: Click to all product titles");
 		productTitles = notebooksPage.getAllProductTitles(driver);

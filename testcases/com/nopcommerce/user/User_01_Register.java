@@ -31,10 +31,12 @@ public class User_01_Register extends BaseTest {
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 03: Click to Register link");
 		homePage.openHeaderPageByName(driver, "register");
 		registerPage = PageGeneratorManager.getRegisterPage(driver);
+		showBrowserConsoleLogs(driver);
 	}
 
 	@Test
@@ -96,6 +98,7 @@ public class User_01_Register extends BaseTest {
 		log.info("Register_03 - Step 09: Click to Logout link");
 		registerPage.openHeaderPageByName(driver, "logout");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Register_03 - Step 10: Verify HomePage slider displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
@@ -103,6 +106,7 @@ public class User_01_Register extends BaseTest {
 		log.info("Register_03 - Step 11: Click to Register link");
 		homePage.openHeaderPageByName(driver, "register");
 		registerPage = PageGeneratorManager.getRegisterPage(driver);
+		showBrowserConsoleLogs(driver);
 
 	}
 

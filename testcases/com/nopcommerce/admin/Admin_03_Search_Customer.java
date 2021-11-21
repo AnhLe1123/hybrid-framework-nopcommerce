@@ -40,6 +40,7 @@ public class Admin_03_Search_Customer extends BaseTest {
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
 		driver = getBrowserDriver(browserName, appUrl);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 02: Login to Admin account with email: " + adminEmail + " and password: " + adminPassword);
 		loginPage.enterToEmailTextbox(adminEmail);
@@ -49,10 +50,12 @@ public class Admin_03_Search_Customer extends BaseTest {
 		log.info("Pre-condition - Step 03: Open menu 'Customers' and submenu 'Customers'");
 		dashboardPage.openAdminSubmenuPageByName(driver, "Customers", "Customers");
 		customerSearchPage = PageGeneratorManager.getCustomerSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 		
 		log.info("Pre-condition - Step 04: Click to Add new button");
 		customerSearchPage.clickToAddNewButton(driver);
 		createCustomerPage = PageGeneratorManager.getCreateCustomerPage(driver);
+		showBrowserConsoleLogs(driver);
 		createCustomerPage.sleepInSecond(1);
 		
 		log.info("Pre-condition - Step 05: Input to Email textbox with value: " + cusEmail);
@@ -127,6 +130,7 @@ public class Admin_03_Search_Customer extends BaseTest {
 		log.info("Search_02 - Step 01: Open Customer Search page");
 		dashboardPage.openAdminSubmenuPageByName(driver, "Customers", "Customers");
 		customerSearchPage = PageGeneratorManager.getCustomerSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 		customerSearchPage.sleepInSecond(1);
 		
 		log.info("Search_02 - Step 02: Input to First Name textbox with value: " + cusFirstname);
@@ -153,6 +157,7 @@ public class Admin_03_Search_Customer extends BaseTest {
 		log.info("Search_03 - Step 01: Open Customer Search page");
 		dashboardPage.openAdminSubmenuPageByName(driver, "Customers", "Customers");
 		customerSearchPage = PageGeneratorManager.getCustomerSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 		customerSearchPage.sleepInSecond(1);
 		
 		log.info("Search_03 - Step 02: Input to Company textbox with value: " + cusCompany);
@@ -176,6 +181,7 @@ public class Admin_03_Search_Customer extends BaseTest {
 		log.info("Search_04 - Step 01: Open Customer Search page");
 		dashboardPage.openAdminSubmenuPageByName(driver, "Customers", "Customers");
 		customerSearchPage = PageGeneratorManager.getCustomerSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 		customerSearchPage.sleepInSecond(1);
 		
 		log.info("Search_04 - Step 02: Input to Email textbox with value: " + cusEmail);

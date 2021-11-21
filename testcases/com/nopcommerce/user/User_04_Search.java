@@ -53,10 +53,12 @@ public class User_04_Search extends BaseTest {
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 03: Click to Register link");
 		homePage.openHeaderPageByName(driver, "register");
 		registerPage = PageGeneratorManager.getRegisterPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 04: Click to gender ratio button with value: " + gender);
 		registerPage.clickToRadioButtonByLabel(driver, gender);
@@ -97,6 +99,7 @@ public class User_04_Search extends BaseTest {
 		log.info("Pre-condition - Step 15: Click to Logout link");
 		registerPage.openHeaderPageByName(driver, "logout");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 16: Verify HomePage displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
@@ -104,6 +107,7 @@ public class User_04_Search extends BaseTest {
 		log.info("Pre-condition - Step 17: Click to Login link");
 		homePage.openHeaderPageByName(driver, "login");
 		loginPage = PageGeneratorManager.getLoginPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 18: Enter to Email textbox with value: " + emailAddress);
 		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
@@ -117,10 +121,12 @@ public class User_04_Search extends BaseTest {
 		log.info("Pre-condition - Step 20: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 21: Click to Search footer link");
 		homePage.openFooterPageByName(driver, "Search");
 		searchPage = PageGeneratorManager.getSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 22: Verify Search page displayed");
 		verifyTrue(searchPage.isPageTitleByTextDisplayed(driver, "Search"));

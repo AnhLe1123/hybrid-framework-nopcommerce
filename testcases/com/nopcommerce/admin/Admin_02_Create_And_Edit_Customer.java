@@ -78,6 +78,7 @@ public class Admin_02_Create_And_Edit_Customer extends BaseTest {
 		log.info("Pre-condition - Step 03: Open menu 'Customers' and submenu 'Customers'");
 		dashboardPage.openAdminSubmenuPageByName(driver, "Customers", "Customers");
 		customerSearchPage = PageGeneratorManager.getCustomerSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 	}
 
 	@Test
@@ -85,6 +86,7 @@ public class Admin_02_Create_And_Edit_Customer extends BaseTest {
 		log.info("Customer_01 - Step 01: Click to Add new button");
 		customerSearchPage.clickToAddNewButton(driver);
 		createCustomerPage = PageGeneratorManager.getCreateCustomerPage(driver);
+		showBrowserConsoleLogs(driver);
 		createCustomerPage.sleepInSecond(1);
 
 		log.info("Customer_01 - Step 02: Input to Email textbox with value: " + cusEmail);
@@ -343,6 +345,7 @@ public class Admin_02_Create_And_Edit_Customer extends BaseTest {
 		log.info("Customer_05 - Step 01: Open menu 'Customers' and submenu 'Customers'");
 		customerDetailPage.openAdminSubmenuPageByName(driver, "Customers", "Customers");
 		customerSearchPage = PageGeneratorManager.getCustomerSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 		
 		log.info("Customer_05 - Step 02: Input to Search fields");
 		customerSearchPage.inputToAdminTextboxByID(driver, "SearchEmail", editCusEmail);

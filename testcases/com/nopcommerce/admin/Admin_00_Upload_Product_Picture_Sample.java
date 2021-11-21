@@ -27,6 +27,7 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		
 		driver = getBrowserDriver(browserName, appUrl);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		loginPage.enterToEmailTextbox(adminEmail);
 		loginPage.enterToPasswordTextbox(adminPassword);
@@ -34,6 +35,7 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 
 		dashboardPage.openAdminSubmenuPageByName(driver, "Catalog", "Products");
 		productSearchPage = PageGeneratorManager.getProductSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		productSearchPage.inputToProductNameTextbox(productName);
 		productSearchPage.clickToSearchButton();

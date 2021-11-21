@@ -119,10 +119,12 @@ public class User_07_Order extends BaseTest {
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 03: Click to Register link");
 		homePage.openHeaderPageByName(driver, "register");
 		registerPage = PageGeneratorManager.getRegisterPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 04: Click to gender ratio button with value: " + gender);
 		registerPage.clickToRadioButtonByLabel(driver, gender);
@@ -151,6 +153,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Pre-condition - Step 12: Click to Logout link");
 		registerPage.openHeaderPageByName(driver, "logout");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 13: Verify HomePage displayed");
 		verifyTrue(homePage.isHomePageSliderDisplayed());
@@ -158,6 +161,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Pre-condition - Step 14: Click to Login link");
 		homePage.openHeaderPageByName(driver, "login");
 		loginPage = PageGeneratorManager.getLoginPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 15: Enter to Email textbox with value: " + emailAddress);
 		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
@@ -171,14 +175,17 @@ public class User_07_Order extends BaseTest {
 		log.info("Pre-condition - Step 18: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 19: Open submenu " + submenuName);
 		homePage.openUserSubmenuPageByName(driver, menuName, submenuName);
 		desktopsPage = PageGeneratorManager.getDesktopsPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Pre-condition - Step 20: Click to Product title " + "'" + productTitle + "'");
 		desktopsPage.clickToProductTitleByName(driver, productTitle);
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
+		showBrowserConsoleLogs(driver);
 	}
 
 	@Test
@@ -253,6 +260,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_02 - Step 01: Open Shopping cart page");
 		productDetailPage.openHeaderPageByName(driver, "cart");
 		shoppingCartPage = PageGeneratorManager.getShoppingCartPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_02 - Step 02: Verify Shopping cart displayed");
 		shoppingCartPage.isPageTitleByTextDisplayed(driver, "Shopping cart");
@@ -260,6 +268,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_02 - Step 03: Click to Edit link");
 		shoppingCartPage.clickToEditProductLink();
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_02 - Step 04: Reselect option in processor dropdown with value: " + editProcessor);
 		productDetailPage.selectUserDropdownByName(driver, "product_attribute_1", editProcessor);
@@ -330,6 +339,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_03 - Step 01: Open Shopping cart page");
 		productDetailPage.openHeaderPageByName(driver, "cart");
 		shoppingCartPage = PageGeneratorManager.getShoppingCartPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_03 - Step 02: Click to Remove icon");
 		shoppingCartPage.clickToRemoveIconInTableByProductName(driver, productTitle);
@@ -346,10 +356,12 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_04 - Step 01: Open submenu " + orderSubMenu);
 		shoppingCartPage.openUserSubmenuPageByName(driver, menuName, orderSubMenu);
 		notebooksPage = PageGeneratorManager.getNotebooksPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_04 - Step 02: Click to Product title " + "'" + orderProductTitle + "'");
 		notebooksPage.clickToProductTitleByName(driver, orderProductTitle);
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_04 - Step 03: Click to Add to cart button");
 		productDetailPage.clickToButtonByText(driver, "Add to cart");
@@ -360,6 +372,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_04 - Step 05: Open Shopping cart page");
 		productDetailPage.clickToPageLinkInAddProductSuccessMessage(driver, "shopping cart");
 		shoppingCartPage = PageGeneratorManager.getShoppingCartPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_04 - Step 06: Verify product info in table");
 		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "SKU", "1"), orderSKU);
@@ -396,6 +409,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_04 - Step 15: Click to Checkout button");
 		shoppingCartPage.clickToButtonByText(driver, "Checkout");
 		checkoutPage = PageGeneratorManager.getCheckoutPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_04 - Step 16: Verify Checkout page displayed");
 		checkoutPage.isPageTitleByTextDisplayed(driver, "Checkout");
@@ -506,14 +520,17 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_04 - Step 43: Click to Continue button");
 		checkoutPage.clickToButtonByText(driver, "Continue");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_04 - Step 44: Click to My account header");
 		homePage.openHeaderPageByName(driver, "account");
 		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_04 - Step 45: Click to Orders link at sidebar");
 		myAccountPage.openSidebarPageByName(driver, "Orders");
 		myOrdersPage = PageGeneratorManager.getMyOrdersPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_04 - Step 46: Verify My Orders page displayed");
 		verifyTrue(myOrdersPage.isPageTitleByTextDisplayed(driver, "My account - Orders"));
@@ -588,10 +605,12 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_05 - Step 01: Open submenu " + orderSubMenu);
 		checkoutPage.openUserSubmenuPageByName(driver, menuName, orderSubMenu);
 		notebooksPage = PageGeneratorManager.getNotebooksPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_05 - Step 02: Click to Product title " + "'" + orderProductTitle + "'");
 		notebooksPage.clickToProductTitleByName(driver, orderProductTitle);
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_05 - Step 03: Click to Add to cart button");
 		productDetailPage.clickToButtonByText(driver, "Add to cart");
@@ -602,6 +621,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_05 - Step 05: Open Shopping cart page");
 		productDetailPage.clickToPageLinkInAddProductSuccessMessage(driver, "shopping cart");
 		shoppingCartPage = PageGeneratorManager.getShoppingCartPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_05 - Step 06: Verify product info in table");
 		verifyEquals(shoppingCartPage.getTextValueInUserTableAtColumnNameAndRowIndex(driver, "SKU", "1"), orderSKU);
@@ -638,6 +658,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_05 - Step 15: Click to Checkout button");
 		shoppingCartPage.clickToButtonByText(driver, "Checkout");
 		checkoutPage = PageGeneratorManager.getCheckoutPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_05 - Step 16: Verify Checkout page displayed");
 		checkoutPage.isPageTitleByTextDisplayed(driver, "Checkout");
@@ -741,14 +762,17 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_05 - Step 43: Click to Continue button");
 		checkoutPage.clickToButtonByText(driver, "Continue");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_05 - Step 44: Click to My account header");
 		homePage.openHeaderPageByName(driver, "account");
 		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_05 - Step 45: Click to Orders link at sidebar");
 		myAccountPage.openSidebarPageByName(driver, "Orders");
 		myOrdersPage = PageGeneratorManager.getMyOrdersPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_05 - Step 46: Verify My Orders page displayed");
 		verifyTrue(myOrdersPage.isPageTitleByTextDisplayed(driver, "My account - Orders"));
@@ -823,10 +847,12 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_06 - Step 01: Open submenu " + submenuName);
 		shoppingCartPage.openUserSubmenuPageByName(driver, menuName, submenuName);
 		desktopsPage = PageGeneratorManager.getDesktopsPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_06 - Step 02: Click to Product title " + "'" + updateProductTitle + "'");
 		desktopsPage.clickToProductTitleByName(driver, updateProductTitle);
 		productDetailPage = PageGeneratorManager.getProductDetailPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_06 - Step 03: Verify product price displayed with value: " + updateProductPrice);
 		verifyEquals(productDetailPage.getProductPrice(), updateProductPrice);
@@ -844,6 +870,7 @@ public class User_07_Order extends BaseTest {
 		productDetailPage.clickToCloseButtonAtMessage(driver);
 		productDetailPage.openHeaderPageByName(driver, "cart");
 		shoppingCartPage = PageGeneratorManager.getShoppingCartPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_06 - Step 08: Edit Quantity textbox with value: " + updateProductQuantiy);
 		shoppingCartPage.inputToQuantityTextboxAtTableByProductName(driver, updateProductTitle, updateProductQuantiy);
@@ -867,10 +894,12 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_07 - Step 01: Click to My account header");
 		checkoutPage.openHeaderPageByName(driver, "account");
 		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_07 - Step 02: Click to Orders link at sidebar");
 		myAccountPage.openSidebarPageByName(driver, "Orders");
 		myOrdersPage = PageGeneratorManager.getMyOrdersPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_07 - Step 03: Verify My Orders page displayed");
 		verifyTrue(myOrdersPage.isPageTitleByTextDisplayed(driver, "My account - Orders"));
@@ -887,6 +916,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_07 - Step 07: Click to Re-order button");
 		myOrdersPage.clickToButtonByText(driver, "Re-order");
 		shoppingCartPage = PageGeneratorManager.getShoppingCartPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_07 - Step 08: Input to Quantity textbox with value: " + reorderQuantity);
 		shoppingCartPage.inputToQuantityTextboxAtTableByProductName(driver, orderProductTitle, reorderQuantity);
@@ -903,6 +933,7 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_07 - Step 12: Click to Checkout button");
 		shoppingCartPage.clickToButtonByText(driver, "Checkout");
 		checkoutPage = PageGeneratorManager.getCheckoutPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_07 - Step 13: Verify Checkout page displayed");
 		checkoutPage.isPageTitleByTextDisplayed(driver, "Checkout");
@@ -1016,14 +1047,17 @@ public class User_07_Order extends BaseTest {
 		log.info("Order_07 - Step 43: Click to Continue button");
 		checkoutPage.clickToButtonByText(driver, "Continue");
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_07 - Step 44: Click to My account header");
 		homePage.openHeaderPageByName(driver, "account");
 		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
+		showBrowserConsoleLogs(driver);
 		
 		log.info("Order_07 - Step 45: Click to Orders link at sidebar");
 		myAccountPage.openSidebarPageByName(driver, "Orders");
 		myOrdersPage = PageGeneratorManager.getMyOrdersPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		log.info("Order_07 - Step 46: Verify My Orders page displayed");
 		verifyTrue(myOrdersPage.isPageTitleByTextDisplayed(driver, "My account - Orders"));

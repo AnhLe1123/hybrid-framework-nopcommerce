@@ -43,6 +43,7 @@ public class User_00_Register_Login_Sample extends BaseTest {
 
 		homePage.openHeaderPageByName(driver, "register");
 		registerPage = PageGeneratorManager.getRegisterPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		registerPage.clickToRadioButtonByLabel(driver, "Male");
 		registerPage.inputToUserTextboxByID(driver, "FirstName", firstName);
@@ -61,12 +62,14 @@ public class User_00_Register_Login_Sample extends BaseTest {
 		registerPage.openHeaderPageByName(driver, "logout");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 	}
 
 	@Test
 	public void User_02_Login_To_System() {
 		homePage.openHeaderPageByName(driver, "login");
 		loginPage = PageGeneratorManager.getLoginPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		loginPage.inputToUserTextboxByID(driver, "Email", emailAddress);
 		loginPage.inputToUserTextboxByID(driver, "Password", password);
@@ -74,27 +77,34 @@ public class User_00_Register_Login_Sample extends BaseTest {
 
 		homePage = PageGeneratorManager.getHomePage(driver);
 		verifyTrue(homePage.isHomePageSliderDisplayed());
+		showBrowserConsoleLogs(driver);
 	}
 
 	@Test
 	public void User_03_Switch_Page() {
 		homePage.openFooterPageByName(driver, "Search");
 		searchPage = PageGeneratorManager.getSearchPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		searchPage.openFooterPageByName(driver, "Shipping & returns");
 		shippingAndReturnPage = PageGeneratorManager.getShippingAndReturnPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		shippingAndReturnPage.openFooterPageByName(driver, "Sitemap");
 		siteMapPage = PageGeneratorManager.getSiteMapPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		siteMapPage.openFooterPageByName(driver, "My account");
 		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
+		showBrowserConsoleLogs(driver);
 
 		myAccountPage.clickToHomePageLogo(driver);
 		homePage = PageGeneratorManager.getHomePage(driver);
+		showBrowserConsoleLogs(driver);
 
 		homePage.openHeaderPageByName(driver, "wishlist");
 		wishlistPage = PageGeneratorManager.getWishlistPage(driver);
+		showBrowserConsoleLogs(driver);
 	}
 
 	@AfterClass(alwaysRun = true)
