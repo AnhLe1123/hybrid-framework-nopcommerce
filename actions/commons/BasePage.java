@@ -156,11 +156,23 @@ public class BasePage {
 	}
 
 	protected void clickToElement(WebDriver driver, String locator) {
-		getElement(driver, locator).click();
+		if (driver.toString().contains("internet explorer")) {
+			clickToElementByJS(driver, locator);
+			sleepInSecond(2);
+			
+		} else {
+			getElement(driver, locator).click();
+		}
 	}
 
 	protected void clickToElement(WebDriver driver, String locator, String... params) {
-		getElement(driver, getDynamicLocator(locator, params)).click();
+		if (driver.toString().contains("internet explorer")) {
+			clickToElementByJS(driver, getDynamicLocator(locator, params));
+			sleepInSecond(2);
+			
+		} else {
+			getElement(driver, getDynamicLocator(locator, params)).click();
+		}
 	}
 
 	protected void sendkeyToElement(WebDriver driver, String locator, String value) {
@@ -283,25 +295,51 @@ public class BasePage {
 
 	protected void checkToCheckboxOrRadio(WebDriver driver, String locator) {
 		if (!isElementSelected(driver, locator)) {
-			getElement(driver, locator).click();
+			if (driver.toString().contains("internet explorer")) {
+				clickToElementByJS(driver, locator);
+				sleepInSecond(2);
+				
+			} else {
+				getElement(driver, locator).click();
+			}
 		}
 	}
 	
 	protected void checkToCheckboxOrRadio(WebDriver driver, String locator, String... params) {
-		if (!isElementSelected(driver, getDynamicLocator(locator, params))) {
-			getElement(driver, getDynamicLocator(locator, params)).click();
+		locator = getDynamicLocator(locator, params);
+		if (!isElementSelected(driver, locator)) {
+			if (driver.toString().contains("internet explorer")) {
+				clickToElementByJS(driver, locator);
+				sleepInSecond(2);
+				
+			} else {
+				getElement(driver, locator).click();
+			}
 		}
 	}
 
 	protected void uncheckToCheckbox(WebDriver driver, String locator) {
 		if (isElementSelected(driver, locator)) {
-			getElement(driver, locator).click();
+			if (driver.toString().contains("internet explorer")) {
+				clickToElementByJS(driver, locator);
+				sleepInSecond(2);
+				
+			} else {
+				getElement(driver, locator).click();
+			}
 		}
 	}
 	
 	protected void uncheckToCheckbox(WebDriver driver, String locator, String... params) {
-		if (isElementSelected(driver, getDynamicLocator(locator, params))) {
-			getElement(driver, getDynamicLocator(locator, params)).click();
+		locator = getDynamicLocator(locator, params);
+		if (isElementSelected(driver, locator)) {
+			if (driver.toString().contains("internet explorer")) {
+				clickToElementByJS(driver, locator);
+				sleepInSecond(2);
+				
+			} else {
+				getElement(driver, locator).click();
+			}
 		}
 	}
 
@@ -593,17 +631,35 @@ public class BasePage {
 
 	public void openFooterPageByName(WebDriver driver, String pageName) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LINK_FOOTER, pageName);
-		clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_FOOTER, pageName);
+ 		if (driver.toString().contains("internet explorer")) {
+ 			openUrl(driver, getElementAttribute(driver, UserBasePageUI.DYNAMIC_LINK_FOOTER, "href", pageName));
+			sleepInSecond(3);
+			
+		} else {
+			clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_FOOTER, pageName);
+		}
 	}
 
 	public void openHeaderPageByName(WebDriver driver, String pageName) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LINK_HEADER, pageName);
-		clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_HEADER, pageName);
+ 		if (driver.toString().contains("internet explorer")) {
+ 			openUrl(driver, getElementAttribute(driver, UserBasePageUI.DYNAMIC_LINK_HEADER, "href", pageName));
+			sleepInSecond(3);
+			
+		} else {
+			clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_HEADER, pageName);
+		}
 	}
 	
 	public void openSidebarPageByName(WebDriver driver, String pageName) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LINK_SIDEBAR, pageName);
-		clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_SIDEBAR, pageName);
+ 		if (driver.toString().contains("internet explorer")) {
+ 			openUrl(driver, getElementAttribute(driver, UserBasePageUI.DYNAMIC_LINK_SIDEBAR, "href", pageName));
+			sleepInSecond(3);
+			
+		} else {
+			clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_SIDEBAR, pageName);
+		}
 	}
 	
 	public void openUserSubmenuPageByName(WebDriver driver, String menuPageName, String submenuPageName) {
@@ -611,7 +667,13 @@ public class BasePage {
 		hoverToElement(driver, UserBasePageUI.DYNAMIC_MENU_BY_NAME, menuPageName);
 		
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_SUBMENU_BY_NAME, menuPageName, submenuPageName);
-		clickToElement(driver, UserBasePageUI.DYNAMIC_SUBMENU_BY_NAME, menuPageName, submenuPageName);
+ 		if (driver.toString().contains("internet explorer")) {
+ 			openUrl(driver, getElementAttribute(driver, UserBasePageUI.DYNAMIC_SUBMENU_BY_NAME, "href", menuPageName, submenuPageName));
+			sleepInSecond(3);
+			
+		} else {
+			clickToElement(driver, UserBasePageUI.DYNAMIC_SUBMENU_BY_NAME, menuPageName, submenuPageName);
+		}
 	}
 
 	public void clickToRadioButtonByLabel(WebDriver driver, String labelText) {

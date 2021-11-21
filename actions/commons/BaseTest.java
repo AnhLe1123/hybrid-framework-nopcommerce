@@ -17,8 +17,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -36,7 +38,7 @@ public class BaseTest {
 	}
 
 	private enum BROWSER {
-		CHROME, FIREFOX, SAFARI, EDGE_CHRONIUM, EDGE_LEGACY, H_CHROME, H_FIREFOX;
+		CHROME, FIREFOX, SAFARI, EDGE_CHRONIUM, EDGE_LEGACY, IE, COC_COC, OPERA, BRAVE, H_CHROME, H_FIREFOX;
 	}
 
 	private enum OS {
@@ -86,8 +88,31 @@ public class BaseTest {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 			
+		} else if (browser == BROWSER.EDGE_LEGACY) {
+			driver = new EdgeDriver();
+			
 		} else if (browser == BROWSER.SAFARI) {
 			driver = new SafariDriver();
+			
+		} else if (browser == BROWSER.IE) {
+			WebDriverManager.iedriver().arch32().driverVersion("3.141.59").setup();
+			driver = new InternetExplorerDriver();
+			
+		} else if (browser == BROWSER.OPERA) {
+			WebDriverManager.operadriver().setup();
+			driver = new OperaDriver();
+			
+		} else if (browser == BROWSER.BRAVE) {
+			WebDriverManager.chromedriver().driverVersion("96.0.4664.45").setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setBinary("/Applications/Brave Browser.app/Contents/MacOS/Brave Browser");
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.COC_COC) {
+			WebDriverManager.chromedriver().driverVersion("93.0.4577.15").setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setBinary("/Applications/CocCoc.app/Contents/MacOS/CocCoc");
+			driver = new ChromeDriver(options);
 			
 		} else if (browser == BROWSER.H_CHROME) {
 			WebDriverManager.chromedriver().setup();
@@ -149,8 +174,38 @@ public class BaseTest {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 			
+		} else if (browser == BROWSER.EDGE_LEGACY) {
+			driver = new EdgeDriver();
+			
 		} else if (browser == BROWSER.SAFARI) {
 			driver = new SafariDriver();
+			
+		} else if (browser == BROWSER.IE) {
+			WebDriverManager.iedriver().arch32().driverVersion("3.141.59").setup();
+			driver = new InternetExplorerDriver();
+			
+		} else if (browser == BROWSER.OPERA) {
+			WebDriverManager.operadriver().setup();
+			driver = new OperaDriver();
+			
+		} else if (browser == BROWSER.BRAVE) {
+			WebDriverManager.chromedriver().driverVersion("96.0.4664.45").setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setBinary("/Applications/Brave Browser.app/Contents/MacOS/Brave Browser");
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.COC_COC) {
+			WebDriverManager.chromedriver().driverVersion("93.0.4577.15").setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setBinary("/Applications/CocCoc.app/Contents/MacOS/CocCoc");
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.H_CHROME) {
+			WebDriverManager.chromedriver().setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setHeadless(true);
+			options.addArguments("window-size=1920x1080");
+			driver = new ChromeDriver(options);
 			
 		} else if (browser == BROWSER.H_CHROME) {
 			WebDriverManager.chromedriver().setup();

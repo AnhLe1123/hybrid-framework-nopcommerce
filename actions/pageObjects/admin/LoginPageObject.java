@@ -25,6 +25,9 @@ public class LoginPageObject extends BasePage {
 	public DashboardPageObject clickToLoginButton() {
 		waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
 		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
+ 		if (driver.toString().contains("internet explorer")) {
+			sleepInSecond(3);
+		}
 		return PageGeneratorManager.getDashboardPage(driver);
 	}
 
