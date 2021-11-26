@@ -20,6 +20,7 @@ public class CustomerAddressPageObject extends BasePage {
 	public CustomerDetailPageObject clickToBackToCustomerDetailsLink() {
 		waitForElementClickable(driver, CustomerAddressPageUI.BACK_TO_CUSTOMER_DETAILS_LINK);
 		clickToElement(driver, CustomerAddressPageUI.BACK_TO_CUSTOMER_DETAILS_LINK);
+		isJQueryAjaxLoadedSuccess(driver);
 		return PageGeneratorManager.getCustomerDetailPage(driver);
 	}
 }

@@ -32,6 +32,7 @@ public class CustomerDetailPageObject extends BasePage {
 	public CustomerAddressPageObject clickToAddNewAddressButton() {
 		waitForElementClickable(driver, CustomerDetailPageUI.ADD_NEW_ADDRESS_BUTTON);
 		clickToElement(driver, CustomerDetailPageUI.ADD_NEW_ADDRESS_BUTTON);
+		isJQueryAjaxLoadedSuccess(driver);
 		return PageGeneratorManager.getCustomerAddressPage(driver);
 	}
 

@@ -3,6 +3,7 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import envConfig.Environment;
 import pageObjects.user.CompareProductPageObject;
 import pageObjects.user.DesktopsPageObject;
 import pageObjects.user.HomePageObject;
@@ -21,15 +22,19 @@ import org.testng.annotations.Parameters;
 import java.util.Arrays;
 import java.util.List;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
-	@Parameters({ "browser", "url" })
+	@Parameters({ "browser", "env" })
 	@BeforeClass
-	public void initBrowser(String browserName, String appUrl) {
+	public void initBrowser(String browserName, String envName) {
+		ConfigFactory.setProperty("env", envName);
+		environment = ConfigFactory.create(Environment.class);
 		fakeData = DataUtil.getData();
 		gender = "Male";
+		
 		firstName = fakeData.getFirstName();
 		lastName = fakeData.getLastName();
 		fullName = firstName + " " + lastName;
@@ -52,8 +57,8 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 		productQuantity = "2";
 		expectedSpecifications = Arrays.asList(productTitle, processor, ram, hdd, os, software);
 
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
-		driver = getBrowserDriver(browserName, appUrl);
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.userUrl() + "'");
+		driver = getBrowserDriver(browserName, environment.userUrl());
 
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
@@ -370,6 +375,7 @@ public class User_06_Wishlist_Compare_Recent_View extends BaseTest {
 	
 	WebDriver driver;
 	DataUtil fakeData;
+	Environment environment;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	RegisterPageObject registerPage;

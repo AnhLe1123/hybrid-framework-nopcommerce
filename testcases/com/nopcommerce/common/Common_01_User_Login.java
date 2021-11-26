@@ -1,6 +1,7 @@
 package com.nopcommerce.common;
 
 import commons.BaseTest;
+import envConfig.Environment;
 import pageObjects.user.HomePageObject;
 import pageObjects.user.LoginPageObject;
 import pageObjects.user.PageGeneratorManager;
@@ -12,15 +13,19 @@ import org.testng.annotations.Parameters;
 
 import java.util.Set;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 public class Common_01_User_Login extends BaseTest {
-	@Parameters({ "browser", "url" })
+	@Parameters({ "browser", "env" })
 	@BeforeTest
-	public void initBrowser(String browserName, String appUrl) {
-		log.info("Pre-condition - Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
-		driver = getBrowserDriver(browserName, appUrl);
+	public void initBrowser(String browserName, String envName) {
+		ConfigFactory.setProperty("env", envName);
+		environment = ConfigFactory.create(Environment.class);
+		
+		log.info("Pre-condition - Open browser '" + browserName + "' and navigate to '" + environment.userUrl() + "'");
+		driver = getBrowserDriver(browserName, environment.userUrl());
 		fakeData = DataUtil.getData();
 		emailAddress = fakeData.getEmailAddress();
 		password = fakeData.getPassword();
@@ -91,6 +96,7 @@ public class Common_01_User_Login extends BaseTest {
 	}
 
 	WebDriver driver;
+	Environment environment;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	RegisterPageObject registerPage;

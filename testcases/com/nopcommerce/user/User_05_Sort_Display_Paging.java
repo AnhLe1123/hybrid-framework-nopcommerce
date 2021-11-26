@@ -3,25 +3,28 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import envConfig.Environment;
 import pageObjects.user.HomePageObject;
 import pageObjects.user.NotebooksPageObject;
 import pageObjects.user.PageGeneratorManager;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_05_Sort_Display_Paging extends BaseTest {
-	@Parameters({ "browser", "url" })
+	@Parameters({ "browser", "env" })
 	@BeforeClass
-	public void initBrowser(String browserName, String appUrl) {
+	public void initBrowser(String browserName, String envName) {
 		menuName = "Computers";
 		submenuName = "Notebooks";
 		
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
-		driver = getBrowserDriver(browserName, appUrl);
+		ConfigFactory.setProperty("env", envName);
+		environment = ConfigFactory.create(Environment.class);
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.userUrl() + "'");
+		driver = getBrowserDriver(browserName, environment.userUrl());
 
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
@@ -122,6 +125,7 @@ public class User_05_Sort_Display_Paging extends BaseTest {
 	}
 	
 	WebDriver driver;
+	Environment environment;
 	HomePageObject homePage;
 	NotebooksPageObject notebooksPage;
 	String menuName, submenuName;

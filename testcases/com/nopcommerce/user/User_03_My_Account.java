@@ -3,6 +3,7 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import envConfig.Environment;
 import pageObjects.user.HomePageObject;
 import pageObjects.user.LoginPageObject;
 import pageObjects.user.MyAccountPageObject;
@@ -17,14 +18,16 @@ import utilities.DataUtil;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_03_My_Account extends BaseTest {
-	@Parameters({ "browser", "url" })
+	@Parameters({ "browser", "env" })
 	@BeforeClass
-	public void initBrowser(String browserName, String appUrl) {
+	public void initBrowser(String browserName, String envName) {
+		ConfigFactory.setProperty("env", envName);
+		environment = ConfigFactory.create(Environment.class);
 		fakeData = DataUtil.getData();
 
 		gender = "Male";
@@ -61,8 +64,8 @@ public class User_03_My_Account extends BaseTest {
 		productReviewTitle = "Computer review";
 		productReviewContent = "Good quality and customer service.";
 
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
-		driver = getBrowserDriver(browserName, appUrl);
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.userUrl() + "'");
+		driver = getBrowserDriver(browserName, environment.userUrl());
 
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
@@ -387,6 +390,7 @@ public class User_03_My_Account extends BaseTest {
 
 	WebDriver driver;
 	DataUtil fakeData;
+	Environment environment;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	RegisterPageObject registerPage;

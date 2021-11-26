@@ -34,6 +34,7 @@ public class CustomerSearchPageObject extends BasePage {
 	public CustomerDetailPageObject clickToEditButtonByCustomerName(String cusFullname) {
 		waitForElementClickable(driver, CustomerSearchPageUI.EDIT_BUTTON_BY_CUSTOMER_NAME, cusFullname);
 		clickToElement(driver, CustomerSearchPageUI.EDIT_BUTTON_BY_CUSTOMER_NAME, cusFullname);
+		isJQueryAjaxLoadedSuccess(driver);
 		return PageGeneratorManager.getCustomerDetailPage(driver);
 	}
 

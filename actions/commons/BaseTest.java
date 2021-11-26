@@ -58,13 +58,9 @@ public class BaseTest {
 		if (browser == BROWSER.FIREFOX) {
 			// WebDriverManager.firefoxdriver().setup();
 			System.setProperty("webdriver.gecko.driver", GlobalConstants.PROJECT_PATH + getSlash("browserDrivers") + "geckodriver");
-			
 			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
 			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.PROJECT_PATH + File.separator + "browserLogs" + File.separator + "Firefox.log");
-			
-			FirefoxOptions options = new FirefoxOptions();
-			options.addArguments("-private");
-			driver = new FirefoxDriver(options);
+			driver = new FirefoxDriver();
 			
 		} else if (browser == BROWSER.CHROME) {
 			WebDriverManager.chromedriver().setup();
@@ -146,13 +142,9 @@ public class BaseTest {
 		if (browser == BROWSER.FIREFOX) {
 			// WebDriverManager.firefoxdriver().setup();
 			System.setProperty("webdriver.gecko.driver", GlobalConstants.PROJECT_PATH + getSlash("browserDrivers") + "geckodriver");
-			
 			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
 			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.PROJECT_PATH + File.separator + "browserLogs" + File.separator + "Firefox.log");
-			
-			FirefoxOptions options = new FirefoxOptions();
-			options.addArguments("-private");
-			driver = new FirefoxDriver(options);
+			driver = new FirefoxDriver();
 			
 		} else if (browser == BROWSER.CHROME) {
 			WebDriverManager.chromedriver().setup();

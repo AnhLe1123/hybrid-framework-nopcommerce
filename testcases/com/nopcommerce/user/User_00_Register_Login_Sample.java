@@ -3,6 +3,7 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import envConfig.Environment;
 import pageObjects.user.HomePageObject;
 import pageObjects.user.LoginPageObject;
 import pageObjects.user.MyAccountPageObject;
@@ -16,15 +17,18 @@ import utilities.DataUtil;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_00_Register_Login_Sample extends BaseTest {
-	@Parameters({ "browser", "url" })
+	@Parameters({ "browser", "env" })
 	@BeforeClass
-	public void initBrowser(String browserName, String appUrl) {
-		driver = getBrowserDriver(browserName, appUrl);
+	public void initBrowser(String browserName, String envName) {
+		ConfigFactory.setProperty("env", envName);
+		environment = ConfigFactory.create(Environment.class);
+		driver = getBrowserDriver(browserName, environment.userUrl());
+		
 		fakeData = DataUtil.getData();
 		emailAddress = fakeData.getEmailAddress();
 		password = fakeData.getPassword();
@@ -114,6 +118,7 @@ public class User_00_Register_Login_Sample extends BaseTest {
 	
 	WebDriver driver;
 	DataUtil fakeData;
+	Environment environment;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	SearchPageObject searchPage;

@@ -3,6 +3,7 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import envConfig.Environment;
 import pageObjects.user.HomePageObject;
 import pageObjects.user.PageGeneratorManager;
 import pageObjects.user.RegisterPageObject;
@@ -10,17 +11,20 @@ import utilities.DataUtil;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_01_Register extends BaseTest {
-	@Parameters({ "browser", "url" })
+	@Parameters({ "browser", "env" })
 	@BeforeClass
-	public void initBrowser(String browserName, String appUrl) {
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "'");
-		driver = getBrowserDriver(browserName, appUrl);
+	public void initBrowser(String browserName, String envName) {
+		ConfigFactory.setProperty("env", envName);
+		environment = ConfigFactory.create(Environment.class);
 		fakeData = DataUtil.getData();
+		
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.userUrl() + "'");
+		driver = getBrowserDriver(browserName, environment.userUrl());
 
 		validEmailAddress = fakeData.getEmailAddress();
 		invalidEmailAddress = "1234@asdf#!";
@@ -174,8 +178,9 @@ public class User_01_Register extends BaseTest {
 	}
 	
 	WebDriver driver;
+	DataUtil fakeData;
+	Environment environment;
 	HomePageObject homePage;
 	RegisterPageObject registerPage;
-	DataUtil fakeData;
 	String validEmailAddress, invalidEmailAddress, password, firstName, lastName;
 }

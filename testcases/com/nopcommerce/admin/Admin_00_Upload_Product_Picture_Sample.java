@@ -1,5 +1,6 @@
 package com.nopcommerce.admin;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -7,6 +8,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import envConfig.Environment;
 import pageObjects.admin.DashboardPageObject;
 import pageObjects.admin.LoginPageObject;
 import pageObjects.admin.PageGeneratorManager;
@@ -14,9 +16,9 @@ import pageObjects.admin.ProductDetailPageObject;
 import pageObjects.admin.ProductSearchPageObject;
 
 public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
-	@Parameters({ "browser", "url" })
+	@Parameters({ "browser", "env" })
 	@BeforeClass
-	public void initBrowser(String browserName, String appUrl) {
+	public void initBrowser(String browserName, String envName) {
 		adminEmail = "admin@yourstore.com";
 		adminPassword = "admin";
 		productName = "Flower Girl Bracelet";
@@ -25,7 +27,9 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		productAvatarTitle = "Avatar Title";
 		productAvatarOrder = "1";
 		
-		driver = getBrowserDriver(browserName, appUrl);
+		ConfigFactory.setProperty("env", envName);
+		environment = ConfigFactory.create(Environment.class);
+		driver = getBrowserDriver(browserName, environment.adminUrl());
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 		showBrowserConsoleLogs(driver);
 
@@ -80,6 +84,7 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 	}
 
 	WebDriver driver;
+	Environment environment;
 	LoginPageObject loginPage;
 	DashboardPageObject dashboardPage;
 	ProductSearchPageObject productSearchPage;
