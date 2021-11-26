@@ -3,160 +3,80 @@ package pageObjects.user;
 import org.openqa.selenium.WebDriver;
 
 public class PageGeneratorManager {
-	private static HomePageObject homePage;
-	private static LoginPageObject loginPage;
-	private static RegisterPageObject registerPage;
-	private static SearchPageObject searchPage;
-	private static SiteMapPageObject siteMapPage;
-	private static WishlistPageObject wishlistPage;
-	private static MyAccountPageObject myAccountPage;
-	private static ShippingAndReturnPageObject shippingAndReturnPage;
-	private static MyAddressPageObject myAddressPage;
-	private static MyPasswordPageObject myPasswordPage;
-	private static MyProductReviewPageObject myProductReviewPage;
-	private static ProductDetailPageObject productDetailPage;
-	private static ProductReviewPageObject productReviewPage;
-	private static NotebooksPageObject notebooksPage;
-	private static DesktopsPageObject desktopsPage;
-	private static CompareProductPageObject compareProductPage;
-	private static ShoppingCartPageObject shoppingCartPage;
-	private static CheckoutPageObject checkoutPage;
-	private static MyOrdersPageObject myOrdersPage;
-	
-	private PageGeneratorManager() {
-		
-	}
 
 	public static HomePageObject getHomePage(WebDriver driver) {
-		if(homePage == null) {
-			homePage = new HomePageObject(driver);
-		}
-		return homePage;
+		return new HomePageObject(driver);
 	}
 	
 	public static LoginPageObject getLoginPage(WebDriver driver) {
-		if(loginPage == null) {
-			loginPage = new LoginPageObject(driver);
-		}
-		return loginPage;
+		return new LoginPageObject(driver);
 	}
 	
 	public static RegisterPageObject getRegisterPage(WebDriver driver) {
-		if(registerPage == null) {
-			registerPage = new RegisterPageObject(driver);
-		}
-		return registerPage;
+		return new RegisterPageObject(driver);
 	}
 	
 	public static SearchPageObject getSearchPage(WebDriver driver) {
-		if(searchPage == null) {
-			searchPage = new SearchPageObject(driver);
-		}
-		return searchPage;
+		return new SearchPageObject(driver);
 	}
 	
 	public static SiteMapPageObject getSiteMapPage(WebDriver driver) {
-		if(siteMapPage == null) {
-			siteMapPage = new SiteMapPageObject(driver);
-		}
-		return siteMapPage;
+		return new SiteMapPageObject(driver);
 	}
 	
 	public static WishlistPageObject getWishlistPage(WebDriver driver) {
-		if(wishlistPage == null) {
-			wishlistPage = new WishlistPageObject(driver);
-		}
-		return wishlistPage;
+		return new WishlistPageObject(driver);
 	}
 	
 	public static MyAccountPageObject getMyAccountPage(WebDriver driver) {
-		if(myAccountPage == null) {
-			myAccountPage = new MyAccountPageObject(driver);
-		}
-		return myAccountPage;
+		return new MyAccountPageObject(driver);
 	}
 	
 	public static ShippingAndReturnPageObject getShippingAndReturnPage(WebDriver driver) {
-		if(shippingAndReturnPage == null) {
-			shippingAndReturnPage = new ShippingAndReturnPageObject(driver);
-		}
-		return shippingAndReturnPage;
+		return new ShippingAndReturnPageObject(driver);
 	}
 	
 	public static MyAddressPageObject getMyAddressPage(WebDriver driver) {
-		if(myAddressPage == null) {
-			myAddressPage = new MyAddressPageObject(driver);
-		}
-		return myAddressPage;
+		return new MyAddressPageObject(driver);
 	}
 	
 	public static MyPasswordPageObject getMyPasswordPage(WebDriver driver) {
-		if(myPasswordPage == null) {
-			myPasswordPage = new MyPasswordPageObject(driver);
-		}
-		return myPasswordPage;
+		return new MyPasswordPageObject(driver);
 	}
 	
 	public static MyProductReviewPageObject getMyProductReviewPage(WebDriver driver) {
-		if(myProductReviewPage == null) {
-			myProductReviewPage = new MyProductReviewPageObject(driver);
-		}
-		return myProductReviewPage;
+		return new MyProductReviewPageObject(driver);
 	}
 	
 	public static ProductDetailPageObject getProductDetailPage(WebDriver driver) {
-		if(productDetailPage == null) {
-			productDetailPage = new ProductDetailPageObject(driver);
-		}
-		return productDetailPage;
+		return new ProductDetailPageObject(driver);
 	}
 	
 	public static ProductReviewPageObject getProductReviewPage(WebDriver driver) {
-		if(productReviewPage == null) {
-			productReviewPage = new ProductReviewPageObject(driver);
-		}
-		return productReviewPage;
+		return new ProductReviewPageObject(driver);
 	}
 	
 	public static NotebooksPageObject getNotebooksPage(WebDriver driver) {
-		if(notebooksPage == null) {
-			notebooksPage = new NotebooksPageObject(driver);
-		}
-		return notebooksPage;
+		return new NotebooksPageObject(driver);
 	}
 	
 	public static DesktopsPageObject getDesktopsPage(WebDriver driver) {
-		if(desktopsPage == null) {
-			desktopsPage = new DesktopsPageObject(driver);
-		}
-		return desktopsPage;
+		return new DesktopsPageObject(driver);
 	}
 	
 	public static ShoppingCartPageObject getShoppingCartPage(WebDriver driver) {
-		if(shoppingCartPage == null) {
-			shoppingCartPage = new ShoppingCartPageObject(driver);
-		}
-		return shoppingCartPage;
+		return new ShoppingCartPageObject(driver);
 	}
 	
 	public static CompareProductPageObject getCompareProductPage(WebDriver driver) {
-		if(compareProductPage == null) {
-			compareProductPage = new CompareProductPageObject(driver);
-		}
-		return compareProductPage;
+		return new CompareProductPageObject(driver);
 	}
 	
 	public static CheckoutPageObject getCheckoutPage(WebDriver driver) {
-		if(checkoutPage == null) {
-			checkoutPage = new CheckoutPageObject(driver);
-		}
-		return checkoutPage;
+		return new CheckoutPageObject(driver);
 	}
 	
 	public static MyOrdersPageObject getMyOrdersPage(WebDriver driver) {
-		if(myOrdersPage == null) {
-			myOrdersPage = new MyOrdersPageObject(driver);
-		}
-		return myOrdersPage;
+		return new MyOrdersPageObject(driver);
 	}
 }
