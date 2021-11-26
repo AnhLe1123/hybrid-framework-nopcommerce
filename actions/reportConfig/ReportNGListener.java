@@ -11,9 +11,10 @@ import org.testng.ITestResult;
 import org.testng.Reporter;
 
 import commons.BaseTest;
+import commons.GlobalConstants;
 
 public class ReportNGListener extends BaseTest implements ITestListener {
-	String projectImgPath = System.getProperty("user.dir") + "/screenshotReportNG/";
+	String projectImgPath = GlobalConstants.PROJECT_PATH + "/screenshotReportNG/";
 
 	@Override
 	public void onStart(ITestContext context) {

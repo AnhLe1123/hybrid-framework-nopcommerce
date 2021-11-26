@@ -30,7 +30,6 @@ import reportConfig.VerificationFailures;
 
 public class BaseTest {
 	private WebDriver driver;
-	private String projectPath = System.getProperty("user.dir");
 	protected final Log log;
 
 	protected BaseTest() {
@@ -58,7 +57,7 @@ public class BaseTest {
 
 		if (browser == BROWSER.FIREFOX) {
 			// WebDriverManager.firefoxdriver().setup();
-			System.setProperty("webdriver.gecko.driver", projectPath + getSlash("browserDrivers") + "geckodriver");
+			System.setProperty("webdriver.gecko.driver", GlobalConstants.PROJECT_PATH + getSlash("browserDrivers") + "geckodriver");
 			
 			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
 			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.PROJECT_PATH + File.separator + "browserLogs" + File.separator + "Firefox.log");
@@ -71,6 +70,8 @@ public class BaseTest {
 			WebDriverManager.chromedriver().setup();
 			
 			ChromeOptions options = new ChromeOptions();
+			File extensionFile = new File(GlobalConstants.PROJECT_PATH + File.separator + "browserExtensions" + File.separator + "ultrasurf_1_6_1.crx");
+			options.addExtensions(extensionFile);
 			options.setExperimentalOption("useAutomationExtension", false);
 			options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 			options.addArguments("--disable-infobars");
@@ -123,7 +124,7 @@ public class BaseTest {
 			
 		} else if (browser == BROWSER.H_FIREFOX) {
 			// WebDriverManager.firefoxdriver().setup();
-			System.setProperty("webdriver.gecko.driver", projectPath + getSlash("browserDrivers") + "geckodriver");
+			System.setProperty("webdriver.gecko.driver", GlobalConstants.PROJECT_PATH + getSlash("browserDrivers") + "geckodriver");
 			FirefoxOptions options = new FirefoxOptions();
 			options.setHeadless(true);
 			options.addArguments("window-size=1920x1080");
@@ -144,7 +145,7 @@ public class BaseTest {
 
 		if (browser == BROWSER.FIREFOX) {
 			// WebDriverManager.firefoxdriver().setup();
-			System.setProperty("webdriver.gecko.driver", projectPath + getSlash("browserDrivers") + "geckodriver");
+			System.setProperty("webdriver.gecko.driver", GlobalConstants.PROJECT_PATH + getSlash("browserDrivers") + "geckodriver");
 			
 			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
 			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.PROJECT_PATH + File.separator + "browserLogs" + File.separator + "Firefox.log");
@@ -157,6 +158,8 @@ public class BaseTest {
 			WebDriverManager.chromedriver().setup();
 			
 			ChromeOptions options = new ChromeOptions();
+			File extensionFile = new File(GlobalConstants.PROJECT_PATH + File.separator + "browserExtensions" + File.separator + "ultrasurf_1_6_1.crx");
+			options.addExtensions(extensionFile);
 			options.setExperimentalOption("useAutomationExtension", false);
 			options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 			options.addArguments("--disable-infobars");
@@ -216,7 +219,7 @@ public class BaseTest {
 			
 		} else if (browser == BROWSER.H_FIREFOX) {
 			// WebDriverManager.firefoxdriver().setup();
-			System.setProperty("webdriver.gecko.driver", projectPath + getSlash("browserDrivers") + "geckodriver");
+			System.setProperty("webdriver.gecko.driver", GlobalConstants.PROJECT_PATH + getSlash("browserDrivers") + "geckodriver");
 			FirefoxOptions options = new FirefoxOptions();
 			options.setHeadless(true);
 			options.addArguments("window-size=1920x1080");
