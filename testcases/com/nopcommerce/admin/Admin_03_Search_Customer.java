@@ -18,9 +18,9 @@ import pageObjects.admin.PageGeneratorManager;
 import utilities.DataUtil;
 
 public class Admin_03_Search_Customer extends BaseTest {
-	@Parameters({ "browser", "env" })
+	@Parameters({ "browser", "env", "ipAddress", "port" })
 	@BeforeClass
-	public void initBrowser(String browserName, String envName) {
+	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
 		ConfigFactory.setProperty("env", envName);
 		environment = ConfigFactory.create(Environment.class);
 		fakeData = DataUtil.getData();
@@ -42,7 +42,7 @@ public class Admin_03_Search_Customer extends BaseTest {
 		cusComment = "Add new Customer (Guest)";
 
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.adminUrl() + "'");
-		driver = getBrowserDriver(browserName, environment.adminUrl());
+		driver = getBrowserDriver(browserName, environment.adminUrl(), ipAddress, portNumber);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 		showBrowserConsoleLogs(driver);
 

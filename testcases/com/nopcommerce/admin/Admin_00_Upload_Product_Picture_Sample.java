@@ -16,9 +16,9 @@ import pageObjects.admin.ProductDetailPageObject;
 import pageObjects.admin.ProductSearchPageObject;
 
 public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
-	@Parameters({ "browser", "env" })
+	@Parameters({ "browser", "env", "ipAddress", "port" })
 	@BeforeClass
-	public void initBrowser(String browserName, String envName) {
+	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
 		adminEmail = "admin@yourstore.com";
 		adminPassword = "admin";
 		productName = "Flower Girl Bracelet";
@@ -29,7 +29,7 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		
 		ConfigFactory.setProperty("env", envName);
 		environment = ConfigFactory.create(Environment.class);
-		driver = getBrowserDriver(browserName, environment.adminUrl());
+		driver = getBrowserDriver(browserName, environment.adminUrl(), ipAddress, portNumber);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 		showBrowserConsoleLogs(driver);
 

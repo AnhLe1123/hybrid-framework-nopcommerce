@@ -18,14 +18,14 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 public class Common_01_User_Login extends BaseTest {
-	@Parameters({ "browser", "env" })
+	@Parameters({ "browser", "env", "ipAddress", "port" })
 	@BeforeTest
-	public void initBrowser(String browserName, String envName) {
+	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
 		ConfigFactory.setProperty("env", envName);
 		environment = ConfigFactory.create(Environment.class);
 		
 		log.info("Pre-condition - Open browser '" + browserName + "' and navigate to '" + environment.userUrl() + "'");
-		driver = getBrowserDriver(browserName, environment.userUrl());
+		driver = getBrowserDriver(browserName, environment.userUrl(), ipAddress, portNumber);
 		fakeData = DataUtil.getData();
 		emailAddress = fakeData.getEmailAddress();
 		password = fakeData.getPassword();

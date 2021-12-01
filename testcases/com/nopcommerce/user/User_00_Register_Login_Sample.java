@@ -22,12 +22,12 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_00_Register_Login_Sample extends BaseTest {
-	@Parameters({ "browser", "env" })
+	@Parameters({ "browser", "env" , "ipAddress", "port" })
 	@BeforeClass
-	public void initBrowser(String browserName, String envName) {
+	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
 		ConfigFactory.setProperty("env", envName);
 		environment = ConfigFactory.create(Environment.class);
-		driver = getBrowserDriver(browserName, environment.userUrl());
+		driver = getBrowserDriver(browserName, environment.userUrl(), ipAddress, portNumber);
 		
 		fakeData = DataUtil.getData();
 		emailAddress = fakeData.getEmailAddress();

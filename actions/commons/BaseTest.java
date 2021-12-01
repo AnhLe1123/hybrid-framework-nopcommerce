@@ -2,6 +2,8 @@ package commons;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -21,6 +24,8 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -219,6 +224,116 @@ public class BaseTest {
 			
 		} else {
 			throw new RuntimeException("Please input the correct browser name!");
+		}
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.get(appUrl);
+
+		return driver;
+	}
+	
+	protected WebDriver getBrowserDriver(String browserName, String appUrl, String ipAddress, String portNumber) {
+		BROWSER browser = BROWSER.valueOf(browserName.toUpperCase());
+		DesiredCapabilities capability = null;
+
+		if (browser == BROWSER.FIREFOX) {
+			// WebDriverManager.firefoxdriver().setup();
+			System.setProperty("webdriver.gecko.driver", GlobalConstants.PROJECT_PATH + getSlash("browserDrivers") + "geckodriver");
+			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
+			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.PROJECT_PATH + File.separator + "browserLogs" + File.separator + "Firefox.log");
+			
+			capability = DesiredCapabilities.firefox();
+			capability.setBrowserName("firefox");
+			capability.setPlatform(Platform.MAC);
+			
+			FirefoxOptions options = new FirefoxOptions();
+			options.merge(capability);
+			
+		} else if (browser == BROWSER.CHROME) {
+			WebDriverManager.chromedriver().setup();
+			
+			capability = DesiredCapabilities.chrome();
+			capability.setBrowserName("chrome");
+			capability.setPlatform(Platform.MAC);
+			
+			ChromeOptions options = new ChromeOptions();
+			File extensionFile = new File(GlobalConstants.PROJECT_PATH + File.separator + "browserExtensions" + File.separator + "ultrasurf_1_6_1.crx");
+			options.addExtensions(extensionFile);
+			options.setExperimentalOption("useAutomationExtension", false);
+			options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+			options.addArguments("--disable-infobars");
+			options.addArguments("--disable-notifications");
+			options.addArguments("--disable-geolocation");
+			options.addArguments("--incognito");
+			
+			Map<String, Object> prefs = new HashMap<String, Object>();
+			prefs.put("credentials_enable_service", false);
+			prefs.put("profile.password_manager_enabled", false);
+			options.setExperimentalOption("prefs", prefs);
+			
+			options.merge(capability);
+			
+		} else if (browser == BROWSER.EDGE_CHRONIUM) {
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
+			
+		} else if (browser == BROWSER.EDGE_LEGACY) {
+			driver = new EdgeDriver();
+			
+		} else if (browser == BROWSER.SAFARI) {
+			driver = new SafariDriver();
+			
+		} else if (browser == BROWSER.IE) {
+			WebDriverManager.iedriver().arch32().driverVersion("3.141.59").setup();
+			driver = new InternetExplorerDriver();
+			
+		} else if (browser == BROWSER.OPERA) {
+			WebDriverManager.operadriver().setup();
+			driver = new OperaDriver();
+			
+		} else if (browser == BROWSER.BRAVE) {
+			WebDriverManager.chromedriver().driverVersion("96.0.4664.45").setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setBinary("/Applications/Brave Browser.app/Contents/MacOS/Brave Browser");
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.COC_COC) {
+			WebDriverManager.chromedriver().driverVersion("93.0.4577.15").setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setBinary("/Applications/CocCoc.app/Contents/MacOS/CocCoc");
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.H_CHROME) {
+			WebDriverManager.chromedriver().setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setHeadless(true);
+			options.addArguments("window-size=1920x1080");
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.H_CHROME) {
+			WebDriverManager.chromedriver().setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setHeadless(true);
+			options.addArguments("window-size=1920x1080");
+			driver = new ChromeDriver(options);
+			
+		} else if (browser == BROWSER.H_FIREFOX) {
+			// WebDriverManager.firefoxdriver().setup();
+			System.setProperty("webdriver.gecko.driver", GlobalConstants.PROJECT_PATH + getSlash("browserDrivers") + "geckodriver");
+			FirefoxOptions options = new FirefoxOptions();
+			options.setHeadless(true);
+			options.addArguments("window-size=1920x1080");
+			driver = new FirefoxDriver(options);
+			
+		} else {
+			throw new RuntimeException("Please input the correct browser name!");
+		}
+		
+		try {
+			driver = new RemoteWebDriver(new URL(String.format("http://%s:%s/wd/hub", ipAddress, portNumber)), capability);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
 		}
 		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

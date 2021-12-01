@@ -16,9 +16,9 @@ import pageObjects.admin.ProductDetailPageObject;
 import pageObjects.admin.ProductSearchPageObject;
 
 public class Admin_01_Search_Product extends BaseTest {
-	@Parameters({ "browser", "env" })
+	@Parameters({ "browser", "env", "ipAddress", "port" })
 	@BeforeClass
-	public void initBrowser(String browserName, String envName) {
+	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
 		adminEmail = "admin@yourstore.com";
 		adminPassword = "admin";
 		productName = "Lenovo IdeaCentre 600 All-in-One PC";
@@ -35,7 +35,7 @@ public class Admin_01_Search_Product extends BaseTest {
 		environment = ConfigFactory.create(Environment.class);
 		
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.adminUrl() + "'");
-		driver = getBrowserDriver(browserName, environment.adminUrl());
+		driver = getBrowserDriver(browserName, environment.adminUrl(), ipAddress, portNumber);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 		showBrowserConsoleLogs(driver);
 

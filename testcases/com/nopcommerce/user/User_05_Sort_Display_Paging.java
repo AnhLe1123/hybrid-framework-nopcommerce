@@ -15,16 +15,16 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_05_Sort_Display_Paging extends BaseTest {
-	@Parameters({ "browser", "env" })
+	@Parameters({ "browser", "env" , "ipAddress", "port" })
 	@BeforeClass
-	public void initBrowser(String browserName, String envName) {
+	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
 		menuName = "Computers";
 		submenuName = "Notebooks";
 		
 		ConfigFactory.setProperty("env", envName);
 		environment = ConfigFactory.create(Environment.class);
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.userUrl() + "'");
-		driver = getBrowserDriver(browserName, environment.userUrl());
+		driver = getBrowserDriver(browserName, environment.userUrl(), ipAddress, portNumber);
 
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);

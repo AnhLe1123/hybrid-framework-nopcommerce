@@ -19,9 +19,9 @@ import pageObjects.admin.PageGeneratorManager;
 import utilities.DataUtil;
 
 public class Admin_02_Create_And_Edit_Customer extends BaseTest {
-	@Parameters({ "browser", "env" })
+	@Parameters({ "browser", "env", "ipAddress", "port" })
 	@BeforeClass
-	public void initBrowser(String browserName, String envName) {
+	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
 		ConfigFactory.setProperty("env", envName);
 		environment = ConfigFactory.create(Environment.class);
 		fakeData = DataUtil.getData();
@@ -71,7 +71,7 @@ public class Admin_02_Create_And_Edit_Customer extends BaseTest {
 		editCusCityStateZip = editCusCity + "," + editCusState + "," + editCusZipcode;
 
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.adminUrl() + "'");
-		driver = getBrowserDriver(browserName, environment.adminUrl());
+		driver = getBrowserDriver(browserName, environment.adminUrl(), ipAddress, portNumber);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 
 		log.info("Pre-condition - Step 02: Login to Admin account with email: " + adminEmail + " and password: " + adminPassword);
