@@ -3,7 +3,7 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import envConfig.Environment;
+import factoryEnvironment.EnvConfig;
 import pageObjects.user.HomePageObject;
 import pageObjects.user.LoginPageObject;
 import pageObjects.user.MyAccountPageObject;
@@ -16,19 +16,22 @@ import pageObjects.user.WishlistPageObject;
 import utilities.DataUtil;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_00_Register_Login_Sample extends BaseTest {
-	@Parameters({ "browser", "env" , "ipAddress", "port" })
+	@Parameters({ "envName", "serverName", "browser", "ipAddress", "port", "osName", "osVersion" })
 	@BeforeClass
-	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
-		ConfigFactory.setProperty("env", envName);
-		environment = ConfigFactory.create(Environment.class);
-		driver = getBrowserDriver(browserName, environment.userUrl(), ipAddress, portNumber);
+	public void initBrowser(@Optional("local") String envName, @Optional("dev") String serverName, @Optional("chrome") String browserName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber,
+			@Optional("Mac OS X") String osName, @Optional("10.16") String osVersion) {
 		
+		ConfigFactory.setProperty("env", serverName);
+		environment = ConfigFactory.create(EnvConfig.class);
+		driver = getBrowserDriver(envName, environment.userUrl(), browserName, ipAddress, portNumber, osName, osVersion);
+
 		fakeData = DataUtil.getData();
 		emailAddress = fakeData.getEmailAddress();
 		password = fakeData.getPassword();
@@ -111,14 +114,15 @@ public class User_00_Register_Login_Sample extends BaseTest {
 		showBrowserConsoleLogs(driver);
 	}
 
+	@Parameters("envName")
 	@AfterClass(alwaysRun = true)
-	public void cleanBrowser() {
-		closeBrowserAndDriver();
+	public void cleanBrowser(@Optional("local") String envName) {
+		closeBrowserAndDriver(envName);
 	}
-	
+
 	WebDriver driver;
 	DataUtil fakeData;
-	Environment environment;
+	EnvConfig environment;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	SearchPageObject searchPage;

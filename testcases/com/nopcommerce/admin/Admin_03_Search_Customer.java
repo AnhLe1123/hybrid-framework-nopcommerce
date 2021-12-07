@@ -4,11 +4,12 @@ import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import envConfig.Environment;
+import factoryEnvironment.EnvConfig;
 import pageObjects.admin.CreateCustomerPageObject;
 import pageObjects.admin.CustomerDetailPageObject;
 import pageObjects.admin.CustomerSearchPageObject;
@@ -18,11 +19,13 @@ import pageObjects.admin.PageGeneratorManager;
 import utilities.DataUtil;
 
 public class Admin_03_Search_Customer extends BaseTest {
-	@Parameters({ "browser", "env", "ipAddress", "port" })
+	@Parameters({ "envName", "serverName", "browser", "ipAddress", "port", "osName", "osVersion" })
 	@BeforeClass
-	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
-		ConfigFactory.setProperty("env", envName);
-		environment = ConfigFactory.create(Environment.class);
+	public void initBrowser(@Optional("local") String envName, @Optional("dev") String serverName, @Optional("chrome") String browserName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber,
+			@Optional("Mac OS X") String osName, @Optional("10.16") String osVersion) {
+		
+		ConfigFactory.setProperty("env", serverName);
+		environment = ConfigFactory.create(EnvConfig.class);
 		fakeData = DataUtil.getData();
 
 		adminEmail = "admin@yourstore.com";
@@ -42,7 +45,7 @@ public class Admin_03_Search_Customer extends BaseTest {
 		cusComment = "Add new Customer (Guest)";
 
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.adminUrl() + "'");
-		driver = getBrowserDriver(browserName, environment.adminUrl(), ipAddress, portNumber);
+		driver = getBrowserDriver(envName, environment.adminUrl(), browserName, ipAddress, portNumber, osName, osVersion);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 		showBrowserConsoleLogs(driver);
 
@@ -219,14 +222,16 @@ public class Admin_03_Search_Customer extends BaseTest {
 		verifyTrue(customerSearchPage.isCustomerInfoDisplayedAtTable(cusFullname, cusRole, cusCompany, cusIsActive));
 	}
 
+	@Parameters("envName")
 	@AfterClass(alwaysRun = true)
-	public void cleanBrowser() {
-		closeBrowserAndDriver();
+	public void cleanBrowser(@Optional("local") String envName) {
+		log.info("Post-condition - Close browser and driver");
+		closeBrowserAndDriver(envName);
 	}
 
 	WebDriver driver;
 	DataUtil fakeData;
-	Environment environment;
+	EnvConfig environment;
 	LoginPageObject loginPage;
 	DashboardPageObject dashboardPage;
 	CustomerSearchPageObject customerSearchPage;

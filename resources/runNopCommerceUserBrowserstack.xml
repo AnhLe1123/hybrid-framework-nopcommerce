@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="User - NopCommerce" parallel="false">
+	<parameter name="envName" value="browserStack" />
+	<parameter name="serverName" value="dev" />
+	
+	<listeners>
+		<listener class-name = "org.uncommons.reportng.HTMLReporter"/>
+		<listener class-name = "org.uncommons.reportng.JUnitXMLReporter"/>
+		<listener class-name = "reportConfig.MethodListener" />
+		<listener class-name = "reportConfig.ReportNGListener" />
+	</listeners>
+
+  <test name="Run on FIREFOX">
+	  <parameter name="browser" value="Firefox"/>
+	  <parameter name="osName" value="Windows" />
+	  <parameter name="osVersion" value="10" />
+	  
+	    <classes>
+	      <class name="com.nopcommerce.user.User_00_Register_Login_Sample"/>
+	      <class name="com.nopcommerce.user.User_01_Register"/>
+	      <class name="com.nopcommerce.user.User_02_Login"/>
+	      <class name="com.nopcommerce.user.User_03_My_Account"/>
+	      <class name="com.nopcommerce.user.User_04_Search"/>
+	      <class name="com.nopcommerce.user.User_05_Sort_Display_Paging"/>
+	      <class name="com.nopcommerce.user.User_06_Wishlist_Compare_Recent_View"/>
+	      <class name="com.nopcommerce.user.User_07_Order"/>
+	    </classes>
+  </test>
+  
+  <test name="Run on CHROME">
+	  <parameter name="browser" value="Chrome"/>
+	  <parameter name="osName" value="OS X" />
+	  <parameter name="osVersion" value="Big Sur" />
+	  
+	    <classes>
+	      <class name="com.nopcommerce.user.User_00_Register_Login_Sample"/>
+	      <class name="com.nopcommerce.user.User_01_Register"/>
+	      <class name="com.nopcommerce.user.User_02_Login"/>
+	      <class name="com.nopcommerce.user.User_03_My_Account"/>
+	      <class name="com.nopcommerce.user.User_04_Search"/>
+	      <class name="com.nopcommerce.user.User_05_Sort_Display_Paging"/>
+	      <class name="com.nopcommerce.user.User_06_Wishlist_Compare_Recent_View"/>
+	      <class name="com.nopcommerce.user.User_07_Order"/>
+	    </classes>
+  </test>
+  
+</suite>

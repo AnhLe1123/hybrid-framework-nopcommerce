@@ -3,7 +3,7 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import envConfig.Environment;
+import factoryEnvironment.EnvConfig;
 import pageObjects.user.HomePageObject;
 import pageObjects.user.LoginPageObject;
 import pageObjects.user.PageGeneratorManager;
@@ -11,17 +11,20 @@ import pageObjects.user.RegisterPageObject;
 import utilities.DataUtil;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
 public class User_02_Login extends BaseTest {
-	@Parameters({ "browser", "env", "ipAddress", "port" })
+	@Parameters({ "envName", "serverName", "browser", "ipAddress", "port", "osName", "osVersion" })
 	@BeforeClass
-	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
-		ConfigFactory.setProperty("env", envName);
-		environment = ConfigFactory.create(Environment.class);
+	public void initBrowser(@Optional("local") String envName, @Optional("dev") String serverName, @Optional("chrome") String browserName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber,
+			@Optional("Mac OS X") String osName, @Optional("10.16") String osVersion) {
+		
+		ConfigFactory.setProperty("env", serverName);
+		environment = ConfigFactory.create(EnvConfig.class);
 		fakeData = DataUtil.getData();
 		
 		registeredEmail = "abc" + generateFakeNumber() + "@gmail.com";
@@ -33,7 +36,8 @@ public class User_02_Login extends BaseTest {
 		lastName = fakeData.getLastName();
 
 		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.userUrl() + "'");
-		driver = getBrowserDriver(browserName, environment.userUrl(), ipAddress, portNumber);
+		driver = getBrowserDriver(envName, environment.userUrl(), browserName, ipAddress, portNumber, osName, osVersion);
+
 
 		log.info("Pre-condition - Step 02: Verify HomePage displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
@@ -169,15 +173,16 @@ public class User_02_Login extends BaseTest {
 		verifyTrue(homePage.isHomePageSliderDisplayed());
 	}
 
+	@Parameters("envName")
 	@AfterClass(alwaysRun = true)
-	public void cleanBrowser() {
+	public void cleanBrowser(@Optional("local") String envName) {
 		log.info("Post-condition - Close browser and driver");
-		closeBrowserAndDriver();
+		closeBrowserAndDriver(envName);
 	}
 	
 	WebDriver driver;
 	DataUtil fakeData;
-	Environment environment;
+	EnvConfig environment;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	RegisterPageObject registerPage;

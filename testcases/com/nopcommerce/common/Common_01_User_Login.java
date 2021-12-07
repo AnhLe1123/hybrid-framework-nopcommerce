@@ -1,14 +1,16 @@
 package com.nopcommerce.common;
 
 import commons.BaseTest;
-import envConfig.Environment;
+import factoryEnvironment.EnvConfig;
 import pageObjects.user.HomePageObject;
 import pageObjects.user.LoginPageObject;
 import pageObjects.user.PageGeneratorManager;
 import pageObjects.user.RegisterPageObject;
 import utilities.DataUtil;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import java.util.Set;
@@ -18,14 +20,16 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 public class Common_01_User_Login extends BaseTest {
-	@Parameters({ "browser", "env", "ipAddress", "port" })
-	@BeforeTest
-	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
-		ConfigFactory.setProperty("env", envName);
-		environment = ConfigFactory.create(Environment.class);
+	@Parameters({ "envName", "serverName", "browser", "ipAddress", "port", "osName", "osVersion" })
+	@BeforeClass
+	public void initBrowser(@Optional("local") String envName, @Optional("dev") String serverName, @Optional("chrome") String browserName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber,
+			@Optional("Mac OS X") String osName, @Optional("10.16") String osVersion) {
+		
+		ConfigFactory.setProperty("env", serverName);
+		environment = ConfigFactory.create(EnvConfig.class);
 		
 		log.info("Pre-condition - Open browser '" + browserName + "' and navigate to '" + environment.userUrl() + "'");
-		driver = getBrowserDriver(browserName, environment.userUrl(), ipAddress, portNumber);
+		driver = getBrowserDriver(envName, environment.userUrl(), browserName, ipAddress, portNumber, osName, osVersion);
 		fakeData = DataUtil.getData();
 		emailAddress = fakeData.getEmailAddress();
 		password = fakeData.getPassword();
@@ -92,11 +96,11 @@ public class Common_01_User_Login extends BaseTest {
 		log.info(loginPageCookie);
 
 		log.info("Post-condition - Close browser and driver");
-		closeBrowserAndDriver();
+		closeBrowserAndDriver(envName);
 	}
 
 	WebDriver driver;
-	Environment environment;
+	EnvConfig environment;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	RegisterPageObject registerPage;

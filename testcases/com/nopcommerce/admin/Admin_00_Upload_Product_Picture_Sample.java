@@ -4,11 +4,12 @@ import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import envConfig.Environment;
+import factoryEnvironment.EnvConfig;
 import pageObjects.admin.DashboardPageObject;
 import pageObjects.admin.LoginPageObject;
 import pageObjects.admin.PageGeneratorManager;
@@ -16,9 +17,11 @@ import pageObjects.admin.ProductDetailPageObject;
 import pageObjects.admin.ProductSearchPageObject;
 
 public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
-	@Parameters({ "browser", "env", "ipAddress", "port" })
+	@Parameters({ "envName", "serverName", "browser", "ipAddress", "port", "osName", "osVersion" })
 	@BeforeClass
-	public void initBrowser(String browserName, String envName, String ipAddress, String portNumber) {
+	public void initBrowser(@Optional("local") String envName, @Optional("dev") String serverName, @Optional("chrome") String browserName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber,
+			@Optional("Mac OS X") String osName, @Optional("10.16") String osVersion) {
+		
 		adminEmail = "admin@yourstore.com";
 		adminPassword = "admin";
 		productName = "Flower Girl Bracelet";
@@ -27,9 +30,9 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		productAvatarTitle = "Avatar Title";
 		productAvatarOrder = "1";
 		
-		ConfigFactory.setProperty("env", envName);
-		environment = ConfigFactory.create(Environment.class);
-		driver = getBrowserDriver(browserName, environment.adminUrl(), ipAddress, portNumber);
+		ConfigFactory.setProperty("env", serverName);
+		environment = ConfigFactory.create(EnvConfig.class);
+		driver = getBrowserDriver(envName, environment.adminUrl(), browserName, ipAddress, portNumber, osName, osVersion);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 		showBrowserConsoleLogs(driver);
 
@@ -78,13 +81,15 @@ public class Admin_00_Upload_Product_Picture_Sample extends BaseTest {
 		verifyTrue(productSearchPage.isPictureImageUpdated(productName, "default-image"));
 	}
 
+	@Parameters("envName")
 	@AfterClass(alwaysRun = true)
-	public void cleanBrowser() {
-		closeBrowserAndDriver();
+	public void cleanBrowser(@Optional("local") String envName) {
+		log.info("Post-condition - Close browser and driver");
+		closeBrowserAndDriver(envName);
 	}
 
 	WebDriver driver;
-	Environment environment;
+	EnvConfig environment;
 	LoginPageObject loginPage;
 	DashboardPageObject dashboardPage;
 	ProductSearchPageObject productSearchPage;
